@@ -1,0 +1,6 @@
+mail_server: smtp.126.com
+mail_port: 25
+mail_user: ihelin@126.com
+mail_password: 13635567652hl
+mail_from_address: ihelin@126.com
+mail_from_name: iHelin

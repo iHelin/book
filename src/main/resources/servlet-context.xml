@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans:beans xmlns="http://www.springframework.org/schema/mvc"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:beans="http://www.springframework.org/schema/beans"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="
+        http://www.springframework.org/schema/mvc 
+        http://www.springframework.org/schema/mvc/spring-mvc-3.1.xsd
+        http://www.springframework.org/schema/context 
+        http://www.springframework.org/schema/context/spring-context-3.1.xsd
+        http://www.springframework.org/schema/beans 
+        http://www.springframework.org/schema/beans/spring-beans-3.1.xsd">
+
+	<!-- Spring mvc配置 -->
+	<context:annotation-config />
+	
+	<!-- 自动扫描且只扫描@Controller -->
+	<context:component-scan base-package="com.ihelin.book.controller"
+		use-default-filters="false">
+		<context:include-filter type="annotation"
+			expression="org.springframework.stereotype.Controller" />
+	</context:component-scan>
+
+	<mvc:annotation-driven />
+
+	<!-- 静态资源处理，css,js,imgs <mvc:resources mapping="/resources/**" location="/resources/" 
+		/> -->
+
+	<!-- View resolvers can also be configured with ResourceBundles or XML files. 
+		If you need different view resolving based on Locale, you have to use the 
+		resource bundle resolver. InternalResourceViewResolver放在最后 -->
+	<beans:bean id="viewResolver"
+		class="org.springframework.web.servlet.view.freemarker.FreeMarkerViewResolver">
+		<beans:property name="contentType" value="text/html;charset=utf-8" />
+		<beans:property name="cache" value="true" />
+		<beans:property name="prefix" value="" />
+		<beans:property name="suffix" value=".ftl" />
+		<beans:property name="exposeRequestAttributes" value="true" />
+		<beans:property name="exposeSessionAttributes" value="true" />
+		<beans:property name="requestContextAttribute" value="request" />
+	</beans:bean>
+	
+	<beans:bean id="multipartResolver"
+		class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+		<!-- the maximum file size in bytes : 10M -->
+		<beans:property name="maxUploadSize" value="10485760" />
+		<!-- the maximum in memory size allowed in bytes : 10M -->
+		<beans:property name="maxInMemorySize" value="10485760" />
+		<beans:property name="defaultEncoding" value="uTF-8" />
+	</beans:bean>
+
+</beans:beans>

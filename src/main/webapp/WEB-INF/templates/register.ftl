@@ -1,109 +1,79 @@
 <!DOCTYPE html>
-<html>
+<html lang="zh-CN">
 <head lang="en">
 	<meta charset="UTF-8">
   	<title>注册 | Book</title>
-  	<meta http-equiv="X-UA-Compatible" content="IE=edge">
   	<meta name="viewport" content="width=device-width, initial-scale=1">
   	<meta name="format-detection" content="telephone=no">
   	<meta name="renderer" content="webkit">
-  	<meta http-equiv="Cache-Control" content="no-siteapp"/>
   	<link rel="alternate icon" type="image/png" href="${request.contextPath}/images/favicon.png">
-  	<link rel="stylesheet" href="${request.contextPath}/css/amazeui.min.css"/>
-  <style>
-    .header {
-      text-align: center;
-    }
-    .header h1 {
-      font-size: 200%;
-      color: #333;
-      margin-top: 30px;
-    }
-    .header p {
-      font-size: 14px;
-    }
-    
-    .footer p {
-      color: #7f8c8d;
-      margin: 0;
-      padding: 15px 0;
-      text-align: center;
-      background: #2d3e50;
-    }
-    
-    #vld-tooltip {
-    position: absolute;
-    z-index: 1000;
-    padding: 5px 10px;
-    background: #F37B1D;
-    min-width: 150px;
-    color: #fff;
-    transition: all 0.15s;
-    box-shadow: 0 0 5px rgba(0,0,0,.15);
-    display: none;
-  }
-
-  #vld-tooltip:before {
-    position: absolute;
-    top: -8px;
-    left: 50%;
-    width: 0;
-    height: 0;
-    margin-left: -8px;
-    content: "";
-    border-width: 0 8px 8px;
-    border-color: transparent transparent #F37B1D;
-    border-style: none inset solid;
-  }
-  </style>
+  	<link rel="stylesheet" href="${request.contextPath}/css/bootstrap.css"/>
+  	<style>
+  	</style>
 </head>
 <body>
-<div class="header">
-  <div class="am-g">
-    <h1>注册</h1>
-  </div>
-  <hr />
+<div class="container">
+	<div class="">
+		<h1 class="text-center">注册</h1>
+		<p class="text-right">已有账号？<a href="login">登录</a></p>
+	</div>
+	<hr />
+	<div class="row">
+		<div class="col-md-4 col-md-offset-4">
+			<form class="myform form-horizontal" id="register_form" data-validate="parsley">
+				<div class="form-group">
+					<label for="email_inp">邮箱</label>
+				    <input type="email" class="form-control" id="email_inp" name="email" placeholder="请输入您的真实有效邮箱" required="" data-type="email">
+				</div>
+				<div class="form-group">
+					<label for="psw_inp">密码</label>
+				    <input type="password" class="form-control" id="psw_inp" name="password" placeholder="Password" required="">
+				</div>
+				<div class="form-group text-center">
+					<button type="button" class="btn btn-info btn-lg" onclick="register()">注册</button>
+				</div>
+			</form>
+	  	</div>
+	  	<div class="col-md-12">
+	  		
+	  	</div>
+	</div>
+	<hr />
+	<p class="text-center bg-info">
+		© 2016 <a href="#">iHelin</a>
+	</p>
 </div>
-<div class="am-g">
-	<div class="am-u-lg-4 am-u-md-6 am-u-sm-centered" style="height:442px">
-	    <form method="post" class="am-form validate-form" id="register_form">
-	    	<div class="am-form-group">
-		      <label for="doc-vld-name-2-0">用户名：</label>
-		      <input type="text" id="doc-vld-name-2-0" minlength="3"
-		             placeholder="输入用户名（至少 3 个字符）" required/>
-		    </div>
-	    
-	    
-	    	<label for="email" />邮箱</label>
-	      	<input type="email" name="" id="email" value="">
-	      	<br />
-	      	<label for="password">密码</label>
-	      	<input type="password" name="" id="password" value="">
-	     	 <br />
-	      	<div class="am-cf">
-	        	<input type="button" onclick="register()" value="注册" class="am-btn am-btn-primary am-btn-sm am-fl">
-	      	</div>
-	    </form>
-  	</div>
-</div>
-<footer class="footer">
-	<p>© 2016 <a href="#">iHelin Inc.</a></p>
-</footer>
+
 </body>
 
 <script src="${request.contextPath}/js/jquery-2.2.1.min.js"></script>
-<script src="${request.contextPath}/js/amazeui.min.js"></script>
-<script src="${request.contextPath}/js/parsley.min.js"></script>
+<script src="${request.contextPath}/js/bootstrap.js"></script>
 <script src="${request.contextPath}/js/formvalidation.js"></script>
+<script src="${request.contextPath}/plugins/parsley/parsley.min.js"></script>
+<script src="${request.contextPath}/plugins/layer/layer.js"></script>
 <script>
 	$(function(){
-		
 		
 	});
 	
 	function register(){
 		if ($('#register_form').parsley('validate')) {
-			alert("haha");
+			var index = layer.load(2, {
+	            shade: [0.3, '#000']
+	        });
+			$.post("general_register",$('#register_form').serialize(),function(data){
+				layer.close(index);
+				if (data.status == "success") {
+					layer.msg('注册成功！');
+					setTimeout(function(){
+						window.location.reload();
+					},3000);
+	            }else if(data.error == "exist"){
+	            	layer.msg('该邮箱已被注册！');
+	            }else if(data.error == "blank"){
+	            	layer.msg('邮箱和密码不能为空！');
+	            }
+			});
 		}
 	
 	}

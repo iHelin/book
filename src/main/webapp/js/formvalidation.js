@@ -2,7 +2,7 @@ $(function() {
 	//Parsley Form Validation
     //While the JS is not usually required in Parsley, we will be modifying
     //the default classes so it plays well with Bootstrap
-    $('.validate-form').parsley({
+    $('.myform').parsley({
         successClass: 'has-success',
         errorClass: 'has-error',
         errors: {

@@ -32,12 +32,18 @@
 	        		<li><a href="message">留言板</a></li>
 	        		<li><a href="contact">Contact</a></li>
 	      		</ul>
-	      		<div class="am-topbar-right">
-	        		<button onclick="javascript:location.href='register'" class="am-btn am-btn-secondary am-topbar-btn am-btn-sm"><span class="am-icon-pencil"></span> 注册</button>
-	      		</div>
-		      	<div class="am-topbar-right">
-		        	<button class="am-btn am-btn-primary am-topbar-btn am-btn-sm"><span class="am-icon-user"></span> 登录</button>
-		      	</div>
+	      		<#if account??>
+	      			<div class="am-topbar-right">
+		        		<small>欢迎，${account.email!?string} </small><button class="am-btn am-btn-primary am-topbar-btn am-btn-sm" onclick="logout();">注销</button>
+		      		</div>
+		      	<#else>
+		      		<div class="am-topbar-right">
+		        		<button onclick="javascript:location.href='register'" class="am-btn am-btn-secondary am-topbar-btn am-btn-sm"><span class="am-icon-pencil"></span> 注册</button>
+		      		</div>
+			      	<div class="am-topbar-right">
+			        	<button onclick="javascript:location.href='login'" class="am-btn am-btn-primary am-topbar-btn am-btn-sm"><span class="am-icon-user"></span> 登录</button>
+			      	</div>
+	      		</#if>
 	    	</div>
 	  	</div>
 	</header>
@@ -45,19 +51,27 @@
 </body>
 </html>
 <script>
-$(function() {
-    var targetAnchor;
-    $.each($('ul.am-nav li a'), function() {
-        //console.log(this.href);
-        if (window.location.href === this.href) {
-            targetAnchor = this;
-            return false;
-        }
-    });
-    var parent = $(targetAnchor).closest('li');
-    parent.addClass('am-active');
-    $(targetAnchor).attr('href', '#');
-});
+	$(function() {
+	    var targetAnchor;
+	    $.each($('ul.am-nav li a'), function() {
+	        //console.log(this.href);
+	        if (window.location.href === this.href) {
+	            targetAnchor = this;
+	            return false;
+	        }
+	    });
+	    var parent = $(targetAnchor).closest('li');
+	    parent.addClass('am-active');
+	    $(targetAnchor).attr('href', '#');
+	});
+	
+	function logout(){
+		$.post("logout",{},function(data){
+			if(data.status == "success"){
+				window.location.reload();
+			}
+		});
+	}
 </script>
 
 <!-- 多说公共JS代码 start (一个网页只需插入一次) -->

@@ -38,7 +38,7 @@
 			<property name="enableSubPackages" value="true" />
 		</javaClientGenerator>
 
-		<table schema="book" tableName="book" domainObjectName="book"
+		<table schema="book" tableName="Account" domainObjectName="Account"
 			enableCountByExample="fasle" enableSelectByExample="false"
 			enableUpdateByExample="false" enableDeleteByExample="false">
 			<generatedKey column="id" sqlStatement="JDBC" />

@@ -50,7 +50,6 @@
 <script>
 	$(function(){
 		
-		
 	});
 	
 	function login(){
@@ -59,7 +58,7 @@
 				layer.msg('登录成功');
 				setTimeout(function(){
 					window.location.href = 'index';
-				},2000);
+				},1000);
 	    	}else if(data.error == 'failed'){
 	    		layer.msg('登录失败，请检查您的用户名或密码是否匹配。');
 	    	}else if(data.error == 'empty'){

@@ -27,7 +27,7 @@
 	   	 	<div class="am-collapse am-topbar-collapse" id="collapse-head">
 	      		<ul class="am-nav am-nav-pills am-topbar-nav">
 	        		<li><a href="index">首页</a></li>
-	        		<li><a href="book">Book</a></li>
+	        		<li><a href="books">Book</a></li>
 	        		<li><a href="music">音乐</a></li>
 	        		<li><a href="message">留言板</a></li>
 	        		<li><a href="contact">Contact</a></li>

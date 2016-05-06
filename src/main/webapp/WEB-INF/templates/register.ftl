@@ -102,7 +102,10 @@
 	});
 	
 	function register(){
-		
+		if ($('#register_form').parsley('validate')) {
+			alert("haha");
+		}
+	
 	}
 </script>
 </html>

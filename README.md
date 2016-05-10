@@ -17,6 +17,7 @@
 > * MySQL Workbench 6.3
 > * FileZIlla 3.16.1
 > * Git (GitHub)
+> * Maven
 
 ## 开发环境
 > * 系统：Mac OS X EI Caption
@@ -36,5 +37,22 @@
 > * [Mybatis](http://www.mybatis.org/mybatis-3/)
 > * [Bootstrap](http://www.bootcss.com/)
 > * [AmazeUI](http://amazeui.org/)
+> * [FontAwesome](http://fontawesome.io/)
+> * [Layer](http://layer.layui.com/)
+> * [多说](http://duoshuo.com/)
+> * ...
 
 ## 其他
+* 211
+* 
+
+## 开发进度
+    - [x] 04/02 项目开发目的、介绍及定位等
+    - [x] 04/09 产品需求分析
+    - [x] 04/16 功能及模块分析
+    - [x] 04/21 开发工具下载安装、开发环境搭建
+    - [x] 04/30 数据库设计
+    - [x] 05/07 登录与注册界面设计及业务实现
+    - [ ] 商城图书添加、修改、删除与展示等
+    - [ ] 用户购买、添加进购物车、订单结算等
+    - [ ] 产品后续优化

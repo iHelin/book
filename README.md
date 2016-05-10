@@ -9,38 +9,38 @@
 认真复习有关数据库管理系统、软件工程的理论知识，严格按照软件工程的要求，对购物网站进行详细的需求分析，在此基础上，进行功能设计、界面设计，最后编码调试实现。要求该系统应包括前台和后台两部分。前台部分实现包括用户注册，购物车管理，订单管理，个人资料管理，留言板等功能；后台实现包括商品管理，处理订单，用户信息管理，链接信息管理等功能。
 
 ## 开发工具
-> * Eclipse Mars.2 (64bit)
-> * Firefox 46.0.1
-> * Safari 9.1
-> * Chrome 50.0.0.2661.94 (64bit)
-> * Navicat for MySQ
-> * MySQL Workbench 6.3
-> * FileZIlla 3.16.1
-> * Git (GitHub)
-> * Maven
+* Eclipse Mars.2 (64bit)
+* Firefox 46.0.1
+* Safari 9.1
+* Chrome 50.0.0.2661.94 (64bit)
+* Navicat for MySQ
+* MySQL Workbench 6.3
+* FileZIlla 3.16.1
+* Git (GitHub)
+* Maven
 
 ## 开发环境
-> * 系统：Mac OS X EI Caption
-> * JDK：1.8.0_77 (64bit)
-> * Web容器：Jetty
-> * MySQL：5.1.73 (使用线上数据库)
+* 系统：Mac OS X EI Caption
+* JDK：1.8.0_77 (64bit)
+* Web容器：Jetty
+* MySQL：5.1.73 (使用线上数据库)
 
 ## 服务器环境
-> * Linux CentOS 6.5 (64bit)
-> * MySQL 5.1.73
-> * JDK 1.8.0_71 (64bit)
-> * Web容器：Jetty 8
+* Linux CentOS 6.5 (64bit)
+* MySQL 5.1.73
+* JDK 1.8.0_71 (64bit)
+* Web容器：Jetty 8
 
 ## 参考文献
-> * [Spring官网](https://spring.io/)
-> * Spring MVC
-> * [Mybatis](http://www.mybatis.org/mybatis-3/)
-> * [Bootstrap](http://www.bootcss.com/)
-> * [AmazeUI](http://amazeui.org/)
-> * [FontAwesome](http://fontawesome.io/)
-> * [Layer](http://layer.layui.com/)
-> * [多说](http://duoshuo.com/)
-> * ...
+* [Spring官网](https://spring.io/)
+* Spring MVC
+* [Mybatis](http://www.mybatis.org/mybatis-3/)
+* [Bootstrap](http://www.bootcss.com/)
+* [AmazeUI](http://amazeui.org/)
+* [FontAwesome](http://fontawesome.io/)
+* [Layer](http://layer.layui.com/)
+* [多说](http://duoshuo.com/)
+* ...
 
 ## 开发进度
 - [x] 04/02 项目开发目的、介绍及定位等

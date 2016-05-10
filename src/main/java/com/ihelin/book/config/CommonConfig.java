@@ -44,7 +44,7 @@ public class CommonConfig {
 	
 	public static void init(String rootPath, String contextName) {
 		contextPath = contextName;
-		webappRoot = rootPath;	//System.getProperty("webapp.root"); 使用这个会使多个项目冲突
+		webappRoot = rootPath;
 		configEntry = loadConfig(ConfigEntry.class);
 		
 		try {

@@ -7,7 +7,7 @@ $(function() {
         errorClass: 'has-error',
         errors: {
             classHandler: function(el) {
-                return $(el).closest('.form-group');
+                return $(el).closest('.form-group,.am-form-group');
             },
             errorsWrapper: '<ul class=\"help-block list-unstyled\"></ul>',
             errorElem: '<li></li>'

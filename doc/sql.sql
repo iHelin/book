@@ -23,3 +23,30 @@ CREATE TABLE `book`.`Book` (
   `create_time` DATETIME NULL,
   `creater_id` INT NULL,
   PRIMARY KEY (`id`));
+
+  ALTER TABLE `book`.`Book` 
+CHANGE COLUMN `id` `id` INT(11) UNSIGNED NOT NULL AUTO_INCREMENT ;
+
+ALTER TABLE `book`.`Account` 
+CHANGE COLUMN `id` `id` INT(10) UNSIGNED NOT NULL AUTO_INCREMENT ;
+
+ALTER TABLE `book`.`Account` 
+CHANGE COLUMN `id` `id` INT(11) UNSIGNED NOT NULL ;
+
+ALTER TABLE `book`.`Book` 
+ADD COLUMN `type` INT NULL AFTER `creater_id`,
+ADD COLUMN `press` VARCHAR(45) NULL AFTER `type`;
+
+ALTER TABLE `book`.`Book` 
+CHANGE COLUMN `type` `type` INT(2) NULL DEFAULT NULL ,
+ADD COLUMN `number` INT(5) NULL AFTER `press`,
+ADD COLUMN `price` DECIMAL(9,2) NULL AFTER `number`,
+ADD COLUMN `promotion_price` DECIMAL(9,2) NULL AFTER `price`;
+
+
+ALTER TABLE `book`.`Book` 
+CHANGE COLUMN `isbn` `isbn` INT(13) NULL DEFAULT NULL ;
+
+ALTER TABLE `book`.`Book` 
+CHANGE COLUMN `isbn` `isbn` VARCHAR(15) NULL DEFAULT NULL ;
+

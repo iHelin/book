@@ -3,17 +3,20 @@
 <html>
 <head lang="en">
 	<meta charset="UTF-8">
-  	<title>${title!} | Book</title>
+  	<title>${title!} | 图书商城</title>
   	<meta http-equiv="X-UA-Compatible" content="IE=edge">
   	<meta name="viewport" content="width=device-width, initial-scale=1">
   	<meta name="format-detection" content="telephone=no">
   	<meta name="renderer" content="webkit">
+  	<meta property="wb:webmaster" content="76eb27bbf473097a" />
   	<meta http-equiv="Cache-Control" content="no-siteapp"/>
   	<link rel="alternate icon" type="image/png" href="${request.contextPath}/images/favicon.png">
   	<link rel="stylesheet" href="${request.contextPath}/css/amazeui.min.css"/>
+  	<link rel="stylesheet" href="${request.contextPath}/css/bootstrap.css"/>
 </head>
 <script src="${request.contextPath}/js/jquery-2.2.1.min.js"></script>
 <script src="${request.contextPath}/js/amazeui.min.js"></script>
+<script src="${request.contextPath}/plugins/layer/layer.js"></script>
 <body>
 	<header class="am-topbar am-topbar-fixed-top">
 		<div class="am-container">
@@ -26,28 +29,46 @@
 			</button>
 	   	 	<div class="am-collapse am-topbar-collapse" id="collapse-head">
 	      		<ul class="am-nav am-nav-pills am-topbar-nav">
-	        		<li><a href="index">首页</a></li>
-	        		<li><a href="books">Book</a></li>
-	        		<li><a href="music">音乐</a></li>
-	        		<li><a href="message">留言板</a></li>
-	        		<li><a href="contact">Contact</a></li>
+	        		<li><a href="${request.contextPath}/index">首页</a></li>
+	        		<li><a href="${request.contextPath}/books">Book</a></li>
+	        		<li><a href="${request.contextPath}/music">音乐</a></li>
+	        		<li><a href="${request.contextPath}/message">留言板</a></li>
+	        		<li><a href="${request.contextPath}/contact">Contact</a></li>
 	      		</ul>
 	      		<#if account??>
 	      			<div class="am-topbar-right">
-		        		<small>欢迎，${account.email!?string} </small><button class="am-btn am-btn-primary am-topbar-btn am-btn-sm" onclick="logout();">注销</button>
+		        		<ul class="am-nav am-nav-pills am-topbar-nav am-topbar-right admin-header-list">
+			        		<li class="am-dropdown" data-am-dropdown>
+				        		<a class="am-dropdown-toggle" data-am-dropdown-toggle href="javascript:void(0);">
+				          			${account.email!?string} <span class="am-icon-caret-down"></span>
+				        		</a>
+				        		<ul class="am-dropdown-content">
+				          			<li><a href="${request.contextPath}/user/user_info"><span class="am-icon-user"></span> 资料</a></li>
+				          			<li><a href="${request.contextPath}/user/user_edit"><span class="am-icon-cog"></span> 设置</a></li>
+				          			<li><a href="javascript:void(0);" onclick="logout();"><span class="am-icon-power-off"></span> 退出</a></li>
+				        		</ul>
+				        	</li>
+			        	</ul>
 		      		</div>
 		      	<#else>
 		      		<div class="am-topbar-right">
-		        		<button onclick="javascript:location.href='register'" class="am-btn am-btn-secondary am-topbar-btn am-btn-sm"><span class="am-icon-pencil"></span> 注册</button>
+		        		<button onclick="javascript:location.href='${request.contextPath}/register'" class="am-btn am-btn-secondary am-topbar-btn am-btn-sm"><span class="am-icon-pencil"></span> 注册</button>
 		      		</div>
 			      	<div class="am-topbar-right">
-			        	<button onclick="javascript:location.href='login'" class="am-btn am-btn-primary am-topbar-btn am-btn-sm"><span class="am-icon-user"></span> 登录</button>
+			        	<button onclick="javascript:location.href='${request.contextPath}/login'" class="am-btn am-btn-primary am-topbar-btn am-btn-sm"><span class="am-icon-user"></span> 登录</button>
 			      	</div>
 	      		</#if>
 	    	</div>
 	  	</div>
 	</header>
 	<#nested>
+	<footer data-am-widget="footer" class="am-footer am-footer-default">
+	<div class="am-footer-miscs ">
+    	<p>由 <a href="http://weibo.com/378920717/" title="iHelin" target="_blank" class="">iHelin</a>提供技术支持</p>
+        <p>CopyRight©2016  iHelin Inc.</p>
+        <p></p>
+    </div>
+</footer>
 </body>
 </html>
 <script>
@@ -62,13 +83,13 @@
 	    });
 	    var parent = $(targetAnchor).closest('li');
 	    parent.addClass('am-active');
-	    $(targetAnchor).attr('href', '#');
+	    $(targetAnchor).attr('href', 'javascript:void(0);');
 	});
 	
 	function logout(){
-		$.post("logout",{},function(data){
+		$.post("${request.contextPath}/logout",{},function(data){
 			if(data.status == "success"){
-				window.location.reload();
+				window.location.href="${request.contextPath}/index";
 			}
 		});
 	}

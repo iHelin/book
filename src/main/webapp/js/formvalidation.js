@@ -36,7 +36,7 @@ $(function() {
             rangelength: "输入的长度不正确，必须介于 %s 与 %s 个字符之间。",
             mincheck: "必须至少选择 %s 项。",
             maxcheck: "最多选择 %s 项。",
-            rangecheck: "You must select between %s and %s choices.",
+            rangecheck: "必须选择 %s 至 %s 个选项。",
             equalto: "输入必须相同。"
         }
     });

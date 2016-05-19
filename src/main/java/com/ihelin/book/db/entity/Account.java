@@ -19,7 +19,7 @@ public class Account {
 
     private String img;
 
-    private Boolean genger;
+    private Boolean gender;
 
     private String mobile;
 
@@ -89,12 +89,12 @@ public class Account {
         this.img = img;
     }
 
-    public Boolean getGenger() {
-        return genger;
+    public Boolean getGender() {
+        return gender;
     }
 
-    public void setGenger(Boolean genger) {
-        this.genger = genger;
+    public void setGender(Boolean gender) {
+        this.gender = gender;
     }
 
     public String getMobile() {

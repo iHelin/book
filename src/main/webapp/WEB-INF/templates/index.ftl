@@ -43,10 +43,6 @@
 	  </ul>
 	</div>
 </div>
-
-<footer class="footer">
-	<p>© 2016 <a href="#">iHelin, Inc.</a></p>
-</footer>
 <script>
 	$(function() {
 		$('#slider').flexslider({

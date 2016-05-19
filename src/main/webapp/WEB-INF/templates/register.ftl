@@ -23,11 +23,15 @@
 			<form class="myform form-horizontal" id="register_form" data-validate="parsley">
 				<div class="form-group">
 					<label for="email_inp">邮箱</label>
-				    <input type="email" class="form-control" id="email_inp" name="email" placeholder="请输入您的真实有效邮箱" required="" data-type="email">
+				    <input type="email" class="form-control" id="email_inp" name="email" placeholder="请输入您的真实有效邮箱" data-trigger="change" data-required="true" data-type="email">
 				</div>
 				<div class="form-group">
 					<label for="psw_inp">密码</label>
-				    <input type="password" class="form-control" id="psw_inp" name="password" placeholder="Password" required="">
+				    <input type="password" class="form-control" id="psw_inp" name="password" placeholder="密码" data-required="true" data-trigger="keyup" data-rangelength="[6,20]">
+				</div>
+				<div class="form-group">
+					<label for="psw_inp2">确认密码</label>
+				    <input type="password" class="form-control" id="psw_inp2" placeholder="确认密码" data-required="true" data-equalto="#psw_inp">
 				</div>
 				<div class="form-group text-center">
 					<button type="button" class="btn btn-info btn-lg" onclick="register()">注册</button>
@@ -53,7 +57,7 @@
 <script src="${request.contextPath}/plugins/layer/layer.js"></script>
 <script>
 	$(function(){
-		
+		console.log($('#register_form').parsley());
 	});
 	
 	function register(){
@@ -64,10 +68,17 @@
 			$.post("general_register",$('#register_form').serialize(),function(data){
 				layer.close(index);
 				if (data.status == "success") {
-					layer.msg('注册成功！');
+					/*layer.msg('注册成功！');
 					setTimeout(function(){
 						window.location.reload();
-					},3000);
+					},3000);*/
+					layer.confirm('注册成功，请先完善您的资料', {
+						btn: ['确定','取消'] //按钮
+					}, function(){
+						window.location.href="${request.contextPath}/user/user_edit";
+					}, function(){
+					  layer.msg('您取消了删除');
+					});
 	            }else if(data.error == "exist"){
 	            	layer.msg('该邮箱已被注册！');
 	            }else if(data.error == "blank"){

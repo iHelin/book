@@ -23,25 +23,23 @@
 			<form class="form-horizontal" id="login_form">
 				<div class="form-group">
 					<label for="email_inp">邮箱</label>
-				    <input type="email" class="form-control" id="email_inp" name="email" placeholder="Email">
+				    <input type="email" class="form-control" id="email_inp" name="email" placeholder="邮箱">
 				</div>
 				<div class="form-group">
 					<label for="psw_inp">密码</label>
-				    <input type="password" class="form-control" id="psw_inp" name="password" placeholder="Password">
+				    <input type="password" class="form-control" id="psw_inp" name="password" placeholder="密码">
 				</div>
 				<div class="form-group text-center">
 					<button type="button" class="btn btn-primary btn-lg" onclick="login()">登录</button>
 				</div>
-				<p class="pull-right"><span>没有账号？</span><a href="register" >现在注册</a></p>
+				<p class="pull-right"><span>没有账号？</span><a href="register">现在注册</a></p>
 			</form>
 	  	</div>
 	</div>
 	<hr />
-	<p class="text-center bg-info">© 2016 <a href="#">iHelin</a>
-	</p>
+	<p class="text-center bg-info">由 <a href="http://weibo.com/378920717/" title="iHelin" target="_blank" class="">iHelin</a>提供技术支持 CopyRight©2016  iHelin Inc.</p>
 </div>
 </body>
-
 <script src="${request.contextPath}/js/jquery-2.2.1.min.js"></script>
 <script src="${request.contextPath}/js/bootstrap.js"></script>
 <script src="${request.contextPath}/plugins/parsley/parsley.min.js"></script>

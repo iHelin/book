@@ -48,7 +48,7 @@ public class LoginController {
 	}
 
 	@RequestMapping(value = "general_register")
-	public void doRegister(String email, String password, HttpServletResponse response) {
+	public void doRegister(String email, String password, HttpServletResponse response, HttpSession session) {
 		if (StringUtils.isBlank(email) || StringUtils.isBlank(password)) {
 			ResponseUtil.writeFailedJSON(response, "blank");
 			return;
@@ -64,6 +64,7 @@ public class LoginController {
 		ac.setAccountType(AccountType.GENERAL.getValue());
 		ac.setRegisterDate(new Date());
 		accountManager.insertAccount(ac);
+		session.setAttribute("account", ac);
 		ResponseUtil.writeSuccessJSON(response);
 	}
 

@@ -17,7 +17,7 @@
 			    	</div>
           		</div>
         	</div>
-        	<#import "pagination.ftl" as pager>
+        	<#import "pagination.ftl" as pager />
             <#assign urlParam>type=<#if type??>${type}</#if>&</#assign>
           	<form class="am-form" action="books" class="form-horizontal" role="form">
         		<div class="am-u-sm-12 am-u-md-3">

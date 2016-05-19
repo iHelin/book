@@ -13,6 +13,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.ihelin.book.controller.BaseController;
 import com.ihelin.book.db.entity.Book;
 import com.ihelin.book.manager.BookManager;
 import com.ihelin.book.utils.ResponseUtil;
@@ -20,18 +21,16 @@ import com.ihelin.book.view.Pagination;
 
 @Controller
 @RequestMapping(value = "/admin/*")
-public class AdminBookController {
+public class AdminBookController extends BaseController {
 
 	@Resource
 	private BookManager bookManager;
-	
-	private static final int PAGE_LENGTH = 10;
 
 	@RequestMapping("books")
-	public String adminIndex(Model model,Integer pageNum,Integer type) {
+	public String adminIndex(Model model, Integer pageNum, Integer type) {
 		if (pageNum == null)
 			pageNum = 1;
-		List<Book> books = bookManager.listBook(type,(pageNum - 1) * PAGE_LENGTH, PAGE_LENGTH);
+		List<Book> books = bookManager.listBook(type, (pageNum - 1) * PAGE_LENGTH, PAGE_LENGTH);
 		int totalCount = bookManager.listBookCount(type);
 		model.addAttribute("books", books);
 		model.addAttribute("type", type);
@@ -60,14 +59,14 @@ public class AdminBookController {
 		bookManager.insertBook(newBook);
 		ResponseUtil.writeSuccessJSON(response);
 	}
-	
+
 	/**
 	 * 编辑图书
 	 * 
 	 */
 	@RequestMapping("edit_book_commit")
-	public void editBook(HttpServletResponse response,Integer id, String bookName, String author, String press, Integer bookType,
-			Integer number, String isbn, BigDecimal price, BigDecimal promotionPrice) {
+	public void editBook(HttpServletResponse response, Integer id, String bookName, String author, String press,
+			Integer bookType, Integer number, String isbn, BigDecimal price, BigDecimal promotionPrice) {
 		Book oldBook = bookManager.selectBookById(id);
 		oldBook.setBookName(bookName);
 		oldBook.setAuthor(author);
@@ -75,7 +74,7 @@ public class AdminBookController {
 		oldBook.setIsbn(isbn);
 		oldBook.setType(bookType);
 		oldBook.setNumber(number);
-		//oldBook.setPrice(price);
+		// oldBook.setPrice(price);
 		oldBook.setPromotionPrice(promotionPrice);
 		bookManager.updateBook(oldBook);
 		ResponseUtil.writeSuccessJSON(response);
@@ -92,7 +91,7 @@ public class AdminBookController {
 		if (id != null) {
 			bookManager.deleteBookById(id);
 			ResponseUtil.writeSuccessJSON(response);
-		}else{
+		} else {
 			ResponseUtil.writeFailedJSON(response, "id_is_null");
 		}
 	}

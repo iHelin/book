@@ -26,6 +26,10 @@ public class AccountManager {
 		return accountMapper.selectByEmail(email);
 	}
 	
+	public Account selectAccountByAccountName(String accountName){
+		return accountMapper.selectByAccountName(accountName);
+	}
+	
 	public Account selectAccountById(Integer id){
 		return accountMapper.selectByPrimaryKey(id);
 	}

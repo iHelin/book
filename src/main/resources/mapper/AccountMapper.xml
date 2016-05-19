@@ -34,12 +34,12 @@
 			<if test="accountType!=null">account_type = #{accountType,jdbcType=INTEGER}</if>
 		</where>
 	</select>
-	<select id="selectByPrimaryKey" resultMap="BaseResultMap"
-		parameterType="java.lang.Integer">
+	<select id="selectByAccountName" resultMap="BaseResultMap"
+		parameterType="java.lang.String">
 		select
 		<include refid="Base_Column_List" />
 		from Account
-		where id = #{id,jdbcType=INTEGER}
+		where account_name = #{accountName,jdbcType=VARCHAR}
 	</select>
 	<select id="selectByEmail" resultMap="BaseResultMap"
 		parameterType="java.lang.String">
@@ -47,6 +47,13 @@
 		<include refid="Base_Column_List" />
 		from Account
 		where email = #{email,jdbcType=VARCHAR}
+	</select>
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap"
+		parameterType="java.lang.Integer">
+		select
+		<include refid="Base_Column_List" />
+		from Account
+		where id = #{id,jdbcType=INTEGER}
 	</select>
 	<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
 		delete from Account

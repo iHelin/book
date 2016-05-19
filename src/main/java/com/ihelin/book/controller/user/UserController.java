@@ -35,8 +35,16 @@ public class UserController extends BaseController {
 
 	@RequestMapping("change_account_info")
 	public void changeAccountInfo(Integer id, String accountName, String realName, Boolean gender, String birthday,
-			String phone, String email,HttpServletResponse response,HttpSession session) {
-		if(id!=null){
+			String phone, String email, HttpServletResponse response, HttpSession session) {
+		Account oldAccount = accountManager.selectAccountByAccountName(accountName);
+		if (oldAccount != null) {
+			ResponseUtil.writeFailedJSON(response, "account_name_repeat");
+			return;
+		}
+		if (id == null) {
+			ResponseUtil.writeFailedJSON(response, "account_id_null");
+			return;
+		}else{
 			Account ac = accountManager.selectAccountById(id);
 			ac.setAccountName(accountName);
 			ac.setRealName(realName);

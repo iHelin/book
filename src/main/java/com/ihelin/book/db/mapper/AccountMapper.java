@@ -17,6 +17,8 @@ public interface AccountMapper {
     Account selectByPrimaryKey(Integer id);
     
     Account selectByEmail(String email);
+    
+    Account selectByAccountName(String accountName);
 
     int updateByPrimaryKeySelective(Account record);
 

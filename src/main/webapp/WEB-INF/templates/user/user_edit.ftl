@@ -21,9 +21,14 @@
 					  			<input type="hidden" name="id" value="${account.id!}">
 					  			<div class="am-form-group">
 						    		<label for="account_name" class="am-u-sm-4 am-form-label">用户名</label>
-						    		<div class="am-u-sm-8">
-						      			<input type="text" id="account_name" name="accountName" placeholder="输入你的用户名" value="${account.accountName!}" data-trigger="change" data-required="true" data-rangelength="[6,20]">
-						    		</div>
+						    		<#if account.accountName??>
+						    			${account.accountName!}
+						    		<#else>
+						    			<div class="am-u-sm-8">
+						      				<input type="text" id="account_name" name="accountName" placeholder="输入你的用户名" value="${account.accountName!}" data-trigger="change" data-required="true" data-rangelength="[6,20]">
+						      				<span class="text-danger">用户名是唯一凭证，只能修改一次。</span>
+						    			</div>
+						    		</#if>
 						  		</div>
 						  		<div class="am-form-group">
 						    		<label for="real_name" class="am-u-sm-4 am-form-label">真实姓名</label>
@@ -81,6 +86,12 @@
 				if(data.status=='success'){
 					layer.msg('已保存！');
 					window.location.reload();
+				}else if(data.error=='account_name_repeat'){
+					layer.msg('用户名重复！');
+				}else if(data.error=='account_id_null'){
+					layer.msg('用户id为空！');
+				}else{
+					layer.msg('未知错误！');
 				}
 			});
 		}

@@ -46,6 +46,10 @@
 <script src="${request.contextPath}/js/formvalidation.js"></script>
 <script src="${request.contextPath}/plugins/layer/layer.js"></script>
 <script>
+	var from = "${from!}";
+	if(from==null || from==""){
+		from = '${request.contextPath}/index';
+	}
 	$(function(){
 		
 	});
@@ -55,8 +59,8 @@
 			if (data.status == "success") {
 				layer.msg('登录成功');
 				setTimeout(function(){
-					window.location.href = 'index';
-				},1000);
+					window.location.href = from;
+				},600);
 	    	}else if(data.error == 'failed'){
 	    		layer.msg('登录失败，请检查您的用户名或密码是否匹配。');
 	    	}else if(data.error == 'empty'){

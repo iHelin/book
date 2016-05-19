@@ -15,6 +15,13 @@
 	<!-- Spring mvc配置 -->
 	<context:annotation-config />
 	
+	<mvc:interceptors>
+		<mvc:interceptor>
+			<mvc:mapping path="/user/**" />
+			<beans:bean class="com.ihelin.book.interceptor.UserAuthInterceptor" />
+		</mvc:interceptor>
+	</mvc:interceptors>
+	
 	<!-- 自动扫描且只扫描@Controller -->
 	<context:component-scan base-package="com.ihelin.book.controller"
 		use-default-filters="false">

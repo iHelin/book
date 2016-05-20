@@ -37,6 +37,7 @@
       margin-bottom: 0;
     }
 
+	.book-detail img,
     .book-content img,
     .book-team img {
       max-width: 100%;
@@ -86,8 +87,9 @@
 							</ul>
 							<div class="am-tabs-bd">
 								<div class="am-tab-panel am-active">
-									<p>看著自己的作品，你的喜悅之情溢於言表，差點就要說出我要感謝我的父母之類的得獎感言。但在你對面的客戶先是一點表情也沒有，又瞬間轉為陰沉，抿了抿嘴角冷冷的說……</p>
-          							<p>「我要一種比較跳的感覺懂嗎？」</p>
+									<div class="book-detail">
+										${book.detail!}
+									</div>
 								</div>
 								<div class="am-tab-panel">
 									<div class="ds-thread" data-thread-key="book_${book.id!}" data-title="${book.bookName!}" data-url="${request.contextPath}/book_detail?id=${book.id!}"></div>

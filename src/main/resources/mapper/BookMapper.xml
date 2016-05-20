@@ -1,39 +1,44 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.ihelin.book.db.mapper.BookMapper" >
-  <resultMap id="BaseResultMap" type="com.ihelin.book.db.entity.Book" >
-    <id column="id" property="id" jdbcType="INTEGER" />
-    <result column="book_name" property="bookName" jdbcType="VARCHAR" />
-    <result column="author" property="author" jdbcType="VARCHAR" />
-    <result column="img" property="img" jdbcType="VARCHAR" />
-    <result column="isbn" property="isbn" jdbcType="VARCHAR" />
-    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
-    <result column="creater_id" property="createrId" jdbcType="INTEGER" />
-    <result column="type" property="type" jdbcType="INTEGER" />
-    <result column="press" property="press" jdbcType="VARCHAR" />
-    <result column="number" property="number" jdbcType="INTEGER" />
-    <result column="price" property="price" jdbcType="DECIMAL" />
-    <result column="promotion_price" property="promotionPrice" jdbcType="DECIMAL" />
-    <result column="promo" property="promo" jdbcType="VARCHAR" />
-    <result column="is_free_postage" property="isFreePostage" jdbcType="BIT" />
-  </resultMap>
-  <resultMap id="ResultMapWithBLOBs" type="com.ihelin.book.db.entity.Book" extends="BaseResultMap" >
-    <result column="detail" property="detail" jdbcType="LONGVARCHAR" />
-  </resultMap>
-  <sql id="Base_Column_List" >
-    id, book_name, author, img, isbn, create_time, creater_id, type, press, number, price, 
-    promotion_price, promo, is_free_postage
-  </sql>
-  <sql id="Blob_Column_List" >
-    detail
-  </sql>
-  <select id="bookList" resultMap="BaseResultMap">
-  	select * from Book
-  	<where>
-		<if test="type!=null">type = #{type,jdbcType=INTEGER}</if>
-	</where>
-  </select>
-  <select id="listBookCount" resultType="int" parameterType="java.util.Map">
+<mapper namespace="com.ihelin.book.db.mapper.BookMapper">
+	<resultMap id="BaseResultMap" type="com.ihelin.book.db.entity.Book">
+		<id column="id" property="id" jdbcType="INTEGER" />
+		<result column="book_name" property="bookName" jdbcType="VARCHAR" />
+		<result column="author" property="author" jdbcType="VARCHAR" />
+		<result column="img" property="img" jdbcType="VARCHAR" />
+		<result column="isbn" property="isbn" jdbcType="VARCHAR" />
+		<result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+		<result column="creater_id" property="createrId" jdbcType="INTEGER" />
+		<result column="type" property="type" jdbcType="INTEGER" />
+		<result column="press" property="press" jdbcType="VARCHAR" />
+		<result column="number" property="number" jdbcType="INTEGER" />
+		<result column="price" property="price" jdbcType="DECIMAL" />
+		<result column="promotion_price" property="promotionPrice"
+			jdbcType="DECIMAL" />
+		<result column="promo" property="promo" jdbcType="VARCHAR" />
+		<result column="detail" property="detail" jdbcType="VARCHAR" />
+		<result column="is_free_postage" property="isFreePostage"
+			jdbcType="BIT" />
+	</resultMap>
+	<resultMap id="ResultMapWithBLOBs" type="com.ihelin.book.db.entity.Book"
+		extends="BaseResultMap">
+		<result column="detail" property="detail" jdbcType="LONGVARCHAR" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		id, book_name, author, img, isbn, create_time, creater_id, type, press,
+		number, price,
+		promotion_price, promo, detail, is_free_postage
+	</sql>
+	<sql id="Blob_Column_List">
+		detail
+	</sql>
+	<select id="bookList" resultMap="BaseResultMap">
+		select * from Book
+		<where>
+			<if test="type!=null">type = #{type,jdbcType=INTEGER}</if>
+		</where>
+	</select>
+	<select id="listBookCount" resultType="int" parameterType="java.util.Map">
 		select
 		count(id)
 		from Book
@@ -41,202 +46,188 @@
 			<if test="type!=null">type = #{type,jdbcType=INTEGER}</if>
 		</where>
 	</select>
-  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
-    select 
-    <include refid="Base_Column_List" />
-    ,
-    <include refid="Blob_Column_List" />
-    from Book
-    where id = #{id,jdbcType=INTEGER}
-  </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
-    delete from Book
-    where id = #{id,jdbcType=INTEGER}
-  </delete>
-  <insert id="insert" parameterType="com.ihelin.book.db.entity.Book" useGeneratedKeys="true" keyProperty="id" >
-    insert into Book (book_name, author, img, 
-      isbn, create_time, creater_id, 
-      type, press, number, 
-      price, promotion_price, promo, 
-      is_free_postage, detail)
-    values (#{bookName,jdbcType=VARCHAR}, #{author,jdbcType=VARCHAR}, #{img,jdbcType=VARCHAR}, 
-      #{isbn,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{createrId,jdbcType=INTEGER}, 
-      #{type,jdbcType=INTEGER}, #{press,jdbcType=VARCHAR}, #{number,jdbcType=INTEGER}, 
-      #{price,jdbcType=DECIMAL}, #{promotionPrice,jdbcType=DECIMAL}, #{promo,jdbcType=VARCHAR}, 
-      #{isFreePostage,jdbcType=BIT}, #{detail,jdbcType=LONGVARCHAR})
-  </insert>
-  <insert id="insertSelective" parameterType="com.ihelin.book.db.entity.Book" useGeneratedKeys="true" keyProperty="id" >
-    insert into Book
-    <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="bookName != null" >
-        book_name,
-      </if>
-      <if test="author != null" >
-        author,
-      </if>
-      <if test="img != null" >
-        img,
-      </if>
-      <if test="isbn != null" >
-        isbn,
-      </if>
-      <if test="createTime != null" >
-        create_time,
-      </if>
-      <if test="createrId != null" >
-        creater_id,
-      </if>
-      <if test="type != null" >
-        type,
-      </if>
-      <if test="press != null" >
-        press,
-      </if>
-      <if test="number != null" >
-        number,
-      </if>
-      <if test="price != null" >
-        price,
-      </if>
-      <if test="promotionPrice != null" >
-        promotion_price,
-      </if>
-      <if test="promo != null" >
-        promo,
-      </if>
-      <if test="isFreePostage != null" >
-        is_free_postage,
-      </if>
-      <if test="detail != null" >
-        detail,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="bookName != null" >
-        #{bookName,jdbcType=VARCHAR},
-      </if>
-      <if test="author != null" >
-        #{author,jdbcType=VARCHAR},
-      </if>
-      <if test="img != null" >
-        #{img,jdbcType=VARCHAR},
-      </if>
-      <if test="isbn != null" >
-        #{isbn,jdbcType=VARCHAR},
-      </if>
-      <if test="createTime != null" >
-        #{createTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="createrId != null" >
-        #{createrId,jdbcType=INTEGER},
-      </if>
-      <if test="type != null" >
-        #{type,jdbcType=INTEGER},
-      </if>
-      <if test="press != null" >
-        #{press,jdbcType=VARCHAR},
-      </if>
-      <if test="number != null" >
-        #{number,jdbcType=INTEGER},
-      </if>
-      <if test="price != null" >
-        #{price,jdbcType=DECIMAL},
-      </if>
-      <if test="promotionPrice != null" >
-        #{promotionPrice,jdbcType=DECIMAL},
-      </if>
-      <if test="promo != null" >
-        #{promo,jdbcType=VARCHAR},
-      </if>
-      <if test="isFreePostage != null" >
-        #{isFreePostage,jdbcType=BIT},
-      </if>
-      <if test="detail != null" >
-        #{detail,jdbcType=LONGVARCHAR},
-      </if>
-    </trim>
-  </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.ihelin.book.db.entity.Book" >
-    update Book
-    <set >
-      <if test="bookName != null" >
-        book_name = #{bookName,jdbcType=VARCHAR},
-      </if>
-      <if test="author != null" >
-        author = #{author,jdbcType=VARCHAR},
-      </if>
-      <if test="img != null" >
-        img = #{img,jdbcType=VARCHAR},
-      </if>
-      <if test="isbn != null" >
-        isbn = #{isbn,jdbcType=VARCHAR},
-      </if>
-      <if test="createTime != null" >
-        create_time = #{createTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="createrId != null" >
-        creater_id = #{createrId,jdbcType=INTEGER},
-      </if>
-      <if test="type != null" >
-        type = #{type,jdbcType=INTEGER},
-      </if>
-      <if test="press != null" >
-        press = #{press,jdbcType=VARCHAR},
-      </if>
-      <if test="number != null" >
-        number = #{number,jdbcType=INTEGER},
-      </if>
-      <if test="price != null" >
-        price = #{price,jdbcType=DECIMAL},
-      </if>
-      <if test="promotionPrice != null" >
-        promotion_price = #{promotionPrice,jdbcType=DECIMAL},
-      </if>
-      <if test="promo != null" >
-        promo = #{promo,jdbcType=VARCHAR},
-      </if>
-      <if test="isFreePostage != null" >
-        is_free_postage = #{isFreePostage,jdbcType=BIT},
-      </if>
-      <if test="detail != null" >
-        detail = #{detail,jdbcType=LONGVARCHAR},
-      </if>
-    </set>
-    where id = #{id,jdbcType=INTEGER}
-  </update>
-  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.ihelin.book.db.entity.Book" >
-    update Book
-    set book_name = #{bookName,jdbcType=VARCHAR},
-      author = #{author,jdbcType=VARCHAR},
-      img = #{img,jdbcType=VARCHAR},
-      isbn = #{isbn,jdbcType=VARCHAR},
-      create_time = #{createTime,jdbcType=TIMESTAMP},
-      creater_id = #{createrId,jdbcType=INTEGER},
-      type = #{type,jdbcType=INTEGER},
-      press = #{press,jdbcType=VARCHAR},
-      number = #{number,jdbcType=INTEGER},
-      price = #{price,jdbcType=DECIMAL},
-      promotion_price = #{promotionPrice,jdbcType=DECIMAL},
-      promo = #{promo,jdbcType=VARCHAR},
-      is_free_postage = #{isFreePostage,jdbcType=BIT},
-      detail = #{detail,jdbcType=LONGVARCHAR}
-    where id = #{id,jdbcType=INTEGER}
-  </update>
-  <update id="updateByPrimaryKey" parameterType="com.ihelin.book.db.entity.Book" >
-    update Book
-    set book_name = #{bookName,jdbcType=VARCHAR},
-      author = #{author,jdbcType=VARCHAR},
-      img = #{img,jdbcType=VARCHAR},
-      isbn = #{isbn,jdbcType=VARCHAR},
-      create_time = #{createTime,jdbcType=TIMESTAMP},
-      creater_id = #{createrId,jdbcType=INTEGER},
-      type = #{type,jdbcType=INTEGER},
-      press = #{press,jdbcType=VARCHAR},
-      number = #{number,jdbcType=INTEGER},
-      price = #{price,jdbcType=DECIMAL},
-      promotion_price = #{promotionPrice,jdbcType=DECIMAL},
-      promo = #{promo,jdbcType=VARCHAR},
-      is_free_postage = #{isFreePostage,jdbcType=BIT}
-    where id = #{id,jdbcType=INTEGER}
-  </update>
+	<select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs"
+		parameterType="java.lang.Integer">
+		select
+		<include refid="Base_Column_List" />
+		from Book
+		where id = #{id,jdbcType=INTEGER}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+		delete from Book
+		where id = #{id,jdbcType=INTEGER}
+	</delete>
+	<insert id="insert" parameterType="com.ihelin.book.db.entity.Book"
+		useGeneratedKeys="true" keyProperty="id">
+		insert into Book (book_name, author, img,
+		isbn, create_time, creater_id,
+		type, press, number,
+		price, promotion_price, promo,detail
+		is_free_postage,)
+		values (#{bookName,jdbcType=VARCHAR}, #{author,jdbcType=VARCHAR},
+		#{img,jdbcType=VARCHAR},
+		#{isbn,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{createrId,jdbcType=INTEGER},
+		#{type,jdbcType=INTEGER}, #{press,jdbcType=VARCHAR},
+		#{number,jdbcType=INTEGER},
+		#{price,jdbcType=DECIMAL}, #{promotionPrice,jdbcType=DECIMAL}, #{promo,jdbcType=VARCHAR},
+		#{detail,jdbcType=VARCHAR}, #{isFreePostage,jdbcType=BIT})
+	</insert>
+	<insert id="insertSelective" parameterType="com.ihelin.book.db.entity.Book"
+		useGeneratedKeys="true" keyProperty="id">
+		insert into Book
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="bookName != null">
+				book_name,
+			</if>
+			<if test="author != null">
+				author,
+			</if>
+			<if test="img != null">
+				img,
+			</if>
+			<if test="isbn != null">
+				isbn,
+			</if>
+			<if test="createTime != null">
+				create_time,
+			</if>
+			<if test="createrId != null">
+				creater_id,
+			</if>
+			<if test="type != null">
+				type,
+			</if>
+			<if test="press != null">
+				press,
+			</if>
+			<if test="number != null">
+				number,
+			</if>
+			<if test="price != null">
+				price,
+			</if>
+			<if test="promotionPrice != null">
+				promotion_price,
+			</if>
+			<if test="promo != null">
+				promo,
+			</if>
+			<if test="detail != null">
+				detail,
+			</if>
+			<if test="isFreePostage != null">
+				is_free_postage,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="bookName != null">
+				#{bookName,jdbcType=VARCHAR},
+			</if>
+			<if test="author != null">
+				#{author,jdbcType=VARCHAR},
+			</if>
+			<if test="img != null">
+				#{img,jdbcType=VARCHAR},
+			</if>
+			<if test="isbn != null">
+				#{isbn,jdbcType=VARCHAR},
+			</if>
+			<if test="createTime != null">
+				#{createTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="createrId != null">
+				#{createrId,jdbcType=INTEGER},
+			</if>
+			<if test="type != null">
+				#{type,jdbcType=INTEGER},
+			</if>
+			<if test="press != null">
+				#{press,jdbcType=VARCHAR},
+			</if>
+			<if test="number != null">
+				#{number,jdbcType=INTEGER},
+			</if>
+			<if test="price != null">
+				#{price,jdbcType=DECIMAL},
+			</if>
+			<if test="promotionPrice != null">
+				#{promotionPrice,jdbcType=DECIMAL},
+			</if>
+			<if test="promo != null">
+				#{promo,jdbcType=VARCHAR},
+			</if>
+			<if test="detail != null">
+				#{detail,jdbcType=VARCHAR},
+			</if>
+			<if test="isFreePostage != null">
+				#{isFreePostage,jdbcType=BIT},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="com.ihelin.book.db.entity.Book">
+		update Book
+		<set>
+			<if test="bookName != null">
+				book_name = #{bookName,jdbcType=VARCHAR},
+			</if>
+			<if test="author != null">
+				author = #{author,jdbcType=VARCHAR},
+			</if>
+			<if test="img != null">
+				img = #{img,jdbcType=VARCHAR},
+			</if>
+			<if test="isbn != null">
+				isbn = #{isbn,jdbcType=VARCHAR},
+			</if>
+			<if test="createTime != null">
+				create_time = #{createTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="createrId != null">
+				creater_id = #{createrId,jdbcType=INTEGER},
+			</if>
+			<if test="type != null">
+				type = #{type,jdbcType=INTEGER},
+			</if>
+			<if test="press != null">
+				press = #{press,jdbcType=VARCHAR},
+			</if>
+			<if test="number != null">
+				number = #{number,jdbcType=INTEGER},
+			</if>
+			<if test="price != null">
+				price = #{price,jdbcType=DECIMAL},
+			</if>
+			<if test="promotionPrice != null">
+				promotion_price = #{promotionPrice,jdbcType=DECIMAL},
+			</if>
+			<if test="promo != null">
+				promo = #{promo,jdbcType=VARCHAR},
+			</if>
+			<if test="detail != null">
+				detail = #{detail,jdbcType=VARCHAR},
+			</if>
+			<if test="isFreePostage != null">
+				is_free_postage = #{isFreePostage,jdbcType=BIT},
+			</if>
+		</set>
+		where id = #{id,jdbcType=INTEGER}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.ihelin.book.db.entity.Book">
+		update Book
+		set book_name = #{bookName,jdbcType=VARCHAR},
+		author = #{author,jdbcType=VARCHAR},
+		img = #{img,jdbcType=VARCHAR},
+		isbn = #{isbn,jdbcType=VARCHAR},
+		create_time = #{createTime,jdbcType=TIMESTAMP},
+		creater_id = #{createrId,jdbcType=INTEGER},
+		type = #{type,jdbcType=INTEGER},
+		press = #{press,jdbcType=VARCHAR},
+		number = #{number,jdbcType=INTEGER},
+		price = #{price,jdbcType=DECIMAL},
+		promotion_price = #{promotionPrice,jdbcType=DECIMAL},
+		promo = #{promo,jdbcType=VARCHAR},
+		detail = #{detail,jdbcType=VARCHAR},
+		is_free_postage = #{isFreePostage,jdbcType=BIT}
+		where id = #{id,jdbcType=INTEGER}
+	</update>
 </mapper>

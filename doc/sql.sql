@@ -61,20 +61,7 @@ ADD COLUMN `promo` VARCHAR(450) NULL AFTER `promotion_price`,
 ADD COLUMN `detail` LONGTEXT NULL AFTER `promo`,
 ADD COLUMN `is_free_postage` BIT(1) NULL AFTER `detail`;
 
-<select id="bookList" resultMap="BaseResultMap">
-  	select * from Book
-  	<where>
-		<if test="type!=null">type = #{type,jdbcType=INTEGER}</if>
-	</where>
-  </select>
-  <select id="listBookCount" resultType="int" parameterType="java.util.Map">
-		select
-		count(id)
-		from Book
-		<where>
-			<if test="type!=null">type = #{type,jdbcType=INTEGER}</if>
-		</where>
-	</select>
-
+ALTER TABLE `book`.`Book` 
+CHANGE COLUMN `detail` `detail` TEXT NULL DEFAULT NULL ;
 
 

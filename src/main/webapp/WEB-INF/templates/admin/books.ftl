@@ -1,6 +1,12 @@
 <#import "admin_frame.ftl" as main>
 <@main.page title="图书管理">
 <link rel="stylesheet" type="text/css" href="${request.contextPath}/plugins/simditor/simditor.css" />
+<style>
+	.book-detail img {
+		max-width: 100%;
+      	height: auto;
+    }
+</style>
 <div class="admin-content">
 	<div class="admin-content-body">
 		<div class="am-cf am-padding am-padding-bottom-0">
@@ -204,7 +210,7 @@
 				  	</div>
 				  	<div class="am-form-group">
 				    	<label for="book-detail" class="am-u-sm-3 am-form-label">图书详情</label>
-				    	<div class="am-u-sm-9 am-text-left">
+				    	<div class="am-u-sm-9 am-text-left book-detail">
 				      		<textarea id="book-detail" name="detail" placeholder="图书详情"></textarea>
 				    	</div>
 				  	</div>
@@ -231,10 +237,14 @@
 	var simditor;
 	
 	$(function(){
+		simditor();
+	});
+	
+	function simditor(){
 		//编辑器初始化
 	    simditor = new Simditor({
 	        textarea: $('#book-detail'),
-	        toolbar:['title','bold','fontScale','italic','link','underline','color','blockquote','image','code','indent','outdent'],
+	        toolbar:['title','bold','fontScale','italic','link','underline','color','blockquote','image'],
 	        upload: {
 	            url: '${request.contextPath}/imgupload.do',
 	            params: null,
@@ -242,11 +252,11 @@
 	            connectionCount: 3,
 	            leaveConfirm: '正在上传文件'
 	        },
-	        defaultImage: '${request.contextPath}/images/image.png',
+	        defaultImage: '${request.contextPath}/images/defaultimage.png',
 	        pasteImage: true,
 	        imageButton: ['upload']
 	    });
-	});
+	}
 
 	function addBookModal(){
 		$('#add_book_form')[0].reset();
@@ -305,12 +315,14 @@
 				$('#book-price').val(book.price.toFixed(2));
 				$('#book-price').attr('readonly','true');
 				$('#add_book_title').text("编辑图书");
-				$('#book-detail').html(book.detail);
+				//$('#book-detail').val(book.detail);
+				simditor.setValue(book.detail);
 				if(book.isFreePostage)
 					$('#isfreepostage').attr("checked",true);
 				else
 					$('#isfreepostage').attr("checked",false);
 				$('#book-promotion-price').val(book.promotionPrice.toFixed(2));
+				
 				$('#add-book-modal').modal('open');
 			}
 		});
@@ -338,4 +350,5 @@
 		  layer.msg('您取消了删除');
 		});
 	}
+	
 </script>

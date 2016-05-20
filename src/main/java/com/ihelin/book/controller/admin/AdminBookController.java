@@ -44,7 +44,8 @@ public class AdminBookController extends BaseController {
 	 */
 	@RequestMapping("add_book_commit")
 	public void addBook(HttpServletResponse response, String bookName, String author, String press, Integer bookType,
-			Integer number, String isbn, BigDecimal price, BigDecimal promotionPrice) {
+			Integer number, String isbn, BigDecimal price, BigDecimal promotionPrice, String promo, String detail,
+			Boolean postage) {
 		Book newBook = new Book();
 		newBook.setBookName(bookName);
 		newBook.setAuthor(author);
@@ -56,6 +57,9 @@ public class AdminBookController extends BaseController {
 		newBook.setPromotionPrice(promotionPrice);
 		newBook.setCreateTime(new Date());
 		newBook.setCreaterId(1);// 替换
+		newBook.setPromo(promo);
+		newBook.setDetail(detail);
+		newBook.setIsFreePostage(postage);
 		bookManager.insertBook(newBook);
 		ResponseUtil.writeSuccessJSON(response);
 	}
@@ -66,7 +70,8 @@ public class AdminBookController extends BaseController {
 	 */
 	@RequestMapping("edit_book_commit")
 	public void editBook(HttpServletResponse response, Integer id, String bookName, String author, String press,
-			Integer bookType, Integer number, String isbn, BigDecimal price, BigDecimal promotionPrice) {
+			Integer bookType, Integer number, String isbn, BigDecimal price, BigDecimal promotionPrice, String promo,
+			String detail, Boolean postage) {
 		Book oldBook = bookManager.selectBookById(id);
 		oldBook.setBookName(bookName);
 		oldBook.setAuthor(author);
@@ -76,6 +81,9 @@ public class AdminBookController extends BaseController {
 		oldBook.setNumber(number);
 		// oldBook.setPrice(price);
 		oldBook.setPromotionPrice(promotionPrice);
+		oldBook.setPromo(promo);
+		oldBook.setDetail(detail);
+		oldBook.setIsFreePostage(postage);
 		bookManager.updateBook(oldBook);
 		ResponseUtil.writeSuccessJSON(response);
 	}

@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.ihelin.book.controller.BaseController;
 import com.ihelin.book.db.entity.Account;
 import com.ihelin.book.manager.AccountManager;
+import com.ihelin.book.utils.CryptUtil;
 import com.ihelin.book.utils.DateTimeUtil;
 import com.ihelin.book.utils.ResponseUtil;
 
@@ -31,6 +32,11 @@ public class UserController extends BaseController {
 	@RequestMapping("user_edit")
 	public String userEdit() {
 		return UserFtl("user_edit");
+	}
+	
+	@RequestMapping("password_edit")
+	public String passwordEdit() {
+		return UserFtl("password_edit");
 	}
 
 	@RequestMapping("change_account_info")
@@ -56,6 +62,26 @@ public class UserController extends BaseController {
 			session.setAttribute("account", ac);
 			ResponseUtil.writeSuccessJSON(response);
 		}
+	}
+	
+	@RequestMapping("change_password")
+	public void changePsw(HttpServletResponse response,String oldPsw,String newPsw,Integer id){
+		if(id==null){
+			ResponseUtil.writeFailedJSON(response, "account_id_null");
+			return;
+		}
+		if(newPsw.equals(oldPsw)){
+			ResponseUtil.writeFailedJSON(response, "same_psw");
+			return;
+		}
+		Account account = accountManager.selectAccountById(id);
+		if(!account.getPassword().equals(CryptUtil.sha1(oldPsw))){
+			ResponseUtil.writeFailedJSON(response, "old_psw_error");
+			return;
+		}
+		account.setPassword(CryptUtil.sha1(newPsw));
+		accountManager.updateAccount(account);
+		ResponseUtil.writeSuccessJSON(response);
 	}
 
 }

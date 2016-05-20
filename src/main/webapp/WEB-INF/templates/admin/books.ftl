@@ -1,5 +1,6 @@
 <#import "admin_frame.ftl" as main>
 <@main.page title="图书管理">
+<link rel="stylesheet" type="text/css" href="${request.contextPath}/plugins/simditor/simditor.css" />
 <div class="admin-content">
 	<div class="admin-content-body">
 		<div class="am-cf am-padding am-padding-bottom-0">
@@ -78,11 +79,11 @@
 								    	<td><input type="checkbox" /></td>
 								        <td><span class="am-badge am-badge-primary am-radius">${book.id!}</span></td>
 								        <td><a href="#">${book.bookName!}</a></td>
-								        <td class="am-hide-sm-only">${book.author!"未知"}</td>
-								        <td class="am-hide-sm-only">${book.number!}</td>
-								        <td class="am-hide-sm-only"><del>${book.price!?string.currency}</del></td>
-								        <td class="am-hide-sm-only">${book.promotionPrice!?string.currency}</td>
-								        <td class="am-hide-sm-only">${book.createTime?string("yyyy-MM-dd HH:mm")}</td>
+								        <td>${book.author!"未知"}</td>
+								        <td>${book.number!}</td>
+								        <td><del>${book.price!?string.currency}</del></td>
+								        <td>${book.promotionPrice!?string.currency}</td>
+								        <td>${book.createTime?string("yyyy-MM-dd HH:mm")}</td>
 								        <td>
 							            	<div class="am-btn-toolbar">
 							    				<div class="am-btn-group am-btn-group-xs">
@@ -111,9 +112,9 @@
 </div>
 </@main.page>
 	<div class="am-modal am-modal-no-btn" tabindex="-1" id="add-book-modal">
-		<div class="am-modal-dialog" style="min-width:600px">
+		<div class="am-modal-dialog" style="min-width:700px">
 	    	<div class="am-modal-hd">
-	    		<strong id="add_book_title" style="font-size:25px;">添加图书</strong>
+	    		<strong class="am-text-xl" id="add_book_title">添加图书</strong>
 	      		<a href="javascript: void(0)" class="am-close am-close-spin" data-am-modal-close><i class="am-icon-times"></i></a>
 	    	</div>
 	    	<hr />
@@ -124,6 +125,12 @@
 				    	<label for="book-name" class="am-u-sm-3 am-form-label">图书名称</label>
 				    	<div class="am-u-sm-9">
 				      		<input type="text" id="book-name" name="bookName" placeholder="图书名称" required />
+				    	</div>
+				  	</div>
+				  	<div class="am-form-group">
+				    	<label for="book-promo" class="am-u-sm-3 am-form-label">描述信息</label>
+				    	<div class="am-u-sm-9">
+				      		<input type="text" id="book-promo" name="promo" placeholder="描述信息" />
 				    	</div>
 				  	</div>
 				  	<div class="am-form-group">
@@ -187,6 +194,20 @@
 				      		<input type="text" id="book-promotion-price" name="promotionPrice" placeholder="促销价" required>
 				    	</div>
 				  	</div>
+				  	<div class="am-form-group">
+				    	<label for="free-postage" class="am-u-sm-3 am-form-label">是否包邮</label>
+				    	<div class="am-u-sm-9">
+				      		<label class="am-checkbox am-checkbox-inline">
+						    	<input type="checkbox" id="isfreepostage" value="1" name="postage" data-am-ucheck> 包邮
+						  	</label>
+				    	</div>
+				  	</div>
+				  	<div class="am-form-group">
+				    	<label for="book-detail" class="am-u-sm-3 am-form-label">图书详情</label>
+				    	<div class="am-u-sm-9 am-text-left">
+				      		<textarea id="book-detail" name="detail" placeholder="图书详情"></textarea>
+				    	</div>
+				  	</div>
 				</form>
 	    	</div>
 	    	<hr />
@@ -201,7 +222,31 @@
 <script src="${request.contextPath}/js/formvalidation.js"></script>
 <script src="${request.contextPath}/plugins/parsley/parsley.min.js"></script>
 <script src="${request.contextPath}/plugins/layer/layer.js"></script>
+<script type="text/javascript" src="${request.contextPath}/plugins/simditor/module.js"></script>
+<script type="text/javascript" src="${request.contextPath}/plugins/simditor/hotkeys.js"></script>
+<script type="text/javascript" src="${request.contextPath}/plugins/simditor/uploader.js"></script>
+<script type="text/javascript" src="${request.contextPath}/plugins/simditor/simditor.js"></script>
 <script>
+	//编辑器
+	var simditor;
+	
+	$(function(){
+		//编辑器初始化
+	    simditor = new Simditor({
+	        textarea: $('#book-detail'),
+	        toolbar:['title','bold','fontScale','italic','link','underline','color','blockquote','image','code','indent','outdent'],
+	        upload: {
+	            url: '${request.contextPath}/imgupload.do',
+	            params: null,
+	            fileKey: 'fileDataFileName',
+	            connectionCount: 3,
+	            leaveConfirm: '正在上传文件'
+	        },
+	        defaultImage: '${request.contextPath}/images/image.png',
+	        pasteImage: true,
+	        imageButton: ['upload']
+	    });
+	});
 
 	function addBookModal(){
 		$('#add_book_form')[0].reset();
@@ -251,15 +296,21 @@
 				$('#add_book_form')[0].reset();
 				$('#book_id_inp').val(id);
 				$('#book-name').val(book.bookName);
+				$('#book-promo').val(book.promo);
 				$('#book-author').val(book.author);
 				$('#book-isbn').val(book.isbn);
 				$('#book-press').val(book.press);
 				$('#book-type').val(book.type);
 				$('#book-number').val(book.number);
-				$('#book-price').val(book.price);
+				$('#book-price').val(book.price.toFixed(2));
 				$('#book-price').attr('readonly','true');
 				$('#add_book_title').text("编辑图书");
-				$('#book-promotion-price').val(book.promotionPrice);
+				$('#book-detail').html(book.detail);
+				if(book.isFreePostage)
+					$('#isfreepostage').attr("checked",true);
+				else
+					$('#isfreepostage').attr("checked",false);
+				$('#book-promotion-price').val(book.promotionPrice.toFixed(2));
 				$('#add-book-modal').modal('open');
 			}
 		});

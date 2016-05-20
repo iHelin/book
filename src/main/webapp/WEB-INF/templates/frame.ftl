@@ -8,7 +8,6 @@
   	<meta name="viewport" content="width=device-width, initial-scale=1">
   	<meta name="format-detection" content="telephone=no">
   	<meta name="renderer" content="webkit">
-  	<meta property="wb:webmaster" content="76eb27bbf473097a" />
   	<meta http-equiv="Cache-Control" content="no-siteapp"/>
   	<link rel="alternate icon" type="image/png" href="${request.contextPath}/images/favicon.png">
   	<link rel="stylesheet" href="${request.contextPath}/css/amazeui.min.css"/>
@@ -41,9 +40,10 @@
 				          			${account.email!?string} <span class="am-icon-caret-down"></span>
 				        		</a>
 				        		<ul class="am-dropdown-content">
-				          			<li><a href="${request.contextPath}/user/user_info"><span class="am-icon-user"></span> 资料</a></li>
-				          			<li><a href="${request.contextPath}/user/user_edit"><span class="am-icon-cog"></span> 设置</a></li>
-				          			<li><a href="javascript:void(0);" onclick="logout();"><span class="am-icon-power-off"></span> 退出</a></li>
+				          			<li><a href="${request.contextPath}/user/user_info"><span class="am-icon-user"></span> 个人信息</a></li>
+				          			<li><a href="${request.contextPath}/user/user_edit"><span class="am-icon-edit"></span> 资料设置</a></li>
+				          			<li><a href="${request.contextPath}/user/password_edit"><span class="am-icon-cog"></span> 密码修改</a></li>
+				          			<li><a href="javascript:void(0);" onclick="logout();"><span class="am-icon-sign-out"></span> 登出</a></li>
 				        		</ul>
 				        	</li>
 			        	</ul>
@@ -53,7 +53,7 @@
 		        		<button onclick="javascript:location.href='${request.contextPath}/register'" class="am-btn am-btn-secondary am-topbar-btn am-btn-sm"><span class="am-icon-pencil"></span> 注册</button>
 		      		</div>
 			      	<div class="am-topbar-right">
-			        	<button onclick="javascript:location.href='${request.contextPath}/login'" class="am-btn am-btn-primary am-topbar-btn am-btn-sm"><span class="am-icon-user"></span> 登录</button>
+			        	<button onclick="javascript:location.href='${request.contextPath}/login'" class="am-btn am-btn-primary am-topbar-btn am-btn-sm"><span class="am-icon-sign-in"></span> 登录</button>
 			      	</div>
 	      		</#if>
 	    	</div>

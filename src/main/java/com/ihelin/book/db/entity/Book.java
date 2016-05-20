@@ -28,6 +28,12 @@ public class Book {
 
     private BigDecimal promotionPrice;
 
+    private String promo;
+
+    private Boolean isFreePostage;
+
+    private String detail;
+
     public Integer getId() {
         return id;
     }
@@ -122,5 +128,29 @@ public class Book {
 
     public void setPromotionPrice(BigDecimal promotionPrice) {
         this.promotionPrice = promotionPrice;
+    }
+
+    public String getPromo() {
+        return promo;
+    }
+
+    public void setPromo(String promo) {
+        this.promo = promo;
+    }
+
+    public Boolean getIsFreePostage() {
+        return isFreePostage;
+    }
+
+    public void setIsFreePostage(Boolean isFreePostage) {
+        this.isFreePostage = isFreePostage;
+    }
+
+    public String getDetail() {
+        return detail;
+    }
+
+    public void setDetail(String detail) {
+        this.detail = detail;
     }
 }

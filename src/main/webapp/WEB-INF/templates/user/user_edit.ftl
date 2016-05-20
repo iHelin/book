@@ -1,6 +1,5 @@
 <#import "../frame.ftl" as main>
 <@main.page title="修改资料">
-
 <div class="am-g am-g-fixed blog-g-fixed">
 	<div class="am-u-md-12">
 		<div class="am-cf am-padding am-padding-bottom-0">

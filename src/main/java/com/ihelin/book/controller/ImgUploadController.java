@@ -53,8 +53,8 @@ public class ImgUploadController{
 			// 检查扩展名
 			String fileExt = file.getOriginalFilename().substring(file.getOriginalFilename().lastIndexOf(".") + 1)
 					.toLowerCase();
-			SimpleDateFormat df = new SimpleDateFormat("yyyyMMddHHmmss");
-			String newFileName = df.format(new Date()) + "_" + new Random().nextInt(1000) + "." + fileExt;
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss");
+			String newFileName = sdf.format(new Date()) + "_" + new Random().nextInt(10000) + "." + fileExt;
 			try {
 				File uploadedFile = new File(saveRealFilePath, newFileName);
 				ByteStreams.copy(file.getInputStream(), new FileOutputStream(uploadedFile));

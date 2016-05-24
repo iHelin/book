@@ -59,7 +59,7 @@ public class AdminBookController extends BaseController {
 		newBook.setCreaterId(1);// 替换
 		newBook.setPromo(promo);
 		newBook.setDetail(detail);
-		newBook.setIsFreePostage(postage);
+		newBook.setIsFreePostage(postage==null?false:true);
 		bookManager.insertBook(newBook);
 		ResponseUtil.writeSuccessJSON(response);
 	}
@@ -83,7 +83,7 @@ public class AdminBookController extends BaseController {
 		oldBook.setPromotionPrice(promotionPrice);
 		oldBook.setPromo(promo);
 		oldBook.setDetail(detail);
-		oldBook.setIsFreePostage(postage);
+		oldBook.setIsFreePostage(postage==null?false:true);
 		bookManager.updateBook(oldBook);
 		ResponseUtil.writeSuccessJSON(response);
 	}

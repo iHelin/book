@@ -62,8 +62,8 @@
 		insert into Book (book_name, author, img,
 		isbn, create_time, creater_id,
 		type, press, number,
-		price, promotion_price, promo,detail
-		is_free_postage,)
+		price, promotion_price, promo,detail,
+		is_free_postage)
 		values (#{bookName,jdbcType=VARCHAR}, #{author,jdbcType=VARCHAR},
 		#{img,jdbcType=VARCHAR},
 		#{isbn,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{createrId,jdbcType=INTEGER},

@@ -27,7 +27,7 @@ $(function() {
             notnull: "此栏不能留空。",
             notblank: "此栏不能留空。",
             required: "此栏不能留空。",
-            regexp: "此栏填写似乎不合格式。",
+            regexp: "请填写正确的金额。",
             min: "此栏的值必须大于等于 %s。",
             max: "此栏的值必须小于等于 %s。",
             range: "此栏的值必须介于 %s 和 %s 之间。",

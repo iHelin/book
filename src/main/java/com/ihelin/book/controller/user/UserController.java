@@ -52,7 +52,8 @@ public class UserController extends BaseController {
 			return;
 		}else{
 			Account ac = accountManager.selectAccountById(id);
-			ac.setAccountName(accountName);
+			if(ac.getAccountName()==null)
+				ac.setAccountName(accountName);
 			ac.setRealName(realName);
 			ac.setGender(gender);
 			ac.setBirthday(DateTimeUtil.parseDate(birthday));

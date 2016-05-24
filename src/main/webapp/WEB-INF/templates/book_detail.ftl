@@ -7,42 +7,12 @@
       }
     }
 
-    .book-main {
-      padding: 20px 0;
-    }
-
-    .book-title {
-      margin: 10px 0 20px 0;
-    }
-
-    .book-meta {
-      font-size: 14px;
-      margin: 10px 0 20px 0;
-      color: #222;
-    }
-
-    .book-meta a {
-      color: #27ae60;
-    }
-
-    .book-pagination a {
-      font-size: 1.4rem;
-    }
-
-    .book-team li {
-      padding: 4px;
-    }
-
-    .book-team img {
-      margin-bottom: 0;
-    }
-
 	.book-detail img,
-    .book-content img,
-    .book-team img {
+    .book-content img {
       max-width: 100%;
       height: auto;
     }
+    
   </style>
 
 <div class="am-g am-g-fixed book-g-fixed">
@@ -52,27 +22,49 @@
         		<div class="am-u-lg-5">
         			<div class="am-panel am-panel-default am-vertical-align" style="height:345px;width:345px">
         				<div class="am-vertical-align-middle">
-        					<img src="http://f.cl.ly/items/451O3X0g47320D203D1B/不夠活潑.jpg">
+        					<img src="https://ss0.bdstatic.com/94oJfD_bAAcT8t7mm9GUKT-xh_/timg?image&quality=100&size=b4000_4000&sec=1463749784&di=a16ddaf87d0def2bb9da4d04ccad5e94&src=http://www.qianhuaweb.com/data/attachement/jpg/site2/20111025/00016c40a1c21010562a05.jpg">
         				</div>
         			</div>
         		</div>
         		<div class="am-u-lg-7">
         			<div>
+        				<#if book.isFreePostage?? && book.isFreePostage>
+        					<span class="am-badge am-badge-danger am-fr">包邮</span>
+        				</#if>
         				<h2>${book.bookName!}</h2>
         			</div>
         			<div>
+        				<p class="am-text-warning">${book.promo!}</p>
         				<p>作者：${book.author!}</p>
-        				<p>出版社：${book.press!}</p>
-        				<p>库存：${book.number!}</p>
         				<p>价格：<del><strong>${book.price!?string.currency}</strong></del></p>
         			</div>
         			<div>
         				<p>促销价：<span style="font-size:30px;color:#ff4400"><strong>${book.promotionPrice!?string.currency}</strong></span></p>
         			</div>
+        			<div>
+        				<p>
+        					<div class="am-g">
+        						<div class="am-u-sm-3" style="margin-top:10px;">
+        							<span>数量(本)：</span>
+        						</div>
+							  	<div class="am-u-sm-4 am-fl" style="float:left;">
+							    	<div class="am-input-group">
+							      		<span class="am-input-group-btn">
+        									<button class="am-btn am-btn-default am-btn-xs input-num-down" id="book_down_btn" type="button" onclick="count(this);"><span class="am-icon-minus"></span> </button>
+      									</span>
+							      		<input type="text" value="1" class="am-form-field am-text-center" id="book_count" data-step="1" data-max="5" data-min="1" onkeyup='this.value=this.value.replace(/\D/gi,"")' readOnly>
+							      		<span class="am-input-group-btn">
+        									<button class="am-btn am-btn-default am-btn-xs input-num-up" id="book_up_btn" type="button" onclick="count(this);"><span class="am-icon-plus"></span> </button>
+      									</span>
+							    	</div>
+							  	</div>
+							</div>
+     					</p>
+        			</div>
         			<hr data-am-widget="divider" style="" class="am-divider am-divider-dotted" />
         			<div class="am-text-center">
-        				<button class="am-btn am-btn-danger" style="margin-right: 40px;">立即购买</button>
-        				<button class="am-btn am-btn-danger">加入购物车</button>
+        				<button class="am-btn am-btn-danger" style="margin-right: 40px;" onclick="go(#{book.id!})">立即购买</button>
+        				<button class="am-btn am-btn-danger" onclick="addCart(#{book.id!})">加入购物车</button>
         			</div>
         		</div>
       		</div>
@@ -117,3 +109,68 @@
   	</div>
 </div>
 </@main.page>
+<script>
+	function go(id){
+		var accountId = $('#login-tag').val();
+		var count = $('#book_count').val();
+		if(count==null || count=="")
+			count=1;
+		if(accountId == null){
+			layer.confirm('当前操作需要登录才能进行，是否前往登录？', {
+				btn: ['确定','取消']
+			}, function(){
+				window.location.href="${request.contextPath}/login?from=book_detail?id="+id;
+			});
+		}else{
+			window.location.href="${request.contextPath}/user/buy_now?id="+id+"&number="+count;
+		}
+	}
+	
+	function addCart(id){
+		var accountId = $('#login-tag').val();
+		if(accountId == null){
+			layer.confirm('当前操作需要登录才能进行，是否前往登录？', {
+				btn: ['确定','取消']
+			}, function(){
+				window.location.href="${request.contextPath}/login?from=book_detail?id="+id;
+			});
+		}else{
+			layer.msg('已登录');
+		}
+	}
+	
+	function count(e){
+			var thisBtn = $(e);
+            var countInput = $('#book_count');
+            var currentValue = countInput.val();
+            var step = countInput.attr('data-step') || 1;
+            if (thisBtn.hasClass('input-num-up'))
+            {
+                var newValue = parseInt(parseFloat(currentValue) + parseFloat(step)),
+                    maxValue = countInput.attr('data-max'),
+                    downBtn = $('#book_down_btn');
+                //若执行‘加’操作且‘减’按钮存在class='disabled'的话，则移除‘减’操作按钮的class 'disabled'
+                downBtn.hasClass('am-disabled') && downBtn.removeClass('am-disabled');
+                if (maxValue && newValue >= maxValue) {
+                    newValue = maxValue;
+                    thisBtn.addClass('am-disabled');
+                }
+            } else {
+                var newValue = parseInt( parseFloat(currentValue) - parseFloat(step) ),
+                    minValue = countInput.attr('data-min') || false,
+                    upBtn = $('#book_up_btn');
+                //若执行‘减’操作且‘加’按钮存在class='disabled'的话，则移除‘加’操作按钮的class 'disabled'
+                upBtn.hasClass('am-disabled') && upBtn.removeClass('am-disabled');
+                if (minValue && newValue <= minValue) {
+                    newValue = minValue;
+                    thisBtn.addClass('am-disabled');
+                }
+            }
+            countInput.val( newValue );
+        }
+	
+	$(function() {
+		$('#book_up_btn').click();
+        $('#book_down_btn').click();
+    });
+</script>

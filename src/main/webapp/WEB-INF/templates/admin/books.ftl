@@ -63,7 +63,7 @@
       	</div>
       	<div class="am-g">
         	<div class="am-u-sm-12">
-            	<table class="am-table am-table-striped am-table-hover table-main ">
+            	<table class="am-table am-table-striped am-table-hover table-main">
               		<thead>
               			<tr>
 	                		<th class="table-check am-text-center"><input type="checkbox" /></th>
@@ -128,39 +128,37 @@
 	      		<form class="myform am-form am-form-horizontal" id="add_book_form" data-validate="parsley">
 	      			<input type="hidden" id="book_id_inp" name="id" value="" />
 					<div class="am-form-group">
-				    	<label for="book-name" class="am-u-sm-3 am-form-label">图书名称</label>
-				    	<div class="am-u-sm-9">
+				    	<label for="book-name" class="am-u-sm-2 am-form-label">图书名称</label>
+				    	<div class="am-u-sm-10">
 				      		<input type="text" id="book-name" name="bookName" placeholder="图书名称" required />
 				    	</div>
 				  	</div>
 				  	<div class="am-form-group">
-				    	<label for="book-promo" class="am-u-sm-3 am-form-label">描述信息</label>
-				    	<div class="am-u-sm-9">
+				    	<label for="book-promo" class="am-u-sm-2 am-form-label">描述信息</label>
+				    	<div class="am-u-sm-10">
 				      		<input type="text" id="book-promo" name="promo" placeholder="描述信息" />
 				    	</div>
 				  	</div>
 				  	<div class="am-form-group">
-				    	<label for="book-author" class="am-u-sm-3 am-form-label">作者</label>
-				    	<div class="am-u-sm-9">
-				      		<input type="text" id="book-author" name="author" placeholder="作者" />
-				    	</div>
-				  	</div>
-				  	<div class="am-form-group">
-				    	<label for="book-isbn" class="am-u-sm-3 am-form-label">ISBN</label>
-				    	<div class="am-u-sm-9">
-				      		<input type="text" id="book-isbn" name="isbn" placeholder="ISBN">
-				    	</div>
-				  	</div>
-				  	<div class="am-form-group">
-				    	<label for="book-press" class="am-u-sm-3 am-form-label">出版社</label>
-				    	<div class="am-u-sm-9">
+				    	<label for="book-press" class="am-u-sm-2 am-form-label">出版社</label>
+				    	<div class="am-u-sm-10">
 				      		<input type="text" id="book-press" name="press" placeholder="出版社">
 				    	</div>
 				  	</div>
 				  	<div class="am-form-group">
-				    	<label for="book-type" class="am-u-sm-3 am-form-label">类别</label>
-				    	<div class="am-u-sm-9">
-				    		<select id="book-type" name="bookType" required="required">
+				    	<label for="book-author" class="am-u-sm-2 am-form-label">作者</label>
+				    	<div class="am-u-sm-4">
+				      		<input type="text" id="book-author" name="author" placeholder="作者" />
+				    	</div>
+				    	<label for="book-isbn" class="am-u-sm-2 am-form-label">ISBN</label>
+				    	<div class="am-u-sm-4">
+				      		<input type="text" id="book-isbn" name="isbn" placeholder="ISBN" data-type="number">
+				    	</div>
+				  	</div>
+				  	<div class="am-form-group">
+				    	<label for="book-type" class="am-u-sm-2 am-form-label">类别</label>
+				    	<div class="am-u-sm-4">
+				    		<select id="book-type" name="bookType" data-required="true">
 				    			<option value="">选择分类</option>
 				    			<option value="1">小说</option>
 				    			<option value="2">文学</option>
@@ -181,36 +179,33 @@
 				    			<option value="17">其他</option>
 				    		</select>
 				    	</div>
-				  	</div>
-					<div class="am-form-group">
-				    	<label for="book-number" class="am-u-sm-3 am-form-label">库存数量</label>
-				    	<div class="am-u-sm-9">
+				    	<label for="book-number" class="am-u-sm-2 am-form-label">库存数量</label>
+				    	<div class="am-u-sm-4">
 				      		<input type="text" id="book-number" name="number" placeholder="库存数量" required data-type="number">
 				    	</div>
 				  	</div>
 				  	<div class="am-form-group">
-				    	<label for="book-price" class="am-u-sm-3 am-form-label">原价</label>
-				    	<div class="am-u-sm-9">
-				      		<input type="text" id="book-price" name="price" placeholder="原价" required>
+				    	<label for="book-price" class="am-u-sm-2 am-form-label">原价</label>
+				    	<div class="am-u-sm-4">
+				      		<input type="text" id="book-price" name="price" placeholder="原价" required data-regexp="^(([1-9]\d{0,9})|0)(\.\d{1,2})?$">
+				    	</div>
+				    	<label for="book-promotion-price" class="am-u-sm-2 am-form-label">促销价</label>
+				    	<div class="am-u-sm-4">
+				      		<input type="text" id="book-promotion-price" name="promotionPrice" placeholder="促销价" required data-regexp="^(([1-9]\d{0,9})|0)(\.\d{1,2})?$">
 				    	</div>
 				  	</div>
 				  	<div class="am-form-group">
-				    	<label for="book-promotion-price" class="am-u-sm-3 am-form-label">促销价</label>
-				    	<div class="am-u-sm-9">
-				      		<input type="text" id="book-promotion-price" name="promotionPrice" placeholder="促销价" required>
-				    	</div>
-				  	</div>
-				  	<div class="am-form-group">
-				    	<label for="free-postage" class="am-u-sm-3 am-form-label">是否包邮</label>
-				    	<div class="am-u-sm-9">
+				    	<label for="free-postage" class="am-u-sm-2 am-form-label">是否包邮</label>
+				    	<div class="am-u-sm-4">
 				      		<label class="am-checkbox am-checkbox-inline">
 						    	<input type="checkbox" id="isfreepostage" value="1" name="postage" data-am-ucheck> 包邮
 						  	</label>
 				    	</div>
+				    	<div class="am-u-sm-6"></div>
 				  	</div>
 				  	<div class="am-form-group">
-				    	<label for="book-detail" class="am-u-sm-3 am-form-label">图书详情</label>
-				    	<div class="am-u-sm-9 am-text-left book-detail">
+				    	<label for="book-detail" class="am-u-sm-2 am-form-label">图书详情</label>
+				    	<div class="am-u-sm-10 am-text-left book-detail">
 				      		<textarea id="book-detail" name="detail" placeholder="图书详情"></textarea>
 				    	</div>
 				  	</div>
@@ -315,14 +310,12 @@
 				$('#book-price').val(book.price.toFixed(2));
 				$('#book-price').attr('readonly','true');
 				$('#add_book_title').text("编辑图书");
-				//$('#book-detail').val(book.detail);
-				simditor.setValue(book.detail);
+				simditor.setValue(book.detail);//编辑器方式赋值
 				if(book.isFreePostage)
 					$('#isfreepostage').attr("checked",true);
 				else
 					$('#isfreepostage').attr("checked",false);
 				$('#book-promotion-price').val(book.promotionPrice.toFixed(2));
-				
 				$('#add-book-modal').modal('open');
 			}
 		});

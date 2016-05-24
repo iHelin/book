@@ -13,7 +13,7 @@
 	
 	<!-- system default log file -->
 	<appender name="default" class="org.apache.log4j.RollingFileAppender">
-		<param name="File" value="${jetty.home}/logs/iHelin.log" />
+		<param name="File" value="logs/book.log" />
 		<param name="Append" value="true" />  
         <param name="MaxFileSize" value="20MB" />  
         <param name="MaxBackupIndex" value="50" />  

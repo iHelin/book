@@ -27,17 +27,19 @@
 	   	 	<div class="am-collapse am-topbar-collapse" id="collapse-head">
 	      		<ul class="am-nav am-nav-pills am-topbar-nav">
 	        		<li><a href="${request.contextPath}/index">首页</a></li>
-	        		<li><a href="${request.contextPath}/books">Book</a></li>
+	        		<li><a href="${request.contextPath}/books">书城</a></li>
 	        		<li><a href="${request.contextPath}/music">音乐</a></li>
 	        		<li><a href="${request.contextPath}/message">留言板</a></li>
 	        		<li><a href="${request.contextPath}/contact">Contact</a></li>
 	      		</ul>
 	      		<#if account??>
+	      			<input type="hidden" id="login-tag" value="#{account.id!}">
 	      			<div class="am-topbar-right">
 		        		<ul class="am-nav am-nav-pills am-topbar-nav am-topbar-right admin-header-list">
 			        		<li class="am-dropdown" data-am-dropdown>
 				        		<a class="am-dropdown-toggle" data-am-dropdown-toggle href="javascript:void(0);">
-				          			${account.email!?string} <span class="am-icon-caret-down"></span>
+				          			欢迎，${account.accountName!account.email!?string?html}！
+				          			<span class="am-icon-caret-down"></span>
 				        		</a>
 				        		<ul class="am-dropdown-content">
 				          			<li><a href="${request.contextPath}/user/user_info"><span class="am-icon-user"></span> 个人信息</a></li>
@@ -50,10 +52,8 @@
 		      		</div>
 		      	<#else>
 		      		<div class="am-topbar-right">
+		      			<button onclick="javascript:location.href='${request.contextPath}/login'" class="am-btn am-btn-primary am-topbar-btn am-btn-sm"><span class="am-icon-sign-in"></span> 登录</button>
 		        		<button onclick="javascript:location.href='${request.contextPath}/register'" class="am-btn am-btn-secondary am-topbar-btn am-btn-sm"><span class="am-icon-pencil"></span> 注册</button>
-		      		</div>
-			      	<div class="am-topbar-right">
-			        	<button onclick="javascript:location.href='${request.contextPath}/login'" class="am-btn am-btn-primary am-topbar-btn am-btn-sm"><span class="am-icon-sign-in"></span> 登录</button>
 			      	</div>
 	      		</#if>
 	    	</div>
@@ -85,10 +85,17 @@
 	});
 	
 	function logout(){
-		$.post("${request.contextPath}/logout",{},function(data){
-			if(data.status == "success"){
-				window.location.href="${request.contextPath}/index";
-			}
+		layer.confirm('确定要退出吗？', {
+			btn: ['确定','取消'] //按钮
+		}, function(){
+			$.post("${request.contextPath}/logout",{},function(data){
+				if(data.status == "success"){
+					//window.location.href="${request.contextPath}/index";
+					window.location.reload();
+				}
+			});
+		}, function(){
+			
 		});
 	}
 </script>

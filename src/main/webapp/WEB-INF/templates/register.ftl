@@ -43,9 +43,9 @@
 	  	</div>
 	</div>
 	<hr />
-	<p class="text-center bg-info">
-		© 2016 <a href="#">iHelin</a>
-	</p>
+	<div class="text-center">
+	    <p>由 <a href="http://weibo.com/378920717/" title="iHelin" target="_blank" class="">iHelin</a>提供技术支持 CopyRight©2016  iHelin Inc.</p>
+	</div>
 </div>
 
 </body>

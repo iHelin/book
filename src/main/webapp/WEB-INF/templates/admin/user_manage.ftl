@@ -96,7 +96,7 @@
 
     <footer class="admin-content-footer">
       <hr />
-      <p class="am-padding-left">© 2016 iHlin, Inc.</p>
+      <p class="am-padding-left">© 2016 iHelin, Inc.</p>
     </footer>
 
 </div>

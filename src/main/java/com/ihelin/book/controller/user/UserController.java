@@ -24,8 +24,6 @@ public class UserController extends BaseController {
 
 	@RequestMapping("user_info")
 	public String userInfo(Model model) {
-		// Account account = accountManager.selectAccountById(id);
-		// model.addAttribute("account", account);
 		return UserFtl("user_info");
 	}
 

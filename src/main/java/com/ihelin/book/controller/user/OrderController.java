@@ -49,7 +49,7 @@ public class OrderController extends BaseController {
 		}
 		orderItem.setTotalMoney(totalMoney);
 		model.addAttribute("orderItem", orderItem);
-		return "user/buy_now";
+		return UserFtl("buy_now");
 	}
 
 	@RequestMapping("submit_order")

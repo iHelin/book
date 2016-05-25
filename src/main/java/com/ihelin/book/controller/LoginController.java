@@ -33,6 +33,9 @@ public class LoginController {
 	public void doLogin(String email, String password, HttpServletResponse response, HttpSession session) {
 		Account account = accountManager.selectAccountByEmail(email);
 		if (account == null) {
+			account = accountManager.selectAccountByAccountName(email);
+		}
+		if (account == null) {
 			ResponseUtil.writeFailedJSON(response, "empty");
 			return;
 		}

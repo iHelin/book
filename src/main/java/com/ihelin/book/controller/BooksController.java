@@ -17,7 +17,7 @@ public class BooksController {
 	@Resource
 	private BookManager bookManager;
 
-	protected static final int PAGE_LENGTH = 24;
+	protected static final int PAGE_LENGTH = 12;
 
 	@RequestMapping("books")
 	public String handleBook(Model model, Integer pageNum) {

@@ -12,8 +12,8 @@
         http://www.springframework.org/schema/beans 
         http://www.springframework.org/schema/beans/spring-beans-3.1.xsd">
 
-	<!-- Spring mvc配置 -->
-	<context:annotation-config />
+	<!-- Spring mvc配置 (component-scan包含annotation-config，故不需要)-->
+	<!-- <context:annotation-config /> -->
 	
 	<mvc:interceptors>
 		<mvc:interceptor>

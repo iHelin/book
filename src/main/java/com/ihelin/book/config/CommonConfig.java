@@ -21,18 +21,7 @@ public class CommonConfig {
 
 	}
 	
-	public static class MailConfigEntry {
-		public String mail_server;
-		public String mail_port;
-		public String mail_user;
-		public String mail_password;
-		public String mail_from_address;
-		public String mail_from_name;
-	}
-
 	private static ConfigEntry configEntry;
-	
-	public static MailConfigEntry mailEntry;
 	
 	private static String webappRoot;
 	
@@ -46,12 +35,6 @@ public class CommonConfig {
 		contextPath = contextName;
 		webappRoot = rootPath;
 		configEntry = loadConfig(ConfigEntry.class);
-		
-		try {
-			mailEntry = loadConfig("mail_config.yml", MailConfigEntry.class);
-		} catch (RuntimeException e) {
-			//ignore, mail not configured. 
-		}
 		
 		if(configEntry == null || configEntry.domain_url == null){
 			throw new RuntimeException("Can not find domain_url in the config.yml.");
@@ -108,10 +91,6 @@ public class CommonConfig {
 	
 	public static File getWebInfDir() {
 		return new File(webappRoot, "WEB-INF");
-	}
-	
-	public static MailConfigEntry getMailEntry(){
-		return mailEntry;
 	}
 	
 	public static <T> T loadConfig(String cfgFileName, Class<T> clazz) {

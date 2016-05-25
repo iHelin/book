@@ -15,7 +15,6 @@
 	http://www.springframework.org/schema/context/spring-context-3.1.xsd">
 
 	<!-- Root Context: defines shared resources visible to all other web components -->
-	<!-- Spring上下文配置 -->
 
 	<description>Spring配置</description>
 

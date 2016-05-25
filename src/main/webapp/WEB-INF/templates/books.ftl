@@ -16,7 +16,10 @@
 </style>
 <br />
 <div class="am-container" style="">
+	
 	<div class="am-g am-g-fixed blog-g-fixed">
+	<#import "admin/pagination.ftl" as pager />
+    <#assign urlParam></#assign>
 		<#if books??>
 			<#list books as book>
 				<#if book??>
@@ -45,6 +48,10 @@
 				</#if>
 			</#list>
 		</#if>
+		<div class="am-u-sm-12" style="float:left;">
+			<#assign currentUrl>books?${urlParam}</#assign>
+			<@pager.pageul pagination=pagination url="${currentUrl}" />
+		</div>
 	</div>
 </div>
 </@main.page>

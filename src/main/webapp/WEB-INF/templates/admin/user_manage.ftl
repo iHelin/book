@@ -61,8 +61,8 @@
 			              			<tr>
 								    	<td><input type="checkbox" /></td>
 								        <td><span class="am-badge am-badge-primary am-radius">${account.id!}</span></td>
-								        <td><a href="#">${account.accountName!"未知"}</a></td>
-								        <td class="am-hide-sm-only">${account.email!"未知"}</td>
+								        <td><span>${account.accountName!"未设置"}</span></td>
+								        <td class="am-hide-sm-only">${account.email!"未设置"}</td>
 								        <td class="am-hide-sm-only">
 								        	<#if account.accountType==0>
 								        		<span class="am-badge am-badge-secondary">普通用户</span>
@@ -72,8 +72,8 @@
 								        		<span class="am-badge am-badge-warning">未知</span>
 								        	</#if>
 								        </td>
-								        <td class="am-hide-sm-only">${account.realName!"未知"}</td>
-								        <td class="am-hide-sm-only">${account.genger!"未知"}</td>
+								        <td class="am-hide-sm-only">${account.realName!"未设置"}</td>
+								        <td class="am-hide-sm-only">${account.genger!"未设置"}</td>
 								        <td class="am-hide-sm-only">${account.registerDate?string("yyyy-MM-dd")}</td>
 								        <td>
 							            	<div class="am-btn-toolbar">

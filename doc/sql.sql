@@ -64,4 +64,6 @@ ADD COLUMN `is_free_postage` BIT(1) NULL AFTER `detail`;
 ALTER TABLE `book`.`Book` 
 CHANGE COLUMN `detail` `detail` TEXT NULL DEFAULT NULL ;
 
+ALTER TABLE `book`.`Account` 
+ADD COLUMN `QQ` VARCHAR(10) NULL AFTER `birthday`;
 

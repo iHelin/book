@@ -30,7 +30,6 @@ public class ImgUploadController{
 	@RequestMapping(value = "imgupload.do", method = RequestMethod.POST)
 	@ResponseBody
 	public String imgUpload(HttpServletRequest request, HttpServletResponse response) {
-
 		response.setContentType("text/html;charset=UTF-8");
 		PrintWriter out = null;
 		try {

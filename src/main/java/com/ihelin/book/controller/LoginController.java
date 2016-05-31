@@ -24,7 +24,7 @@ public class LoginController {
 	private AccountManager accountManager;
 
 	@RequestMapping("login")
-	public String pageLogin(String from,Model model) {
+	public String pageLogin(String from, Model model) {
 		model.addAttribute("from", from);
 		return "login";
 	}
@@ -35,7 +35,7 @@ public class LoginController {
 		if (account == null) {
 			account = accountManager.selectAccountByAccountName(email);
 		}
-		if (account == null) {
+		if (account == null || account.getAccountType() != AccountType.GENERAL.getValue()) {
 			ResponseUtil.writeFailedJSON(response, "empty");
 			return;
 		}
@@ -76,6 +76,7 @@ public class LoginController {
 	@RequestMapping(value = "logout")
 	public void doLogout(HttpSession session, HttpServletResponse response) {
 		session.removeAttribute("account");
+		// session.invalidate();
 		ResponseUtil.writeSuccessJSON(response);
 	}
 

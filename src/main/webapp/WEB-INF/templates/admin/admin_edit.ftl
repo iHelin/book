@@ -21,11 +21,11 @@
 					                  		<img class="am-img-circle am-img-thumbnail" src="http://s.amazeui.org/media/i/demos/bw-2014-06-19.jpg?imageView/1/w/200/h/200/q/80" alt=""/>
 					                	</div>
 					                	<div class="am-u-md-8">
-					                  		<form class="am-form">
+					                  		<form class="am-form" action="imgupload" method="post">
 					                    		<div class="am-form-group">
-					                     		 	<input type="file" id="user-pic">
+					                     		 	<input type="file" id="user-pic" id="img_pic">
 					                      			<p class="am-form-help">请选择要上传的文件...</p>
-					                      			<button type="button" class="am-btn am-btn-primary am-btn-xs">保存</button>
+					                      			<button type="submit" class="am-btn am-btn-primary am-btn-xs">保存</button>
 					                    		</div>
 					                  		</form>
 					                	</div>
@@ -52,29 +52,30 @@
 							</div>
 						</div>
 					    <div class="am-u-sm-12 am-u-md-8 am-u-md-pull-4">
-					    	<form class="am-form am-form-horizontal">
+					    	<form class="myform am-form am-form-horizontal" id="edit_admin_form">
+					    		<input type="hidden" name="id" value="${admin.id!}">
 					        	<div class="am-form-group">
-					            	<label for="user-name" class="am-u-sm-3 am-form-label">姓名</label>
+					            	<label for="admin_name" class="am-u-sm-3 am-form-label">姓名</label>
 					              	<div class="am-u-sm-9">
-					                	<input type="text" id="user-name" placeholder="姓名">
+					                	<input type="text" id="admin_name" name="realName" placeholder="姓名" value="${admin.realName!}">
 					              	</div>
 					      		</div>
 					            <div class="am-form-group">
-					              	<label for="user-email" class="am-u-sm-3 am-form-label">电子邮件</label>
+					              	<label for="admin_email" class="am-u-sm-3 am-form-label">邮箱</label>
 					              	<div class="am-u-sm-9">
-					                	<input type="email" id="user-email" placeholder="输入你的电子邮件">
+					                	<input type="email" id="admin_email" name="email" placeholder="输入你的邮箱" value="${admin.email!}" data-required="true">
 					              	</div>
 					            </div>
 					            <div class="am-form-group">
-					              	<label for="user-phone" class="am-u-sm-3 am-form-label">电话</label>
+					              	<label for="admin_mobile" class="am-u-sm-3 am-form-label">电话</label>
 					              	<div class="am-u-sm-9">
-					                	<input type="tel" id="user-phone" placeholder="输入你的电话号码">
+					                	<input type="text" id="admin_mobile" name="mobile" placeholder="输入你的电话号码" value="${admin.mobile!}">
 					              	</div>
 					            </div>
 					            <div class="am-form-group">
-					              	<label for="user-QQ" class="am-u-sm-3 am-form-label">QQ</label>
+					              	<label for="admin_QQ" class="am-u-sm-3 am-form-label">QQ</label>
 					              	<div class="am-u-sm-9">
-					                	<input type="number" pattern="[0-9]*" id="user-QQ" placeholder="输入你的QQ号码">
+					                	<input type="text" id="admin_QQ" name="QQ" placeholder="输入你的QQ号码" value="${admin.QQ!}" data-type="number" data-rangelength="[5,10]">
 					              	</div>
 					            </div>
 					            <div class="am-form-group">
@@ -85,7 +86,7 @@
 					            </div>
 					            <div class="am-form-group">
 					              	<div class="am-u-sm-9 am-u-sm-push-3">
-					                	<button type="button" class="am-btn am-btn-primary">保存修改</button>
+					                	<button type="button" class="am-btn am-btn-primary" onclick="saveInfo()">保存修改</button>
 					              	</div>
 					            </div>
 					     	</form>
@@ -95,9 +96,31 @@
 			</div>
 		</div>
 	</div>
+	<hr />
 	<footer class="admin-content-footer">
-      <hr />
       <p class="am-padding-left">© 2016 iHelin, Inc.</p>
     </footer>
 </div>
 </@main.page>
+<script src="${request.contextPath}/js/formvalidation.js"></script>
+<script src="${request.contextPath}/plugins/parsley/parsley.min.js"></script>
+<script>
+function saveInfo(){
+	if ($('#edit_admin_form').parsley('validate')) {
+		$.post("${request.contextPath}/admin/change_admin_info",$('#edit_admin_form').serialize(),function(data){
+				if(data.status=='success'){
+					layer.msg('已保存！');
+					setTimeout(function(){
+						window.location.reload();
+					},500);
+				}else if(data.error=='account_name_repeat'){
+					layer.msg('用户名重复！');
+				}else if(data.error=='account_id_null'){
+					layer.msg('用户id为空！');
+				}else{
+					layer.msg('未知错误！');
+				}
+			});
+		}
+}
+</script>

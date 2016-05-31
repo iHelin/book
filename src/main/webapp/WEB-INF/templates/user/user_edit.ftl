@@ -47,21 +47,27 @@
 						    		</div>
 						  		</div>
 						  		<div class="am-form-group">
-						    		<label for="doc-ipt-3" class="am-u-sm-4 am-form-label">出生日期</label>
+						    		<label for="account_birthday" class="am-u-sm-4 am-form-label">出生日期</label>
 						    		<div class="am-u-sm-8">
 						    			<input type="text" class="am-form-field" id="account_birthday" name="birthday" placeholder="输入你的出生日期" <#if account.birthday??>value="${account.birthday?string("yyyy-MM-dd")}"</#if> data-am-datepicker />
 						    		</div>
 						  		</div>
 						  		<div class="am-form-group">
-						    		<label for="doc-ipt-3" class="am-u-sm-4 am-form-label">手机</label>
+						    		<label for="account_mobile" class="am-u-sm-4 am-form-label">手机</label>
 						    		<div class="am-u-sm-8">
-						      			<input type="text" id="doc-ipt-3" name="phone" placeholder="输入你的手机号" value="${account.mobile!}" data-type="phone" data-required="true">
+						      			<input type="text" id="account_mobile" name="phone" placeholder="输入你的手机号" value="${account.mobile!}" data-type="phone" data-required="true">
 						    		</div>
 						  		</div>
 						  		<div class="am-form-group">
-						    		<label for="doc-ipt-3" class="am-u-sm-4 am-form-label">邮箱</label>
+						    		<label for="account_email" class="am-u-sm-4 am-form-label">邮箱</label>
 						    		<div class="am-u-sm-8">
-						      			<input type="email" id="doc-ipt-3" name="email" placeholder="输入你的邮箱号" value="${account.email!}">
+						      			<input type="email" id="account_email" name="email" placeholder="输入你的邮箱号" value="${account.email!}">
+						    		</div>
+						  		</div>
+						  		<div class="am-form-group">
+						    		<label for="account_QQ" class="am-u-sm-4 am-form-label">QQ</label>
+						    		<div class="am-u-sm-8">
+						      			<input type="text" id="account_QQ" name="QQ" placeholder="输入你的QQ号" value="${account.QQ!}" data-type="number" data-rangelength="[5,10]">
 						    		</div>
 						  		</div>
 						  		<div class="am-form-group">
@@ -84,7 +90,9 @@
 			$.post("${request.contextPath}/user/change_account_info",$('#edit_account_form').serialize(),function(data){
 				if(data.status=='success'){
 					layer.msg('已保存！');
-					window.location.reload();
+					setTimeout(function(){
+						window.location.reload();
+					},500);
 				}else if(data.error=='account_name_repeat'){
 					layer.msg('用户名重复！');
 				}else if(data.error=='account_id_null'){

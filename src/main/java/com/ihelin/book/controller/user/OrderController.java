@@ -51,6 +51,16 @@ public class OrderController extends BaseController {
 		model.addAttribute("orderItem", orderItem);
 		return UserFtl("buy_now");
 	}
+	
+	@RequestMapping("pay")
+	public String pay(){
+		return UserFtl("pay");
+	}
+	
+	@RequestMapping("pay_success")
+	public String paySuccess(){
+		return UserFtl("pay_success");
+	}
 
 	@RequestMapping("submit_order")
 	public void submitOrder(Integer bookId, String bookName, BigDecimal bookPrice, Integer number,
@@ -74,7 +84,7 @@ public class OrderController extends BaseController {
 		orderManager.insertOrderPayGroup(opg);
 		Map<String,Object> oMap = new HashMap<String, Object>();
 		oMap.put("oid", opg.getId());
-		ResponseUtil.writeSuccessJSON(response);
+		ResponseUtil.writeSuccessJSON(response,oMap);
 	}
 
 }

@@ -8,6 +8,13 @@
 	<name>book Maven Webapp</name>
 	<url>http://maven.apache.org</url>
 	<dependencies>
+		<!-- 七牛存储 -->
+		<dependency>
+			<groupId>com.qiniu</groupId>
+			<artifactId>qiniu-java-sdk</artifactId>
+			<version>[7.0.0, 7.0.99]</version>
+		</dependency>
+		
 		<dependency>
 			<groupId>org.apache.commons</groupId>
 			<artifactId>commons-lang3</artifactId>

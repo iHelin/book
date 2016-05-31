@@ -22,6 +22,7 @@
 				  		<li><strong>出生日期 </strong><#if account.birthday??>${account.birthday?string("yyyy-MM-dd")}<#else>未填</#if></li>
 				  		<li><strong>手机号 </strong>${account.mobile!"未填"}</li>
 				  		<li><strong>邮箱 </strong>${account.email!"未填"}</li>
+				  		<li><strong>QQ </strong>${account.QQ!"未填"}</li>
 				  		<li><strong>注册日期 </strong>${account.registerDate?string("yyyy-MM-dd")}</li>
 					</ul>
 			  	</div>

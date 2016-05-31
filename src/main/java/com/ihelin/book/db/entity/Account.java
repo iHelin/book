@@ -3,6 +3,7 @@ package com.ihelin.book.db.entity;
 import java.util.Date;
 
 public class Account {
+	
     private Integer id;
 
     private String accountName;
@@ -14,6 +15,8 @@ public class Account {
     private Integer accountType;
 
     private String realName;
+    
+    private String QQ;
 
     private Date registerDate;
 
@@ -73,7 +76,15 @@ public class Account {
         this.realName = realName;
     }
 
-    public Date getRegisterDate() {
+    public String getQQ() {
+		return QQ;
+	}
+
+	public void setQQ(String qQ) {
+		QQ = qQ;
+	}
+
+	public Date getRegisterDate() {
         return registerDate;
     }
 

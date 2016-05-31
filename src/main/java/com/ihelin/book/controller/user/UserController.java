@@ -39,7 +39,7 @@ public class UserController extends BaseController {
 
 	@RequestMapping("change_account_info")
 	public void changeAccountInfo(Integer id, String accountName, String realName, Boolean gender, String birthday,
-			String phone, String email, HttpServletResponse response, HttpSession session) {
+			String phone, String email, String QQ, HttpServletResponse response, HttpSession session) {
 		Account oldAccount = accountManager.selectAccountByAccountName(accountName);
 		if (oldAccount != null) {
 			ResponseUtil.writeFailedJSON(response, "account_name_repeat");
@@ -57,6 +57,7 @@ public class UserController extends BaseController {
 			ac.setBirthday(DateTimeUtil.parseDate(birthday));
 			ac.setMobile(phone);
 			ac.setEmail(email);
+			ac.setQQ(QQ);
 			accountManager.updateAccount(ac);
 			session.setAttribute("account", ac);
 			ResponseUtil.writeSuccessJSON(response);

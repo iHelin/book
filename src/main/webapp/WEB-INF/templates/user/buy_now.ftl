@@ -45,10 +45,15 @@
 </@main.page>
 <script>
 	function submitOrder(){
+		var index = layer.load(2, {
+	    	shade: [0.3, '#000']
+	    });
 		$.post('submit_order',$('#order_form').serialize(),function(data){
+			layer.close(index);
 			if(data.status=='success'){
-				//window.location.href="pay?oid=";
 				layer.msg("success");
+				window.location.href="pay?oid="+data.oid;
+				//window.location.href="pay_success";
 			}
 		});
 	}

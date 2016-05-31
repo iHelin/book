@@ -50,7 +50,7 @@
 	          			<ul class="am-list am-collapse admin-sidebar-sub am-in" id="collapse-nav">
 	            			<li><a href="books" class="am-cf"><span class="am-icon-check"></span> 图书管理</a></li>
 	            			<li><a href="user_manage"><span class="am-icon-puzzle-piece"></span> 用户管理</a></li>
-	            			<li><a href="order_manager"><span class="am-icon-th"></span> 订单管理</a></li>
+	            			<li><a href="order_manage"><span class="am-icon-th"></span> 订单管理</a></li>
 	          			</ul>
 	        		</li>
 	        		<li><a href="admin_edit"><span class="am-icon-table"></span> 管理员资料</a></li>
@@ -86,7 +86,17 @@
 	<script src="${request.contextPath}/plugins/layer/layer.js"></script>
 	<script>
 		function logout(){
-			layer.msg("已注销");
+			layer.confirm('确定要退出吗？', {
+				btn: ['确定','取消'] //按钮
+			}, function(){
+				$.post("${request.contextPath}/admin/logout",{},function(data){
+					if(data.status == "success"){
+						window.location.href="${request.contextPath}/admin/login";
+					}
+				});
+			}, function(){
+				
+			});
 		}
 	</script>
 </body>

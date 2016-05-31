@@ -20,6 +20,10 @@
 			<mvc:mapping path="/user/**" />
 			<beans:bean class="com.ihelin.book.interceptor.UserAuthInterceptor" />
 		</mvc:interceptor>
+		<mvc:interceptor>
+			<mvc:mapping path="/admin/**" />
+			<beans:bean class="com.ihelin.book.interceptor.AdminAuthInterceptor" />
+		</mvc:interceptor>
 	</mvc:interceptors>
 	
 	<!-- 自动扫描且只扫描@Controller -->

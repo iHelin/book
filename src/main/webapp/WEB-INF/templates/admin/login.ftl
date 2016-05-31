@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 <head lang="en">
 	<meta charset="UTF-8">
-  	<title>登录 | Book</title>
+  	<title>登录 | 图书商城后台管理系统</title>
   	<meta name="viewport" content="width=device-width, initial-scale=1">
   	<meta name="format-detection" content="telephone=no">
   	<meta name="renderer" content="webkit">
@@ -10,12 +10,13 @@
   	<link rel="alternate icon" type="image/png" href="${request.contextPath}/images/favicon.png">
   	<link rel="stylesheet" href="${request.contextPath}/css/bootstrap.css"/>
   	<style>
+  	
   	</style>
 </head>
 <body>
 <div class="container">
 	<div class="">
-		<h1 class="text-center">登录</h1>
+		<h1 class="text-center">后台登录</h1>
 	</div>
 	<hr />
 	<div class="row">
@@ -32,7 +33,6 @@
 				<div class="form-group text-center">
 					<button type="button" class="btn btn-primary btn-lg" onclick="login()">登录</button>
 				</div>
-				<p class="pull-right"><span>没有账号？</span><a href="register">现在注册</a></p>
 			</form>
 	  	</div>
 	</div>
@@ -49,18 +49,15 @@
 <script src="${request.contextPath}/plugins/layer/layer.js"></script>
 <script>
 	var from = "${from!}";
-	if(from==null || from==""){
-		from = '${request.contextPath}/index';
+	if(from == null || from == ""){
+		from = '${request.contextPath}/admin/index';
 	}
-	$(function(){
-		
-	});
 	
 	function login(){
 		var index = layer.load(2, {
 	    	shade: [0.3, '#000']
 	    });
-		$.post("login.do",$('#login_form').serialize(),function(data){
+		$.post("${request.contextPath}/admin/dologin",$('#login_form').serialize(),function(data){
 			layer.close(index);
 			if (data.status == "success") {
 				layer.msg('登录成功');
@@ -70,7 +67,7 @@
 	    	}else if(data.error == 'failed'){
 	    		layer.msg('登录失败，请检查您的用户名或密码是否匹配。');
 	    	}else if(data.error == 'empty'){
-	    		layer.msg('登录失败，用户名不存在。');
+	    		layer.msg('登录失败，管理员不存在。');
 	    	}
 		});
 	}

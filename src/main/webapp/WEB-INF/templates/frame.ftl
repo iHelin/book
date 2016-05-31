@@ -90,8 +90,8 @@
 		}, function(){
 			$.post("${request.contextPath}/logout",{},function(data){
 				if(data.status == "success"){
-					//window.location.href="${request.contextPath}/index";
-					window.location.reload();
+					window.location.href="${request.contextPath}/index";
+					//window.location.reload();
 				}
 			});
 		}, function(){

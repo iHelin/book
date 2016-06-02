@@ -25,7 +25,7 @@
     		<ul class="am-nav am-nav-pills am-topbar-nav am-topbar-right admin-header-list">
       			<li class="am-dropdown" data-am-dropdown>
         			<a class="am-dropdown-toggle" data-am-dropdown-toggle href="javascript:;">
-          				<span class="am-icon-users"></span> 管理员 <span class="am-icon-caret-down"></span>
+          				<span class="am-icon-users"></span> ${admin.email!} <span class="am-icon-caret-down"></span>
         			</a>
 	        		<ul class="am-dropdown-content">
 	          			<li><a href="admin_edit"><span class="am-icon-user"></span> 资料</a></li>
@@ -61,13 +61,6 @@
 	        		<div class="am-panel-bd">
 	          			<p><span class="am-icon-bookmark"></span> 公告</p>
 	          			<p>时光静好，与君语；细水流年，与君同。—— Amaze UI</p>
-	        		</div>
-	      		</div>
-	
-	      		<div class="am-panel am-panel-default admin-sidebar-panel">
-	        		<div class="am-panel-bd">
-	          			<p><span class="am-icon-tag"></span> wiki</p>
-	          			<p>Welcome to the Amaze UI wiki!</p>
 	        		</div>
 	      		</div>
 	    	</div>

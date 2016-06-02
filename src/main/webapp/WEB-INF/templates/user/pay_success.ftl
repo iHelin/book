@@ -3,7 +3,7 @@
 <div class="am-g am-g-fixed book-g-fixed">
 	<div class="am-u-md-12">
 		
-		
+		<h1>支付成功</h1>
 	</div>
 </div>
 </@main.page>

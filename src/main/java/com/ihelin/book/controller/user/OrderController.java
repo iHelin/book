@@ -18,6 +18,7 @@ import com.ihelin.book.controller.BaseController;
 import com.ihelin.book.db.entity.Book;
 import com.ihelin.book.db.entity.OrderItem;
 import com.ihelin.book.db.entity.OrderPayGroup;
+import com.ihelin.book.filed.OrderStatus;
 import com.ihelin.book.manager.BookManager;
 import com.ihelin.book.manager.OrderManager;
 import com.ihelin.book.utils.JSON;
@@ -51,20 +52,50 @@ public class OrderController extends BaseController {
 		model.addAttribute("orderItem", orderItem);
 		return UserFtl("buy_now");
 	}
-	
+
 	@RequestMapping("pay")
-	public String pay(){
+	public String pay(Integer oid, Model model) {
+		model.addAttribute("oid", oid);
 		return UserFtl("pay");
 	}
-	
+
 	@RequestMapping("pay_success")
-	public String paySuccess(){
+	public String paySuccess() {
 		return UserFtl("pay_success");
+	}
+
+	@RequestMapping("delete_order")
+	public void deleteOrder(Integer id, HttpServletResponse response) {
+		if (id == null) {
+			ResponseUtil.writeFailedJSON(response, "id_is_null");
+			return;
+		}
+		orderManager.deleteOrderById(id);
+		ResponseUtil.writeSuccessJSON(response);
+	}
+
+	@RequestMapping("payed")
+	public void payed(Integer oid, HttpServletResponse response) {
+		OrderPayGroup opg = orderManager.seleteOrderPayGroupById(oid);
+		if (opg != null) {
+			opg.setPayTime(new Date());
+			opg.setStatus(OrderStatus.PAYED.getValue());
+			orderManager.updateOrderPayGroup(opg);
+			ResponseUtil.writeSuccessJSON(response);
+		}else{
+			ResponseUtil.writeFailedJSON(response, "opg_is_null");
+		}
 	}
 
 	@RequestMapping("submit_order")
 	public void submitOrder(Integer bookId, String bookName, BigDecimal bookPrice, Integer number,
-			BigDecimal totalMoney, BigDecimal deliveryFee,HttpServletResponse response) {
+			BigDecimal totalMoney, BigDecimal deliveryFee, HttpServletResponse response) {
+		List<OrderPayGroup> oldOrders = orderManager.selectOpgByCondition(getAccount().getId(),
+				OrderStatus.NOT_PAY.getValue());
+		if (oldOrders.size() > 0) {
+			ResponseUtil.writeFailedJSON(response, "not_pay_order");
+			return;
+		}
 		OrderItem orderItem = new OrderItem();
 		orderItem.setBookId(bookId);
 		orderItem.setBookName(bookName);
@@ -81,10 +112,11 @@ public class OrderController extends BaseController {
 		String[] oids = oidList.toArray(new String[oidList.size()]);
 		opg.setOrderIds(JSON.toJson(oids));
 		opg.setTotalMoney(orderItem.getTotalMoney());
+		opg.setStatus(OrderStatus.NOT_PAY.getValue());
 		orderManager.insertOrderPayGroup(opg);
-		Map<String,Object> oMap = new HashMap<String, Object>();
+		Map<String, Object> oMap = new HashMap<String, Object>();
 		oMap.put("oid", opg.getId());
-		ResponseUtil.writeSuccessJSON(response,oMap);
+		ResponseUtil.writeSuccessJSON(response, oMap);
 	}
 
 }

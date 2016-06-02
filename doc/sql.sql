@@ -67,3 +67,7 @@ CHANGE COLUMN `detail` `detail` TEXT NULL DEFAULT NULL ;
 ALTER TABLE `book`.`Account` 
 ADD COLUMN `QQ` VARCHAR(10) NULL AFTER `birthday`;
 
+ALTER TABLE `book`.`OrderPayGroup` 
+ADD COLUMN `status` INT(2) NULL AFTER `pay_time`;
+
+

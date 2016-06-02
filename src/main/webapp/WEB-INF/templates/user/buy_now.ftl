@@ -51,9 +51,11 @@
 		$.post('submit_order',$('#order_form').serialize(),function(data){
 			layer.close(index);
 			if(data.status=='success'){
-				layer.msg("success");
+				layer.msg("确认成功！");
 				window.location.href="pay?oid="+data.oid;
 				//window.location.href="pay_success";
+			}else if(data.error == 'not_pay_order'){
+				layer.msg("对不起，您还有未完成的订单!");
 			}
 		});
 	}

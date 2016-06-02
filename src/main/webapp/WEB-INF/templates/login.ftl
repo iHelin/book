@@ -10,6 +10,17 @@
   	<link rel="alternate icon" type="image/png" href="${request.contextPath}/images/favicon.png">
   	<link rel="stylesheet" href="${request.contextPath}/css/bootstrap.css"/>
   	<style>
+  		contentbox {
+		    width: 600px;
+		    background-color: #fff;
+		    border-radius: 15px;
+		    box-shadow: 0 4px 10px 0 #ddd;
+		    height: 430px;
+		    margin: 60px auto 0;
+		    min-height: 430px;
+		    position: relative;
+		    text-align: center;
+		}
   	</style>
 </head>
 <body>
@@ -20,14 +31,14 @@
 	<hr />
 	<div class="row">
 		<div class="col-md-4 col-md-offset-4">
-			<form class="form-horizontal" id="login_form">
+			<form class="myform form-horizontal" id="login_form">
 				<div class="form-group">
 					<label for="email_inp">账号</label>
-				    <input type="email" class="form-control" id="email_inp" name="email" placeholder="用户名/邮箱">
+				    <input type="text" class="form-control" id="email_inp" name="email" placeholder="用户名/邮箱" data-required="true" />
 				</div>
 				<div class="form-group">
 					<label for="psw_inp">密码</label>
-				    <input type="password" class="form-control" id="psw_inp" name="password" placeholder="密码">
+				    <input type="password" class="form-control" id="psw_inp" name="password" placeholder="密码" data-required="true" />
 				</div>
 				<div class="form-group text-center">
 					<button type="button" class="btn btn-primary btn-lg" onclick="login()">登录</button>
@@ -57,22 +68,24 @@
 	});
 	
 	function login(){
-		var index = layer.load(2, {
-	    	shade: [0.3, '#000']
-	    });
-		$.post("login.do",$('#login_form').serialize(),function(data){
-			layer.close(index);
-			if (data.status == "success") {
-				layer.msg('登录成功');
-				setTimeout(function(){
-					window.location.href = from;
-				},600);
-	    	}else if(data.error == 'failed'){
-	    		layer.msg('登录失败，请检查您的用户名或密码是否匹配。');
-	    	}else if(data.error == 'empty'){
-	    		layer.msg('登录失败，用户名不存在。');
-	    	}
-		});
+		if ($('#login_form').parsley('validate')) {
+			var index = layer.load(2, {
+		    	shade: [0.3, '#000']
+		    });
+			$.post("login.do",$('#login_form').serialize(),function(data){
+				layer.close(index);
+				if (data.status == "success") {
+					layer.msg('登录成功');
+					setTimeout(function(){
+						window.location.href = from;
+					},600);
+		    	}else if(data.error == 'failed'){
+		    		layer.msg('登录失败，请检查您的用户名或密码是否匹配。');
+		    	}else if(data.error == 'empty'){
+		    		layer.msg('登录失败，用户名不存在。');
+		    	}
+			});
+		}
 	}
 </script>
 </html>

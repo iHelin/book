@@ -43,6 +43,7 @@
 				        		</a>
 				        		<ul class="am-dropdown-content">
 				          			<li><a href="${request.contextPath}/user/user_info"><span class="am-icon-user"></span> 个人信息</a></li>
+				          			<li><a href="${request.contextPath}/user/user_order"><span class="am-icon-paw"></span> 我的订单</a></li>
 				          			<li><a href="${request.contextPath}/user/user_edit"><span class="am-icon-edit"></span> 资料设置</a></li>
 				          			<li><a href="${request.contextPath}/user/password_edit"><span class="am-icon-cog"></span> 密码修改</a></li>
 				          			<li><a href="javascript:void(0);" onclick="logout();"><span class="am-icon-sign-out"></span> 登出</a></li>

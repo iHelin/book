@@ -16,7 +16,6 @@
 </style>
 <br />
 <div class="am-container" style="">
-	
 	<div class="am-g am-g-fixed blog-g-fixed">
 	<#import "admin/pagination.ftl" as pager />
     <#assign urlParam></#assign>
@@ -27,7 +26,7 @@
 					  	<div class="am-u-sm-3" style="float:left;">
 					  		<div class="am-thumbnail" style="height:370px">
 					  			<div class="book-img am-vertical-align-middle" >
-					      			<img class="am-center" src="https://ss0.bdstatic.com/94oJfD_bAAcT8t7mm9GUKT-xh_/timg?image&quality=100&size=b4000_4000&sec=1463749784&di=a16ddaf87d0def2bb9da4d04ccad5e94&src=http://www.qianhuaweb.com/data/attachement/jpg/site2/20111025/00016c40a1c21010562a05.jpg" alt=""/>
+					      			<img class="am-center" src="<#if book.img??>${book.img!}<#else>images/default.jpg</#if>" alt=""/>
 					      		</div>
 					      		<div class="am-thumbnail-caption">
 					        		<p><strong>${book.bookName!}</strong></p>

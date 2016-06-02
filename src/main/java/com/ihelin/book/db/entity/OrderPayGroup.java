@@ -4,63 +4,74 @@ import java.math.BigDecimal;
 import java.util.Date;
 
 public class OrderPayGroup {
-    private Integer id;
+	private Integer id;
 
-    private String orderIds;
+	private String orderIds;
 
-    private Date createTime;
+	private Date createTime;
 
-    private Integer creatorId;
+	private Integer creatorId;
 
-    private BigDecimal totalMoney;
+	private BigDecimal totalMoney;
 
-    private Date payTime;
+	private Date payTime;
 
-    public Integer getId() {
-        return id;
-    }
+	private Integer status;
 
-    public void setId(Integer id) {
-        this.id = id;
-    }
+	public Integer getId() {
+		return id;
+	}
 
-    public String getOrderIds() {
-        return orderIds;
-    }
+	public void setId(Integer id) {
+		this.id = id;
+	}
 
-    public void setOrderIds(String orderIds) {
-        this.orderIds = orderIds;
-    }
+	public String getOrderIds() {
+		return orderIds;
+	}
 
-    public Date getCreateTime() {
-        return createTime;
-    }
+	public void setOrderIds(String orderIds) {
+		this.orderIds = orderIds;
+	}
 
-    public void setCreateTime(Date createTime) {
-        this.createTime = createTime;
-    }
+	public Date getCreateTime() {
+		return createTime;
+	}
 
-    public Integer getCreatorId() {
-        return creatorId;
-    }
+	public void setCreateTime(Date createTime) {
+		this.createTime = createTime;
+	}
 
-    public void setCreatorId(Integer creatorId) {
-        this.creatorId = creatorId;
-    }
+	public Integer getCreatorId() {
+		return creatorId;
+	}
 
-    public BigDecimal getTotalMoney() {
-        return totalMoney;
-    }
+	public void setCreatorId(Integer creatorId) {
+		this.creatorId = creatorId;
+	}
 
-    public void setTotalMoney(BigDecimal totalMoney) {
-        this.totalMoney = totalMoney;
-    }
+	public BigDecimal getTotalMoney() {
+		return totalMoney;
+	}
 
-    public Date getPayTime() {
-        return payTime;
-    }
+	public void setTotalMoney(BigDecimal totalMoney) {
+		this.totalMoney = totalMoney;
+	}
 
-    public void setPayTime(Date payTime) {
-        this.payTime = payTime;
-    }
+	public Date getPayTime() {
+		return payTime;
+	}
+
+	public void setPayTime(Date payTime) {
+		this.payTime = payTime;
+	}
+
+	public Integer getStatus() {
+		return status;
+	}
+
+	public void setStatus(Integer status) {
+		this.status = status;
+	}
+
 }

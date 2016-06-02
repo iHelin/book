@@ -1,5 +1,8 @@
 package com.ihelin.book.controller.user;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -10,9 +13,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.ihelin.book.controller.BaseController;
 import com.ihelin.book.db.entity.Account;
+import com.ihelin.book.db.entity.OrderItem;
+import com.ihelin.book.db.entity.OrderPayGroup;
 import com.ihelin.book.manager.AccountManager;
+import com.ihelin.book.manager.OrderManager;
 import com.ihelin.book.utils.CryptUtil;
 import com.ihelin.book.utils.DateTimeUtil;
+import com.ihelin.book.utils.JSON;
 import com.ihelin.book.utils.ResponseUtil;
 
 @Controller
@@ -21,6 +28,8 @@ public class UserController extends BaseController {
 
 	@Resource
 	private AccountManager accountManager;
+	@Resource
+	private OrderManager orderManager;
 
 	@RequestMapping("user_info")
 	public String userInfo(Model model) {
@@ -30,6 +39,22 @@ public class UserController extends BaseController {
 	@RequestMapping("user_edit")
 	public String userEdit() {
 		return UserFtl("user_edit");
+	}
+	
+	@RequestMapping("user_order")
+	public String userOrder(Model model) {
+		List<OrderPayGroup> opgs = orderManager.selectOpgByCondition(getAccount().getId(), null);
+		List<OrderItem> orderItems = new ArrayList<OrderItem>();
+		for (OrderPayGroup orderPayGroup : opgs) {
+			String oids = orderPayGroup.getOrderIds();
+			List<Integer> oidList = JSON.parseArray(oids, Integer.class);
+			for (Integer integer : oidList) {
+				orderItems.add(orderManager.selectOrderItemById(integer));
+			}
+		}
+		model.addAttribute("orderItems", orderItems);
+		model.addAttribute("opgs", opgs);
+		return UserFtl("user_order");
 	}
 	
 	@RequestMapping("password_edit")

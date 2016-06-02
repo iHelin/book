@@ -94,6 +94,7 @@
 							            	<div class="am-btn-toolbar">
 							    				<div class="am-btn-group am-btn-group-xs">
 								                	<button type="button" class="am-btn am-btn-default am-btn-xs am-text-secondary" onclick="editBook(#{book.id!})"><span class="am-icon-pencil-square-o"></span> 编辑</button>
+								                	<button type="button" class="am-btn am-btn-default am-btn-xs am-text-warning" onclick="addImgModal(#{book.id!})"><span class="am-icon-images"></span> 图片</button>
 								                    <button type="button" class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only" onclick="deleteBook(#{book.id!})"><span class="am-icon-trash-o"></span> 删除</button>
 							        			</div>
 							            	</div>
@@ -220,6 +221,41 @@
 			</div>
 	  	</div>
 	</div>
+	<div class="am-modal am-modal-no-btn" tabindex="-1" id="add-book-img-modal">
+		<div class="am-modal-dialog" style="min-width:700px">
+	    	<div class="am-modal-hd">
+	    		<strong class="am-text-xl" id="add_img_title">添加图片</strong>
+	      		<a href="javascript: void(0)" class="am-close am-close-spin" data-am-modal-close><i class="am-icon-times"></i></a>
+	    	</div>
+	    	<hr />
+	    	<div class="am-modal-bd" style="height: 200px">
+	      		<div class="am-form-group">
+					<label for="book-name" class="am-u-sm-2 am-form-label">图片</label>
+				   	<div class="am-u-sm-10">
+				    	<div class="am-g">
+					    	<div class="am-u-md-4">
+					        	<img class="am-img-circle am-img-thumbnail" id="book_img_id" src="/" alt=""/>
+					   		</div>
+					        <div class="am-u-md-8">
+					        	<form class="am-form" id="bookImg" action="${request.contextPath}/uploadBookImg" method="post" enctype="multipart/form-data">
+					            	<div class="am-form-group">
+					                	<input id="myfile" type="file" name="myfile" accept="image/*" />
+					                </div>
+					        	</form>
+					        </div>
+					    </div>
+				    </div>
+				</div>
+	    	</div>
+	    	<hr />
+	    	<div class="">
+				<div class="am-u-sm-10 am-u-sm-offset-5"  style="padding-bottom:12px;">
+					<button type="button" class="am-btn am-btn-default" data-am-modal-close>取消</button>
+					<button type="button" class="am-btn am-btn-primary" onclick="commitImg();">保存</button>
+				</div>
+			</div>
+	  	</div>
+	</div>
 <script src="${request.contextPath}/js/formvalidation.js"></script>
 <script src="${request.contextPath}/plugins/parsley/parsley.min.js"></script>
 <script src="${request.contextPath}/plugins/layer/layer.js"></script>
@@ -253,6 +289,27 @@
 	    });
 	}
 
+	function addImgModal(id){
+		$('#add_img_title').text("添加图片");
+		var index = layer.load(2, {
+	    	shade: [0.3, '#000']
+	    });
+		$.post('${request.contextPath}/select_book_by_id',{id:id},function(data){
+			layer.close(index);
+			if(data.status=="success"){
+				var src = data.book.img;
+				$('#book_img_id').attr("src",src);
+				$('#bookImg').attr("action","${request.contextPath}/uploadBookImg/"+id);
+				$('#add-book-img-modal').modal('open');
+			}
+		});
+		
+	}
+	
+	function commitImg(){
+		$('#bookImg').submit();
+	}
+	
 	function addBookModal(){
 		$('#add_book_form')[0].reset();
 		$('#add_book_title').text("添加图书");

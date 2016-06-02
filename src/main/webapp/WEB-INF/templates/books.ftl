@@ -22,7 +22,7 @@
 		<#if books??>
 			<#list books as book>
 				<#if book??>
-					<a href="${request.contextPath}/book_detail?id=${book.id!}" target="_blank">
+					<a href="${request.contextPath}/book/${book.id!}" target="_blank">
 					  	<div class="am-u-sm-3" style="float:left;">
 					  		<div class="am-thumbnail" style="height:370px">
 					  			<div class="book-img am-vertical-align-middle" >

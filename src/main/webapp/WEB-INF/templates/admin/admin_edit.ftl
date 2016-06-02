@@ -18,14 +18,14 @@
 					            	<div class="am-g">
 					            		<p class="am-u-md-12">头像</p>
 					                	<div class="am-u-md-4">
-					                  		<img class="am-img-circle am-img-thumbnail" src="http://s.amazeui.org/media/i/demos/bw-2014-06-19.jpg?imageView/1/w/200/h/200/q/80" alt=""/>
+					                  		<img class="am-img-circle am-img-thumbnail" src="${request.contextPath}${admin.img!}" onerror="javascript:this.src='${request.contextPath}/images/default/default_icon.jpg';" alt=""/>
 					                	</div>
 					                	<div class="am-u-md-8">
-					                  		<form class="am-form" action="imgupload" method="post">
+					                		<p>推荐使用正方形图片。</p>
+					                  		<form class="am-form" id="myImg" action="${request.contextPath}/upload" method="post" enctype="multipart/form-data">
 					                    		<div class="am-form-group">
-					                     		 	<input type="file" id="user-pic" id="img_pic">
-					                      			<p class="am-form-help">请选择要上传的文件...</p>
-					                      			<button type="submit" class="am-btn am-btn-primary am-btn-xs">保存</button>
+					                    			<input id="myfile" type="file" name="myfile" accept="image/*" /><br />
+												    <button type="button" class="am-btn am-btn-primary am-btn-xs" onclick="commitImg();">保存</button>
 					                    		</div>
 					                  		</form>
 					                	</div>
@@ -105,22 +105,26 @@
 <script src="${request.contextPath}/js/formvalidation.js"></script>
 <script src="${request.contextPath}/plugins/parsley/parsley.min.js"></script>
 <script>
-function saveInfo(){
-	if ($('#edit_admin_form').parsley('validate')) {
-		$.post("${request.contextPath}/admin/change_admin_info",$('#edit_admin_form').serialize(),function(data){
-				if(data.status=='success'){
-					layer.msg('已保存！');
-					setTimeout(function(){
-						window.location.reload();
-					},500);
-				}else if(data.error=='account_name_repeat'){
-					layer.msg('用户名重复！');
-				}else if(data.error=='account_id_null'){
-					layer.msg('用户id为空！');
-				}else{
-					layer.msg('未知错误！');
-				}
-			});
-		}
-}
+	function saveInfo(){
+		if ($('#edit_admin_form').parsley('validate')) {
+			$.post("${request.contextPath}/admin/change_admin_info",$('#edit_admin_form').serialize(),function(data){
+					if(data.status=='success'){
+						layer.msg('已保存！');
+						setTimeout(function(){
+							window.location.reload();
+						},500);
+					}else if(data.error=='account_name_repeat'){
+						layer.msg('用户名重复！');
+					}else if(data.error=='account_id_null'){
+						layer.msg('用户id为空！');
+					}else{
+						layer.msg('未知错误！');
+					}
+				});
+			}
+	}
+	
+	function commitImg(){
+		$('#myImg').submit();
+	}
 </script>

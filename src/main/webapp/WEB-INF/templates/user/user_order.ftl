@@ -39,7 +39,7 @@
 													<#list orderItems as oitem>
 														<#if order.orderIds?contains(oitem.id?c)>
 															${oitem.bookName}
-															<small>${oitem.number}本 ${oitem.deliveryFee?string.currency}</small>
+															<small>${oitem.bookPrice?string.currency} x ${oitem.number}本</small>
 														</#if>
 													</#list>
 												</#if>
@@ -64,8 +64,6 @@
 											<td>
 												<#if order.createTime??>
 													${order.createTime?string("yyyy-MM-dd")}
-												<#else>
-													未支付
 												</#if>
 											</td>
 											<td>
@@ -101,11 +99,11 @@ function deleteOrder(id){
 	    	shade: [0.3, '#000']
 	    });
 		$.post('delete_order',{id:id},function(data){
-			lay.close(index);
+			layer.close(index);
 			if(data.status == 'success'){
 				window.location.reload();
 			}else{
-				layer.meg("未知错误！");
+				layer.msg("未知错误！");
 			}
 		});
 	}, function(){

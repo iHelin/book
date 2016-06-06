@@ -37,10 +37,13 @@ public class AdminController extends BaseController {
 	public String adminIndex(HttpSession session, Model model) {
 		ServletContext context = session.getServletContext();
 		Integer olCount = (Integer) context.getAttribute("count");
-		int bookCount = bookManager.listBookCount(null);
-		List<OrderPayGroup> opgList = orderManager.selectOpgByCondition(null,OrderStatus.PAYED.getValue());
+		int bookCount = bookManager.listBookCount(null, null);
+		int accountCount = accountManager.listAccountCount(AccountType.GENERAL.getValue(), null);
+		List<OrderPayGroup> opgList = orderManager.selectOpgByCondition(null, OrderStatus.PAYED.getValue(), 0,
+				MAX_LENGTH);
 		model.addAttribute("opgList", opgList);
 		model.addAttribute("bookCount", bookCount);
+		model.addAttribute("accountCount", accountCount);
 		model.addAttribute("olCount", olCount);
 		return AdminFtl("index");
 	}

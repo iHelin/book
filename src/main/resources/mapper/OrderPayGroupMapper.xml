@@ -21,7 +21,16 @@
 			<if test="creatorId!=null">creator_id = #{creatorId,jdbcType=INTEGER}</if>
 			<if test="status!=null">and status = #{status,jdbcType=INTEGER}</if>
 		</where>
-		order by pay_time asc;
+		order by pay_time
+	</select>
+	<select id="listOpgCount" resultType="int" parameterType="java.util.Map">
+		select
+		count(id)
+		from OrderPayGroup
+		<where>
+			<if test="creatorId!=null">creator_id = #{creatorId,jdbcType=INTEGER}</if>
+			<if test="status!=null">and status = #{status,jdbcType=INTEGER}</if>
+		</where>
 	</select>
 	<select id="selectByPrimaryKey" resultMap="BaseResultMap"
 		parameterType="java.lang.Integer">

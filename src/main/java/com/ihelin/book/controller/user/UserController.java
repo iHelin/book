@@ -40,10 +40,10 @@ public class UserController extends BaseController {
 	public String userEdit() {
 		return UserFtl("user_edit");
 	}
-	
+
 	@RequestMapping("user_order")
 	public String userOrder(Model model) {
-		List<OrderPayGroup> opgs = orderManager.selectOpgByCondition(getAccount().getId(), null);
+		List<OrderPayGroup> opgs = orderManager.selectOpgByCondition(getAccount().getId(), null, 0, MAX_LENGTH);
 		List<OrderItem> orderItems = new ArrayList<OrderItem>();
 		for (OrderPayGroup orderPayGroup : opgs) {
 			String oids = orderPayGroup.getOrderIds();
@@ -56,7 +56,7 @@ public class UserController extends BaseController {
 		model.addAttribute("opgs", opgs);
 		return UserFtl("user_order");
 	}
-	
+
 	@RequestMapping("password_edit")
 	public String passwordEdit() {
 		return UserFtl("password_edit");
@@ -73,9 +73,9 @@ public class UserController extends BaseController {
 		if (id == null) {
 			ResponseUtil.writeFailedJSON(response, "account_id_null");
 			return;
-		}else{
+		} else {
 			Account ac = accountManager.selectAccountById(id);
-			if(ac.getAccountName()==null)
+			if (ac.getAccountName() == null)
 				ac.setAccountName(accountName);
 			ac.setRealName(realName);
 			ac.setGender(gender);
@@ -88,19 +88,19 @@ public class UserController extends BaseController {
 			ResponseUtil.writeSuccessJSON(response);
 		}
 	}
-	
+
 	@RequestMapping("change_password")
-	public void changePsw(HttpServletResponse response,String oldPsw,String newPsw,Integer id){
-		if(id==null){
+	public void changePsw(HttpServletResponse response, String oldPsw, String newPsw, Integer id) {
+		if (id == null) {
 			ResponseUtil.writeFailedJSON(response, "account_id_null");
 			return;
 		}
-		if(newPsw.equals(oldPsw)){
+		if (newPsw.equals(oldPsw)) {
 			ResponseUtil.writeFailedJSON(response, "same_psw");
 			return;
 		}
 		Account account = accountManager.selectAccountById(id);
-		if(!account.getPassword().equals(CryptUtil.sha1(oldPsw))){
+		if (!account.getPassword().equals(CryptUtil.sha1(oldPsw))) {
 			ResponseUtil.writeFailedJSON(response, "old_psw_error");
 			return;
 		}

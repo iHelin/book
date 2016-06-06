@@ -35,6 +35,7 @@
 			<input type="hidden" name="bookPrice" value="${orderItem.bookPrice!}" />
 			<input type="hidden" name="number" value="${orderItem.number!}" />
 			<input type="hidden" name="totalMoney" value="${orderItem.totalMoney!}" />
+			<input type="hidden" name="isFreePostage" <#if isFreePostage??>value="true"<#else>value="false"</#if> />
 			<input type="hidden" name="deliveryFee" value="${orderItem.deliveryFee!}" />
 		</form>
 		<div class="am-fr">

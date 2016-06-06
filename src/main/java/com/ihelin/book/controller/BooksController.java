@@ -28,8 +28,8 @@ public class BooksController {
 	public String handleBook(Model model, Integer pageNum) {
 		if (pageNum == null)
 			pageNum = 1;
-		List<Book> books = bookManager.listBook(null, (pageNum - 1) * PAGE_LENGTH, PAGE_LENGTH);
-		int totalCount = bookManager.listBookCount(null);
+		List<Book> books = bookManager.listBook(null,null, (pageNum - 1) * PAGE_LENGTH, PAGE_LENGTH);
+		int totalCount = bookManager.listBookCount(null,null);
 		model.addAttribute("books", books);
 		model.addAttribute("pagination", new Pagination(totalCount, pageNum, PAGE_LENGTH));
 		return "books";

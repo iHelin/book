@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import com.ihelin.book.db.entity.Account;
 import com.ihelin.book.manager.AccountManager;
 import com.ihelin.book.manager.BookManager;
+import com.ihelin.book.manager.OrderManager;
 import com.ihelin.book.utils.RequestUtil;
 
 @Controller
@@ -16,8 +17,14 @@ public class BaseController {
 	protected AccountManager accountManager;
 	@Resource
 	protected BookManager bookManager;
+	@Resource
+	protected OrderManager orderManager;
 
 	protected static final int PAGE_LENGTH = 10;
+	protected static final int MAX_LENGTH = 1000;
+	protected static final String DEFAULT_BOOK_IMG = "/images/default/default_book.jpg";
+	protected static final String DEFAULT_ACCOUNT_IMG = "/images/default/default_icon.jpg";
+	
 
 	protected String AdminFtl(String url) {
 		return "admin/" + url;

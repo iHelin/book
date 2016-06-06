@@ -25,6 +25,7 @@
 		select * from Account
 		<where>
 			<if test="accountType!=null">account_type = #{accountType,jdbcType=INTEGER}</if>
+			<if test="accountName!=null">and account_name like #{accountName,jdbcType=VARCHAR}</if>
 		</where>
 	</select>
 	<select id="listAccountCount" resultType="int" parameterType="java.util.Map">
@@ -33,6 +34,7 @@
 		from Account
 		<where>
 			<if test="accountType!=null">account_type = #{accountType,jdbcType=INTEGER}</if>
+			<if test="accountName!=null">and account_name like #{accountName,jdbcType=VARCHAR}</if>
 		</where>
 	</select>
 	<select id="selectByAccountName" resultMap="BaseResultMap"

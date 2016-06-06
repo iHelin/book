@@ -21,8 +21,8 @@
       		<div class="am-g book-content">
         		<div class="am-u-lg-5">
         			<div class="am-panel am-panel-default am-vertical-align" style="height:345px;width:345px">
-        				<div class="am-vertical-align-middle">
-        					<img src="https://ss0.bdstatic.com/94oJfD_bAAcT8t7mm9GUKT-xh_/timg?image&quality=100&size=b4000_4000&sec=1463749784&di=a16ddaf87d0def2bb9da4d04ccad5e94&src=http://www.qianhuaweb.com/data/attachement/jpg/site2/20111025/00016c40a1c21010562a05.jpg">
+        				<div class="am-vertical-align-middle" style="width:100%">
+        					<img src="${book.img!}" class="am-center">
         				</div>
         			</div>
         		</div>
@@ -52,7 +52,7 @@
 							      		<span class="am-input-group-btn">
         									<button class="am-btn am-btn-default am-btn-xs input-num-down" id="book_down_btn" type="button" onclick="count(this);"><span class="am-icon-minus"></span> </button>
       									</span>
-							      		<input type="text" value="1" class="am-form-field am-text-center" id="book_count" data-step="1" data-max="5" data-min="1" onkeyup='this.value=this.value.replace(/\D/gi,"")' readOnly>
+							      		<input type="text" value="1" class="am-form-field am-text-center" id="book_count" data-step="1" data-max="${book.number!}" data-min="1" onkeyup='this.value=this.value.replace(/\D/gi,"")' readOnly>
 							      		<span class="am-input-group-btn">
         									<button class="am-btn am-btn-default am-btn-xs input-num-up" id="book_up_btn" type="button" onclick="count(this);"><span class="am-icon-plus"></span> </button>
       									</span>
@@ -119,7 +119,7 @@
 			layer.confirm('当前操作需要登录才能进行，是否前往登录？', {
 				btn: ['确定','取消']
 			}, function(){
-				window.location.href="${request.contextPath}/login?from=book_detail?id="+id;
+				window.location.href="${request.contextPath}/login?from=book/"+id;
 			});
 		}else{
 			window.location.href="${request.contextPath}/user/buy_now?id="+id+"&number="+count;

@@ -2,7 +2,6 @@ package com.ihelin.book.controller;
 
 import java.util.Date;
 
-import javax.annotation.Resource;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
@@ -13,15 +12,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.ihelin.book.db.entity.Account;
 import com.ihelin.book.filed.AccountType;
-import com.ihelin.book.manager.AccountManager;
 import com.ihelin.book.utils.CryptUtil;
 import com.ihelin.book.utils.ResponseUtil;
 
 @Controller
-public class LoginController {
-
-	@Resource
-	private AccountManager accountManager;
+public class LoginController extends BaseController{
 
 	@RequestMapping("login")
 	public String pageLogin(String from, Model model) {
@@ -65,6 +60,7 @@ public class LoginController {
 		}
 		Account ac = new Account();
 		ac.setEmail(email);
+		ac.setImg(DEFAULT_ACCOUNT_IMG);
 		ac.setPassword(CryptUtil.sha1(password));
 		ac.setAccountType(AccountType.GENERAL.getValue());
 		ac.setRegisterDate(new Date());

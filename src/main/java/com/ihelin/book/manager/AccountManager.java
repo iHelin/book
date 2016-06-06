@@ -6,6 +6,7 @@ import java.util.Map;
 
 import javax.annotation.Resource;
 
+import org.apache.commons.lang3.StringUtils;
 import org.apache.ibatis.session.RowBounds;
 import org.springframework.stereotype.Service;
 
@@ -34,19 +35,22 @@ public class AccountManager {
 		return accountMapper.selectByPrimaryKey(id);
 	}
 	
-	public List<Account> listAccount(Integer accountType,int offset, int size){
+	public List<Account> listAccount(Integer accountType,String accountName,int offset, int size){
 		Map<String, Object> param = new HashMap<String, Object>();
 		if(accountType!=null)
 			param.put("accountType", accountType);
+		if(StringUtils.isNotEmpty(accountName))
+			param.put("accountName", "%"+accountName+"%");
 		return accountMapper.accountList(param,new RowBounds(offset, size));
 	}
 	
-	public int listAccountCount(Integer accountType) {
+	public int listAccountCount(Integer accountType,String accountName) {
 		Map<String, Object> param = new HashMap<String, Object>();
 		if(accountType!=null)
 			param.put("accountType", accountType);
-		int count = accountMapper.listAccountCount(param);
-		return count;
+		if(StringUtils.isNotEmpty(accountName))
+			param.put("accountName", "%"+accountName+"%");
+		return accountMapper.listAccountCount(param);
 	}
 	
 	public int deleteAccountById(Integer id){

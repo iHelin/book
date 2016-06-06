@@ -6,6 +6,7 @@ import java.util.Map;
 
 import javax.annotation.Resource;
 
+import org.apache.ibatis.session.RowBounds;
 import org.springframework.stereotype.Service;
 
 import com.ihelin.book.db.entity.OrderItem;
@@ -59,7 +60,7 @@ public class OrderManager {
 		return opgMapper.updateByPrimaryKey(orderPayGroup);
 	}
 
-	public List<OrderPayGroup> selectOpgByCondition(Integer creatorId,Integer status) {
+	public List<OrderPayGroup> selectOpgByCondition(Integer creatorId,Integer status,int offset, int size) {
 		Map<String, Object> param = new HashMap<String, Object>();
 		if (creatorId != null) {
 			param.put("creatorId", creatorId);
@@ -67,7 +68,18 @@ public class OrderManager {
 		if (status != null) {
 			param.put("status", status);
 		}
-		return opgMapper.selectByCondition(param);
+		return opgMapper.selectByCondition(param,new RowBounds(offset, size));
+	}
+	
+	public int listOpgCount(Integer creatorId,Integer status) {
+		Map<String, Object> param = new HashMap<String, Object>();
+		if (creatorId != null) {
+			param.put("creatorId", creatorId);
+		}
+		if (status != null) {
+			param.put("status", status);
+		}
+		return opgMapper.listOpgCount(param);
 	}
 
 }

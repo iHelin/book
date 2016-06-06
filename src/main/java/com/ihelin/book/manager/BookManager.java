@@ -21,19 +21,22 @@ public class BookManager {
 		return bookMapper.insert(book);
 	}
 
-	public List<Book> listBook(Integer type, int offset, int size) {
+	public List<Book> listBook(Integer type,String bookName, int offset, int size) {
 		Map<String, Object> param = new HashMap<String, Object>();
 		if (type != null)
 			param.put("type", type);
+		if (bookName != null)
+			param.put("bookName", "%"+bookName+"%");
 		return bookMapper.bookList(param, new RowBounds(offset, size));
 	}
 	
-	public int listBookCount(Integer type) {
+	public int listBookCount(Integer type,String bookName) {
 		Map<String, Object> param = new HashMap<String, Object>();
 		if (type != null)
 			param.put("type", type);
-		int count = bookMapper.listBookCount(param);
-		return count;
+		if (bookName != null)
+			param.put("bookName", "%"+bookName+"%");
+		return bookMapper.listBookCount(param);
 	}
 
 	public Book selectBookById(Integer id) {

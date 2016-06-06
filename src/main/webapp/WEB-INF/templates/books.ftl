@@ -25,8 +25,8 @@
 					<a href="${request.contextPath}/book/${book.id!}" target="_blank">
 					  	<div class="am-u-sm-3" style="float:left;">
 					  		<div class="am-thumbnail" style="height:370px">
-					  			<div class="book-img am-vertical-align-middle" >
-					      			<img class="am-center" src="<#if book.img??>${book.img!}<#else>images/default.jpg</#if>" alt=""/>
+					  			<div class="book-img am-vertical-align-middle" style="height:180px">
+					      			<img class="am-center" src="${book.img!}" alt=""/>
 					      		</div>
 					      		<div class="am-thumbnail-caption">
 					        		<p><strong>${book.bookName!}</strong></p>

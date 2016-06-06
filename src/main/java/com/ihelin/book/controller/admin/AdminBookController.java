@@ -27,12 +27,13 @@ public class AdminBookController extends BaseController {
 	private BookManager bookManager;
 
 	@RequestMapping("books")
-	public String adminIndex(Model model, Integer pageNum, Integer type) {
+	public String adminIndex(Model model, Integer pageNum, String bookName, Integer type) {
 		if (pageNum == null)
 			pageNum = 1;
-		List<Book> books = bookManager.listBook(type, (pageNum - 1) * PAGE_LENGTH, PAGE_LENGTH);
-		int totalCount = bookManager.listBookCount(type);
+		List<Book> books = bookManager.listBook(type, bookName, (pageNum - 1) * PAGE_LENGTH, PAGE_LENGTH);
+		int totalCount = bookManager.listBookCount(type, bookName);
 		model.addAttribute("books", books);
+		model.addAttribute("bookName", bookName);
 		model.addAttribute("type", type);
 		model.addAttribute("pagination", new Pagination(totalCount, pageNum, PAGE_LENGTH));
 		return "admin/books";
@@ -51,6 +52,7 @@ public class AdminBookController extends BaseController {
 		newBook.setAuthor(author);
 		newBook.setPress(press);
 		newBook.setIsbn(isbn);
+		newBook.setImg(DEFAULT_BOOK_IMG);
 		newBook.setType(bookType);
 		newBook.setNumber(number);
 		newBook.setPrice(price);
@@ -59,7 +61,7 @@ public class AdminBookController extends BaseController {
 		newBook.setCreaterId(1);// 替换
 		newBook.setPromo(promo);
 		newBook.setDetail(detail);
-		newBook.setIsFreePostage(postage==null?false:true);
+		newBook.setIsFreePostage(postage == null ? false : true);
 		bookManager.insertBook(newBook);
 		ResponseUtil.writeSuccessJSON(response);
 	}
@@ -83,7 +85,7 @@ public class AdminBookController extends BaseController {
 		oldBook.setPromotionPrice(promotionPrice);
 		oldBook.setPromo(promo);
 		oldBook.setDetail(detail);
-		oldBook.setIsFreePostage(postage==null?false:true);
+		oldBook.setIsFreePostage(postage == null ? false : true);
 		bookManager.updateBook(oldBook);
 		ResponseUtil.writeSuccessJSON(response);
 	}

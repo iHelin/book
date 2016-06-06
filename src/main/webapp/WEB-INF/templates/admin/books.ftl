@@ -53,7 +53,7 @@
         		</div>
         		<div class="am-u-sm-12 am-u-md-3">
           			<div class="am-input-group am-input-group-sm">
-            			<input type="text" class="am-form-field" name="bookName" />
+            			<input type="text" class="am-form-field" placeholder="书名" name="bookName" value="${bookName!}" />
           				<span class="am-input-group-btn">
             				<button class="am-btn am-btn-default" type="submit">搜索</button>
           				</span>

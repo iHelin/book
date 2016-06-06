@@ -78,20 +78,28 @@ public class OrderController extends BaseController {
 	public void payed(Integer oid, HttpServletResponse response) {
 		OrderPayGroup opg = orderManager.seleteOrderPayGroupById(oid);
 		if (opg != null) {
+			String oids = opg.getOrderIds();
+			List<Integer> oidList = JSON.parseArray(oids, Integer.class);
+			for (Integer orderItemId : oidList) {
+				OrderItem orderItem = orderManager.selectOrderItemById(orderItemId);
+				Book book = bookManager.selectBookById(orderItem.getBookId());
+				book.setNumber(book.getNumber() - orderItem.getNumber());
+				bookManager.updateBook(book);
+			}
 			opg.setPayTime(new Date());
 			opg.setStatus(OrderStatus.PAYED.getValue());
 			orderManager.updateOrderPayGroup(opg);
 			ResponseUtil.writeSuccessJSON(response);
-		}else{
+		} else {
 			ResponseUtil.writeFailedJSON(response, "opg_is_null");
 		}
 	}
 
 	@RequestMapping("submit_order")
 	public void submitOrder(Integer bookId, String bookName, BigDecimal bookPrice, Integer number,
-			BigDecimal totalMoney, BigDecimal deliveryFee, HttpServletResponse response) {
+			BigDecimal totalMoney, BigDecimal deliveryFee, HttpServletResponse response,Boolean isFreePostage) {
 		List<OrderPayGroup> oldOrders = orderManager.selectOpgByCondition(getAccount().getId(),
-				OrderStatus.NOT_PAY.getValue());
+				OrderStatus.NOT_PAY.getValue(), 0, MAX_LENGTH);
 		if (oldOrders.size() > 0) {
 			ResponseUtil.writeFailedJSON(response, "not_pay_order");
 			return;
@@ -102,7 +110,10 @@ public class OrderController extends BaseController {
 		orderItem.setBookPrice(bookPrice);
 		orderItem.setNumber(number);
 		orderItem.setTotalMoney(totalMoney);
-		orderItem.setDeliveryFee(deliveryFee);
+		if(isFreePostage)
+			orderItem.setDeliveryFee(BigDecimal.ZERO);
+		else
+			orderItem.setDeliveryFee(deliveryFee);
 		orderManager.insertOrderItem(orderItem);
 		OrderPayGroup opg = new OrderPayGroup();
 		opg.setCreateTime(new Date());

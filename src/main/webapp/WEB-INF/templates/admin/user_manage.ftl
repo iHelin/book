@@ -21,16 +21,16 @@
           	<form class="am-form" action="user_manage" class="form-horizontal" role="form">
         		<div class="am-u-sm-12 am-u-md-3">
           			<div class="am-form-group">
-			            <select data-am-selected="{btnSize: 'sm'}" name="accountType">
+			            <select data-am-selected="{btnSize: 'sm'}" id="account_type" name="accountType">
 			              	<option value=' '>所有类别</option>
-			              	<option value='0'>普通用户</option>
-			              	<option value='1'>管理员</option>
+			              	<option value='0' <#if accountType?? && accountType==0>selected</#if>>普通用户</option>
+			              	<option value='1' <#if accountType?? && accountType==1>selected</#if>>管理员</option>
 			         	</select>
           			</div>
         		</div>
         		<div class="am-u-sm-12 am-u-md-3">
           			<div class="am-input-group am-input-group-sm">
-            			<input type="text" class="am-form-field" name="accountName" />
+            			<input type="text" class="am-form-field" placeholder="用户名" name="accountName" <#if accountName??>value="${accountName!}"</#if> />
           				<span class="am-input-group-btn">
             				<button class="am-btn am-btn-default" type="submit">搜索</button>
           				</span>
@@ -73,7 +73,7 @@
 								        	</#if>
 								        </td>
 								        <td class="am-hide-sm-only">${account.realName!"未设置"}</td>
-								        <td class="am-hide-sm-only">${account.genger!"未设置"}</td>
+								        <td class="am-hide-sm-only"><#if account.gender??><#if account.gender>男<#else>女</#if><#else>未设置</#if></td>
 								        <td class="am-hide-sm-only">${account.registerDate?string("yyyy-MM-dd")}</td>
 								        <td>
 							            	<div class="am-btn-toolbar">

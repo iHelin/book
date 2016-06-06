@@ -19,9 +19,9 @@
 					  		<form class="myform am-form am-form-horizontal" id="edit_psw_form" data-validate="parsley">
 						  		<input type="hidden" name="id" value="${account.id!}">
 						  		<div class="am-form-group">
-						    		<label for="real_name" class="am-u-sm-4 am-form-label">原密码</label>
+						    		<label for="real_name" class="am-u-sm-4 am-form-label">旧密码</label>
 						    		<div class="am-u-sm-8">
-						      			<input type="password" id="old_psw" name="oldPsw" placeholder="原密码" value="" data-required="true">
+						      			<input type="password" id="old_psw" name="oldPsw" placeholder="旧密码" value="" data-required="true">
 						    		</div>
 						  		</div>
 						  		<div class="am-form-group">

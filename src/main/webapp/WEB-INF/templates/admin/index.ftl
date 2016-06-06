@@ -14,13 +14,13 @@
         		</a>
         	</li>
         	<li>
-        		<a href="javascript:void(0);" class="am-text-warning">
-        			<span class="am-icon-btn am-icon-briefcase"></span><br/>成交订单<br/>#{opgList?size}
+        		<a href="javascript:void(0);" class="am-text-danger">
+        			<span class="am-icon-btn am-icon-recycle"></span><br/>用户总计<br/>#{accountCount!}
         		</a>
         	</li>
         	<li>
-        		<a href="javascript:void(0);" class="am-text-danger">
-        			<span class="am-icon-btn am-icon-recycle"></span><br/>昨日访问<br/>80082
+        		<a href="javascript:void(0);" class="am-text-warning">
+        			<span class="am-icon-btn am-icon-briefcase"></span><br/>成交订单<br/>#{opgList?size}
         		</a>
         	</li>
         	<li>

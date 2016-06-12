@@ -61,7 +61,7 @@
 				<#if book??>
 					<a href="${request.contextPath}/book/${book.id!}" target="_blank">
 					  	<div class="am-u-sm-3" style="float:left;">
-					  		<div class="am-thumbnail" style="height:370px">
+					  		<div class="am-thumbnail" style="height:330px">
 					  			<div class="book-img am-vertical-align-middle" style="height:180px">
 					      			<img class="am-center" src="${book.img!}" alt=""/>
 					      		</div>
@@ -73,10 +73,6 @@
 					        		<p>作者:${book.author!}</p>
 					        		<p>原价:<del>${book.price!?string.currency}</del></p>
 					        		<p><span style="font-size:20px;color:#ff4400"><strong>${book.promotionPrice!?string.currency}</strong></span></p>
-					        		<p class="am-text-right">
-					          			<button class="am-btn am-btn-primary am-btn-xs"><i class="am-icon-shopping-cart"></i></button>
-					          			<button class="am-btn am-btn-default am-btn-xs"><i class="am-icon-money"></i></button>
-					        		</p>
 					      		</div>
 					  		</div>
 					  	</div>

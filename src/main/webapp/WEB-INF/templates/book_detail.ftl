@@ -132,10 +132,10 @@
 			layer.confirm('当前操作需要登录才能进行，是否前往登录？', {
 				btn: ['确定','取消']
 			}, function(){
-				window.location.href="${request.contextPath}/login?from=book_detail?id="+id;
+				window.location.href="${request.contextPath}/login?from=book/"+id;
 			});
 		}else{
-			layer.msg('已登录');
+			layer.msg('开发中。。。');
 		}
 	}
 	

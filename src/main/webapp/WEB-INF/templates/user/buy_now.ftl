@@ -19,7 +19,7 @@
 	              			<td>${orderItem.bookName!}</td>
 	              			<td>${orderItem.bookPrice?string.currency}</td>
 	              			<td>${orderItem.number!}</td>
-	              			<td><#if isFreePostage??>免邮费：${orderItem.deliveryFee!?string.currency}<#else>无</#if></td>
+	              			<td><#if isFreePostage??>免邮费<#else>${orderItem.deliveryFee!?string.currency}</#if></td>
 	              			<td>${orderItem.totalMoney?string.currency}</td>
 	              		</tr>
               		</#if>

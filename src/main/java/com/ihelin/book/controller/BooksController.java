@@ -25,12 +25,14 @@ public class BooksController {
 	protected static final int PAGE_LENGTH = 12;
 
 	@RequestMapping("books")
-	public String handleBook(Model model, Integer pageNum) {
+	public String handleBook(Model model, Integer pageNum, String bookName, Integer type) {
 		if (pageNum == null)
 			pageNum = 1;
-		List<Book> books = bookManager.listBook(null,null, (pageNum - 1) * PAGE_LENGTH, PAGE_LENGTH);
-		int totalCount = bookManager.listBookCount(null,null);
+		List<Book> books = bookManager.listBook(type,bookName, (pageNum - 1) * PAGE_LENGTH, PAGE_LENGTH);
+		int totalCount = bookManager.listBookCount(type,bookName);
 		model.addAttribute("books", books);
+		model.addAttribute("bookName", bookName);
+		model.addAttribute("type", type);
 		model.addAttribute("pagination", new Pagination(totalCount, pageNum, PAGE_LENGTH));
 		return "books";
 	}

@@ -16,7 +16,7 @@
 		<param name="File" value="logs/book.log" />
 		<param name="Append" value="true" />  
         <param name="MaxFileSize" value="20MB" />  
-        <param name="MaxBackupIndex" value="50" />  
+        <param name="MaxBackupIndex" value="50" />
 		<layout class="org.apache.log4j.PatternLayout">
 			<param name="ConversionPattern" value="%5p [%t] %d{yy-MM-dd HH:mm:ss} %c{1} (line %L) - %m%n" />
 		</layout>

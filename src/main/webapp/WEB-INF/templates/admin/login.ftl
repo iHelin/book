@@ -48,7 +48,7 @@
 <script src="${request.contextPath}/js/formvalidation.js"></script>
 <script src="${request.contextPath}/plugins/layer/layer.js"></script>
 <script>
-	var from = "${from!}";
+	var from = "${request.contextPath}${from!}";
 	if(from == null || from == ""){
 		from = '${request.contextPath}/admin/index';
 	}

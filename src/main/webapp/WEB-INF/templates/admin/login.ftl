@@ -16,7 +16,7 @@
 <body>
 <div class="container">
 	<div class="">
-		<h1 class="text-center">后台登录</h1>
+		<h1 class="text-center">图书商城后台管理系统<small>登录</small></h1>
 	</div>
 	<hr />
 	<div class="row">

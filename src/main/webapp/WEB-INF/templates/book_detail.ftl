@@ -84,7 +84,7 @@
 									</div>
 								</div>
 								<div class="am-tab-panel">
-									<div class="ds-thread" data-thread-key="book_${book.id!}" data-title="${book.bookName!}" data-url="${request.contextPath}/book_detail?id=${book.id!}"></div>
+									<div class="ds-thread" data-thread-key="book_${book.id!}" data-title="${book.bookName!}" data-url="${request.contextPath}/book/${book.id!}"></div>
 								</div>
 							</div>
 						</div>

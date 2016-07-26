@@ -25,8 +25,8 @@ public class ThumbnailAction {
 	@RequestMapping(value = "thumbnail", method = RequestMethod.POST)
 	public String thumbnail(@RequestParam("image") CommonsMultipartFile file, HttpSession session, Model model)
 			throws Exception {
-		String uploadPath = "images";
-		String realUploadPath = session.getServletContext().getRealPath(uploadPath);
+		String uploadPath = "images";// 相对路径
+		String realUploadPath = session.getServletContext().getRealPath(uploadPath);// 真实路径
 		String imageUrl = uploadService.uploadImage(file, uploadPath, realUploadPath);
 		String thumbImageUrl = thumbnailService.trhumbnail(file, uploadPath, realUploadPath);
 		model.addAttribute("imageUrl", imageUrl);

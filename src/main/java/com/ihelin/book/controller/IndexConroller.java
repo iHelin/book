@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 public class IndexConroller {
 	
-	@RequestMapping("index")
+	@RequestMapping({"index",""})
 	public String doIndex(){
 		return "index";
 	}

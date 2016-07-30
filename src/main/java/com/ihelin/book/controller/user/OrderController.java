@@ -11,6 +11,10 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.TransactionStatus;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.transaction.support.TransactionCallbackWithoutResult;
+import org.springframework.transaction.support.TransactionTemplate;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -33,6 +37,27 @@ public class OrderController extends BaseController {
 	private OrderManager orderManager;
 
 	public BigDecimal deliveryFee = new BigDecimal(10.00);
+
+	@Resource
+	private TransactionTemplate transactionTemplate;
+
+	@Transactional
+	public String wechatWood() {
+		transactionTemplate.execute(new TransactionCallbackWithoutResult() {
+			@Override
+			protected void doInTransactionWithoutResult(TransactionStatus arg0) {
+				Book book1 = bookManager.selectBookById(1);
+				book1.setNumber(300);
+				bookManager.updateBook(book1);
+				//int a = 1 / 0;
+				Book book2 = bookManager.selectBookById(1);
+				book2.setNumber(300);
+				bookManager.updateBook(book2);
+
+			}
+		});
+		return "pc/wechat_wood";
+	}
 
 	@RequestMapping("buy_now")
 	public String makeSureOrder(Integer id, Integer number, Model model) {
@@ -97,7 +122,7 @@ public class OrderController extends BaseController {
 
 	@RequestMapping("submit_order")
 	public void submitOrder(Integer bookId, String bookName, BigDecimal bookPrice, Integer number,
-			BigDecimal totalMoney, BigDecimal deliveryFee, HttpServletResponse response,Boolean isFreePostage) {
+			BigDecimal totalMoney, BigDecimal deliveryFee, HttpServletResponse response, Boolean isFreePostage) {
 		List<OrderPayGroup> oldOrders = orderManager.selectOpgByCondition(getAccount().getId(),
 				OrderStatus.NOT_PAY.getValue(), 0, MAX_LENGTH);
 		if (oldOrders.size() > 0) {
@@ -110,7 +135,7 @@ public class OrderController extends BaseController {
 		orderItem.setBookPrice(bookPrice);
 		orderItem.setNumber(number);
 		orderItem.setTotalMoney(totalMoney);
-		if(isFreePostage)
+		if (isFreePostage)
 			orderItem.setDeliveryFee(BigDecimal.ZERO);
 		else
 			orderItem.setDeliveryFee(deliveryFee);

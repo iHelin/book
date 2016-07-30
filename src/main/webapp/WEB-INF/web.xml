@@ -50,6 +50,7 @@
 	<listener>
 		<listener-class>org.springframework.web.util.IntrospectorCleanupListener</listener-class>
 	</listener>
+	<!-- 测试登录连接数 -->
 	<listener>
 		<listener-class>com.ihelin.book.config.CountLineListener</listener-class>
 	</listener>

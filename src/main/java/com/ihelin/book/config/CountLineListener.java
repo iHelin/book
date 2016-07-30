@@ -12,10 +12,9 @@ public class CountLineListener implements HttpSessionListener {
 		ServletContext context = arg0.getSession().getServletContext();
 		Integer count = (Integer) context.getAttribute("count");
 		if (count == null) {
-			count = new Integer(1);
+			count = 1;
 		} else {
-			int co = count.intValue();
-			count = new Integer(co + 1);
+			count++;
 		}
 		context.setAttribute("count", count);// 保存人数
 		System.out.println("在线人数：" + count);
@@ -26,9 +25,7 @@ public class CountLineListener implements HttpSessionListener {
 		System.out.println("销毁session......");
 		ServletContext context = arg0.getSession().getServletContext();
 		Integer count = (Integer) context.getAttribute("count");
-		int co = count.intValue();
-		count = new Integer(co - 1);
-		context.setAttribute("count", count);
+		context.setAttribute("count", count--);
 		System.out.println("在线人数：" + count);
 	}
 

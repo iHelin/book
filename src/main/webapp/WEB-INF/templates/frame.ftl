@@ -64,8 +64,12 @@
 	<footer data-am-widget="footer" class="am-footer am-footer-default">
 		<div class="am-footer-miscs ">
 	    	<p>由 <a href="http://weibo.com/378920717/" title="iHelin" target="_blank" class="">iHelin</a>提供技术支持</p>
-	        <p>CopyRight©2016  iHelin Inc.</p>
-	        <p></p>
+	    </div>
+	    <div class="am-footer-miscs ">
+	    	<p>CopyRight©2016  iHelin Inc.</p>
+	    </div>
+	    <div class="am-footer-miscs ">
+	    	<p>皖ICP备16015099号</p>
 	    </div>
 	</footer>
 </body>

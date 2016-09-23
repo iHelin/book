@@ -98,7 +98,7 @@
 	</div>
 	<hr />
 	<footer class="admin-content-footer">
-      <p class="am-padding-left">© 2016 iHelin, Inc.</p>
+      <p class="am-padding-left am-text-center">Copyright © iHelin.All Rights Reserved.皖ICP备16015099号</p>
     </footer>
 </div>
 </@main.page>

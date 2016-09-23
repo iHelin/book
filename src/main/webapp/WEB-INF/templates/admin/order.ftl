@@ -87,7 +87,7 @@
 
     <footer class="admin-content-footer">
       <hr>
-      <p class="am-padding-left">© 2014 AllMobilize, Inc. Licensed under MIT license.</p>
+      <p class="am-padding-left am-text-center">Copyright © iHelin.All Rights Reserved.皖ICP备16015099号</p>
     </footer>
 </div>
 </@main.page>

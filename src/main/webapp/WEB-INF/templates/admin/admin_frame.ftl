@@ -60,7 +60,7 @@
 	      		<div class="am-panel am-panel-default admin-sidebar-panel">
 	        		<div class="am-panel-bd">
 	          			<p><span class="am-icon-bookmark"></span> 公告</p>
-	          			<p>时光静好，与君语；细水流年，与君同。—— Amaze UI</p>
+	          			<p>细心在任何时候都不会是多余的。—— iHelin</p>
 	        		</div>
 	      		</div>
 	    	</div>

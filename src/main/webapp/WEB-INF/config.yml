@@ -1,5 +1,5 @@
 jdbc_url: jdbc:mysql://120.27.100.98:3306/book
-jdbc_user: root
+jdbc_user: ihelin
 jdbc_password: 246260
 
-domain_url: http://120.27.100.98
+domain_url: http://book.ianhe.me

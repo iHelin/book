@@ -1,4 +1,4 @@
-jdbc_url: jdbc:mysql://120.27.100.98:3306/book
+jdbc_url: jdbc:mysql://112.74.203.130:3306/book
 jdbc_user: ihelin
 jdbc_password: 246260
 

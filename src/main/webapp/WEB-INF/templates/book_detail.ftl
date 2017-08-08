@@ -23,7 +23,7 @@
         		<div class="am-u-lg-5">
         			<div class="am-panel am-panel-default am-vertical-align" style="height:345px;width:345px">
         				<div class="am-vertical-align-middle" style="width:100%;max-height: 100%;">
-        					<img src="${book.img!}" class="am-center">
+        					<img src="${request.contextPath}${book.img!}" class="am-center">
         				</div>
         			</div>
         		</div>

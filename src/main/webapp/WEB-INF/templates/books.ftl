@@ -63,7 +63,7 @@
 					  	<div class="am-u-sm-3" style="float:left;">
 					  		<div class="am-thumbnail" style="height:330px">
 					  			<div class="book-img am-vertical-align-middle" style="height:180px">
-					      			<img class="am-center" src="${book.img!}" alt=""/>
+					      			<img class="am-center" src="${request.contextPath}${book.img!}" alt=""/>
 					      		</div>
 					      		<div class="am-thumbnail-caption">
 					        		<p><strong>${book.bookName!}</strong></p>

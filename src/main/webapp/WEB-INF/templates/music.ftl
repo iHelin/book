@@ -68,22 +68,7 @@
 <div class="am-g am-g-fixed blog-g-fixed">
 	<div class="am-u-md-12">
     	<article class="blog-main">
-			<!-- 多说评论框 start -->
-				<div class="ds-thread" data-thread-key="book/music" data-title="音乐" data-url="http://120.27.100.98/book/music"></div>
-			<!-- 多说评论框 end -->
-			<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
-			<script type="text/javascript">
-			var duoshuoQuery = {short_name:"ihelin"};
-				(function() {
-					var ds = document.createElement('script');
-					ds.type = 'text/javascript';ds.async = true;
-					ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
-					ds.charset = 'UTF-8';
-					(document.getElementsByTagName('head')[0] 
-					 || document.getElementsByTagName('body')[0]).appendChild(ds);
-				})();
-				</script>
-			<!-- 多说公共JS代码 end -->
+            <div id="SOHUCS"></div>
 		</article>
 	</div>
 </div>

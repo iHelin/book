@@ -83,7 +83,6 @@ public class AdminController extends BaseController {
 			HttpServletResponse response, HttpSession session) {
 		if (id == null) {
 			ResponseUtil.writeFailedJSON(response, "account_id_null");
-			return;
 		} else {
 			Account ac = accountManager.selectAccountById(id);
 			ac.setRealName(realName);

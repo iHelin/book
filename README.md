@@ -13,9 +13,9 @@
 * Firefox 46.0.1
 * Safari 9.1
 * Chrome 50.0.0.2661.94 (64bit)
-* Navicat for MySQ
+* Navicat for MySQL
 * MySQL Workbench 6.3
-* FileZIlla 3.16.1
+* FileZilla 3.16.1
 * Git (GitHub)
 * Maven
 

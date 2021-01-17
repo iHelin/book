@@ -1,4 +1,4 @@
-<#import "admin_frame.ftl" as main>
+<#import "admin_frame.ftlh" as main>
 <@main.page title="用户管理">
 <div class="admin-content">
 	<div class="admin-content-body">
@@ -6,27 +6,29 @@
         	<div class="am-fl am-cf">
         		<strong class="am-text-primary am-text-lg">用户管理</strong>
         	</div>
-      	</div>
-      	<hr />
-      	<div class="am-g">
-        	<div class="am-u-sm-12 am-u-md-6">
-          		<div class="am-btn-toolbar">
-            		<div class="am-btn-group am-btn-group-xs">
-			            <button type="button" class="am-btn am-btn-default am-text-danger"><span class="am-icon-trash-o"></span> 删除</button>
-			    	</div>
-          		</div>
-        	</div>
-        	<#import "pagination.ftl" as pager />
-            <#assign urlParam>accountType=<#if accountType??>${accountType}</#if>&</#assign>
-          	<form class="am-form" action="user_manage" class="form-horizontal" role="form">
-        		<div class="am-u-sm-12 am-u-md-3">
-          			<div class="am-form-group">
-			            <select data-am-selected="{btnSize: 'sm'}" id="account_type" name="accountType">
-			              	<option value=' '>所有类别</option>
-			              	<option value='0' <#if accountType?? && accountType==0>selected</#if>>普通用户</option>
-			              	<option value='1' <#if accountType?? && accountType==1>selected</#if>>管理员</option>
-			         	</select>
-          			</div>
+		</div>
+		<hr/>
+		<div class="am-g">
+			<div class="am-u-sm-12 am-u-md-6">
+				<div class="am-btn-toolbar">
+					<div class="am-btn-group am-btn-group-xs">
+						<button type="button" class="am-btn am-btn-default am-text-danger"><span
+									class="am-icon-trash-o"></span> 删除
+						</button>
+					</div>
+				</div>
+			</div>
+			<#import "pagination.ftlh" as pager />
+			<#assign urlParam>accountType=<#if accountType??>${accountType}</#if>&</#assign>
+			<form class="am-form" action="user_manage" class="form-horizontal" role="form">
+				<div class="am-u-sm-12 am-u-md-3">
+					<div class="am-form-group">
+						<select data-am-selected="{btnSize: 'sm'}" id="account_type" name="accountType">
+							<option value=' '>所有类别</option>
+							<option value='0' <#if accountType?? && accountType==0>selected</#if>>普通用户</option>
+							<option value='1' <#if accountType?? && accountType==1>selected</#if>>管理员</option>
+						</select>
+					</div>
         		</div>
         		<div class="am-u-sm-12 am-u-md-3">
           			<div class="am-input-group am-input-group-sm">

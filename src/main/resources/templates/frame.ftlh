@@ -34,21 +34,21 @@
                 <li><a href="${request.contextPath}/contact">Contact</a></li>
             </ul>
 	      		<#if account??>
-	      			<input type="hidden" id="login-tag" value="#{account.id!}">
-	      			<div class="am-topbar-right">
+                    <input type="hidden" id="login-tag" value="#{account.id!}">
+                    <div class="am-topbar-right">
                         <ul class="am-nav am-nav-pills am-topbar-nav am-topbar-right admin-header-list">
                             <li class="am-dropdown" data-am-dropdown>
                                 <a class="am-dropdown-toggle" data-am-dropdown-toggle href="javascript:void(0);">
-                                    欢迎，${account.accountName!account.email!?string?html}！
+                                    欢迎，${account.accountName!account.email!?string}！
                                     <span class="am-icon-caret-down"></span>
                                 </a>
                                 <ul class="am-dropdown-content">
                                     <li><a href="${request.contextPath}/user/user_info"><span
-                                            class="am-icon-user"></span> 个人信息</a></li>
+                                                    class="am-icon-user"></span> 个人信息</a></li>
                                     <li><a href="${request.contextPath}/user/user_order"><span
-                                            class="am-icon-paw"></span> 我的订单</a></li>
+                                                    class="am-icon-paw"></span> 我的订单</a></li>
                                     <li><a href="${request.contextPath}/user/user_edit"><span
-                                            class="am-icon-edit"></span> 资料设置</a></li>
+                                                    class="am-icon-edit"></span> 资料设置</a></li>
                                     <li><a href="${request.contextPath}/user/password_edit"><span
                                             class="am-icon-cog"></span> 密码修改</a></li>
                                     <li><a href="javascript:void(0);" onclick="logout();"><span
@@ -58,14 +58,14 @@
                         </ul>
                     </div>
                 <#else>
-		      		<div class="am-topbar-right">
-                        <button onclick="javascript:location.href='${request.contextPath}/login'"
+                    <div class="am-topbar-right">
+                        <button onclick="location.href='${request.contextPath}/login'"
                                 class="am-btn am-btn-primary am-topbar-btn am-btn-sm"><span
-                                class="am-icon-sign-in"></span> 登录
+                                    class="am-icon-sign-in"></span> 登录
                         </button>
-                        <button onclick="javascript:location.href='${request.contextPath}/register'"
+                        <button onclick="location.href='${request.contextPath}/register'"
                                 class="am-btn am-btn-secondary am-topbar-btn am-btn-sm"><span
-                                class="am-icon-pencil"></span> 注册
+                                    class="am-icon-pencil"></span> 注册
                         </button>
                     </div>
                 </#if>

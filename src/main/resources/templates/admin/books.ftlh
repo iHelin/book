@@ -1,4 +1,4 @@
-<#import "admin_frame.ftl" as main>
+<#import "admin_frame.ftlh" as main>
 <@main.page title="图书管理">
 <link rel="stylesheet" type="text/css" href="${request.contextPath}/plugins/simditor/simditor.css" />
 <style>
@@ -14,24 +14,28 @@
         		<strong class="am-text-primary am-text-lg">图书管理</strong>
         	</div>
       	</div>
-      	<hr />
-      	<div class="am-g">
-        	<div class="am-u-sm-12 am-u-md-6">
-          		<div class="am-btn-toolbar">
-            		<div class="am-btn-group am-btn-group-xs">
-              			<button type="button" class="am-btn am-btn-default" onclick="addBookModal();"><span class="am-icon-plus"></span> 添加</button>
-			            <button type="button" class="am-btn am-btn-default am-text-danger"><span class="am-icon-trash-o"></span> 删除</button>
-			    	</div>
-          		</div>
-        	</div>
-        	<#import "pagination.ftl" as pager />
-            <#assign urlParam>type=<#if type??>${type}</#if>&</#assign>
-          	<form class="am-form" action="books" class="form-horizontal" role="form">
-        		<div class="am-u-sm-12 am-u-md-3">
-          			<div class="am-form-group">
-			            <select data-am-selected="{btnSize: 'sm'}" name="type">
-			              	<option value=' '>所有类别</option>
-			              	<option value='1' <#if type?? && type==1>selected</#if>>小说</option>
+		<hr/>
+		<div class="am-g">
+			<div class="am-u-sm-12 am-u-md-6">
+				<div class="am-btn-toolbar">
+					<div class="am-btn-group am-btn-group-xs">
+						<button type="button" class="am-btn am-btn-default" onclick="addBookModal();"><span
+									class="am-icon-plus"></span> 添加
+						</button>
+						<button type="button" class="am-btn am-btn-default am-text-danger"><span
+									class="am-icon-trash-o"></span> 删除
+						</button>
+					</div>
+				</div>
+			</div>
+			<#import "pagination.ftlh" as pager />
+			<#assign urlParam>type=<#if type??>${type}</#if>&</#assign>
+			<form class="am-form" action="books" class="form-horizontal" role="form">
+				<div class="am-u-sm-12 am-u-md-3">
+					<div class="am-form-group">
+						<select data-am-selected="{btnSize: 'sm'}" name="type">
+							<option value=' '>所有类别</option>
+							<option value='1' <#if type?? && type==1>selected</#if>>小说</option>
 							<option value='2' <#if type?? && type==2>selected</#if>>文学</option>
 							<option value='3' <#if type?? && type==3>selected</#if>>艺术与摄影</option>
 							<option value='4' <#if type?? && type==4>selected</#if>>传记</option>

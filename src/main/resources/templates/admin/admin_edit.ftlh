@@ -1,4 +1,4 @@
-<#import "admin_frame.ftl" as main>
+<#import "admin_frame.ftlh" as main>
 <@main.page title="管理员资料">
 <div class="admin-content">
 	<div class="admin-content-body">
@@ -8,27 +8,33 @@
         	</div>
       	</div>
       	<hr />
-      	<div class="am-container">
+		<div class="am-container">
 			<div class="am-panel am-panel-default">
-			  	<div class="am-panel-bd">
+				<div class="am-panel-bd">
 					<div class="am-g">
 						<div class="am-u-sm-12 am-u-md-4 am-u-md-push-8">
-					   		<div class="am-panel am-panel-default">
-					        	<div class="am-panel-bd">
-					            	<div class="am-g">
-					            		<p class="am-u-md-12">头像</p>
-					                	<div class="am-u-md-4">
-					                  		<img class="am-img-circle am-img-thumbnail" src="${request.contextPath}${admin.img!}" onerror="javascript:this.src='${request.contextPath}/images/default/default_icon.jpg';" alt=""/>
-					                	</div>
-					                	<div class="am-u-md-8">
-					                		<p>推荐使用正方形图片。</p>
-					                  		<form class="am-form" id="myImg" action="${request.contextPath}/upload" method="post" enctype="multipart/form-data">
-					                    		<div class="am-form-group">
-					                    			<input id="myfile" type="file" name="myfile" accept="image/*" /><br />
-												    <button type="button" class="am-btn am-btn-primary am-btn-xs" onclick="commitImg();">保存</button>
-					                    		</div>
-					                  		</form>
-					                	</div>
+							<div class="am-panel am-panel-default">
+								<div class="am-panel-bd">
+									<div class="am-g">
+										<p class="am-u-md-12">头像</p>
+										<div class="am-u-md-4">
+											<img class="am-img-circle am-img-thumbnail"
+												 src="${request.contextPath}${admin.img!}"
+												 onerror="this.src='${request.contextPath}/images/default/default_icon.jpg';"
+												 alt=""/>
+										</div>
+										<div class="am-u-md-8">
+											<p>推荐使用正方形图片。</p>
+											<form class="am-form" id="myImg" action="${request.contextPath}/upload"
+												  method="post" enctype="multipart/form-data">
+												<div class="am-form-group">
+													<input id="myfile" type="file" name="myfile" accept="image/*"/><br/>
+													<button type="button" class="am-btn am-btn-primary am-btn-xs"
+															onclick="commitImg();">保存
+													</button>
+												</div>
+											</form>
+										</div>
 					              	</div>
 					        	</div>
 					  		</div>

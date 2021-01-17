@@ -1,4 +1,4 @@
-<#import "admin_frame.ftl" as main>
+<#import "admin_frame.ftlh" as main>
 <@main.page title="订单管理">
 <div class="admin-content">
 	<div class="admin-content-body">
@@ -70,25 +70,31 @@
               								<#if orderGroup.createTime??>
 												${orderGroup.createTime?string("yyyy-MM-dd")}
 											</#if>
-              							</td>
-              							<td><button type="button" class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only" onclick="deleteOrder(#{orderGroup.id!})"><span class="am-icon-trash-o"></span> 删除</button></td>
-              						</tr>
-              					</#if>
+										</td>
+										<td>
+											<button type="button"
+													class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"
+													onclick="deleteOrder(#{orderGroup.id!})"><span
+														class="am-icon-trash-o"></span> 删除
+											</button>
+										</td>
+									</tr>
+								</#if>
 							</#list>
 						</#if>
-	              	</tbody>
-            	</table>
-            	<#import "pagination.ftl" as pager />
-            	<#assign currentUrl>order_manage?</#assign>
+					</tbody>
+				</table>
+				<#import "pagination.ftlh" as pager />
+				<#assign currentUrl>order_manage?</#assign>
 				<@pager.pageul pagination=pagination url="${currentUrl}" />
-        	</div>
-      	</div>
-    </div>
+			</div>
+		</div>
+	</div>
 
-    <footer class="admin-content-footer">
-      <hr>
-      <p class="am-padding-left am-text-center">Copyright © iHelin.All Rights Reserved.皖ICP备16015099号</p>
-    </footer>
+	<footer class="admin-content-footer">
+		<hr>
+		<p class="am-padding-left am-text-center">Copyright © iHelin.All Rights Reserved.皖ICP备16015099号</p>
+	</footer>
 </div>
 </@main.page>
 <script>

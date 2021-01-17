@@ -71,8 +71,12 @@
 										    		<div class="am-btn-group am-btn-group-xs">
 										    			<#if order.status??>
 															<#if order.status==1>
-																<button type="button" class="am-btn am-btn-default am-btn-xs am-text-secondary" onclick="javascript:location.href='${request.contextPath}/user/pay?oid=#{order.id!}'"><span class="am-icon-pencil-square-o"></span> 去支付</button>
-															</#if>
+                                                                <button type="button"
+                                                                        class="am-btn am-btn-default am-btn-xs am-text-secondary"
+                                                                        onclick="location.href='${request.contextPath}/user/pay?oid=#{order.id!}'">
+                                                                    <span class="am-icon-pencil-square-o"></span> 去支付
+                                                                </button>
+                                                            </#if>
 														</#if>
 											            <button type="button" class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only" onclick="deleteOrder(#{order.id!})"><span class="am-icon-trash-o"></span> 删除</button>
 										        	</div>

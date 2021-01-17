@@ -1,4 +1,4 @@
-<#import "frame.ftl" as main>
+<#import "frame.ftlh" as main>
 <@main.page title="${book.bookName!}">
 <style>
     @media only screen and (min-width: 1200px) {

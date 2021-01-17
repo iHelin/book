@@ -1,4 +1,4 @@
-<#import "frame.ftl" as main>
+<#import "frame.ftlh" as main>
 <@main.page title="首页">
 <style>
     .get {

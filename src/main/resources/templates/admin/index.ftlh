@@ -1,4 +1,4 @@
-<#import "admin_frame.ftl" as main>
+<#import "admin_frame.ftlh" as main>
 <@main.page title="首页">
 <div class="admin-content">
     <div class="admin-content-body">

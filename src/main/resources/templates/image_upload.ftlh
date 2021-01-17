@@ -172,25 +172,25 @@ function resetAndLoadImgList(){
 }
 
 function sltImgDone(){
-	if(isSingleMode){
-		if(currentSltUrl){
-			$("#single_img_show_dbg_" + currentDom.id).css("backgroundImage","url(" + currentSltUrl + ")");
-			$("#single_img_show_div_" + currentDom.id).css("display","block");
-			currentDom.value = currentSltUrl;
-			if(changeCallFunc){
-				changeCallFunc(currentDom, currentSltUrl);
-			}
-		}
-	}else{
-		var imgArr = new Array();
-		$(".select_list_img_div[isSlt='yes']").each(function(index, ele){
-			imgArr[index] = ele.title;
-		});
-		if(imgArr.length > 0){
-			addImgToMultiShow(currentDom.id, imgArr, currentDom.name);
-		}
-	}
-	$("#img_upd_modal").modal("hide");
+    if (isSingleMode) {
+        if (currentSltUrl) {
+            $("#single_img_show_dbg_" + currentDom.id).css("backgroundImage", "url(" + currentSltUrl + ")");
+            $("#single_img_show_div_" + currentDom.id).css("display", "block");
+            currentDom.value = currentSltUrl;
+            if (changeCallFunc) {
+                changeCallFunc(currentDom, currentSltUrl);
+            }
+        }
+    } else {
+        var imgArr = [];
+        $(".select_list_img_div[isSlt='yes']").each(function (index, ele) {
+            imgArr[index] = ele.title;
+        });
+        if (imgArr.length > 0) {
+            addImgToMultiShow(currentDom.id, imgArr, currentDom.name);
+        }
+    }
+    $("#img_upd_modal").modal("hide");
 }
 
 function addImgToMultiShow(inpEleId, imgArr, inpName){
@@ -225,27 +225,27 @@ function upload_img(fileObj){
 				++list_max_index;
 			}else {
 				alert("上传失败：" + uploadInfo.message);
-			}
-			replaceFileUploadObj(fileObj);
-	        },
-	        error: function(){
-	        	$("#uploading_process_div").hide();
-	            alert( "连接错误");
-	            replaceFileUploadObj(fileObj);
-	        }
-		});
-	}
-};
+            }
+                replaceFileUploadObj(fileObj);
+            },
+            error: function () {
+                $("#uploading_process_div").hide();
+                alert("连接错误");
+                replaceFileUploadObj(fileObj);
+            }
+        });
+    }
+}
 
-function addImgToList(elementId, url, isDeletable, inpName){
-	var count = create_img_count++;
+function addImgToList(elementId, url, isDeletable, inpName) {
+    var count = create_img_count++;
 //	var img = $("<img style='display:block;width:100px;' src='" + url +"'/>");
-	var div = $("<div class='select_list_img_div' title='" + url + "' isSlt='' id='show_div_" + count + 
-				"' style='position:relative;border:3px solid #f2f2f2;margin-right:30px;margin-top:10px;margin-bottom:10px;float:left;overflow:hidden;height:100px;width:100px;" +
-				"background-image:url(\"" + url + "\");background-repeat:no-repeat;background-size: 100% auto;background-position:center center;'>");
+    var div = $("<div class='select_list_img_div' title='" + url + "' isSlt='' id='show_div_" + count +
+        "' style='position:relative;border:3px solid #f2f2f2;margin-right:30px;margin-top:10px;margin-bottom:10px;float:left;overflow:hidden;height:100px;width:100px;" +
+        "background-image:url(\"" + url + "\");background-repeat:no-repeat;background-size: 100% auto;background-position:center center;'>");
 
-	if(isDeletable){
-		var delButton = $("<input type='button' name='" + count + "' class='btn btn-danger btn-xs' value='删除' style='position:absolute;top:5px;left:53px'/>");
+    if (isDeletable) {
+        var delButton = $("<input type='button' name='" + count + "' class='btn btn-danger btn-xs' value='删除' style='position:absolute;top:5px;left:53px'/>");
 		$(delButton).click(function (){
 			delImgInput(this.name);
 		});
@@ -261,27 +261,27 @@ function addImgToList(elementId, url, isDeletable, inpName){
 			if($(this).attr("isSlt")){
 				$(this).attr("isSlt", "");
 				$(this).css("border","3px solid #f2f2f2");
-				currentSltUrl = ""
-			}else{
-				$(this).attr("isSlt", "yes");
-				currentSltUrl = this.title;
-				$(this).css("border","4px solid #8EB7E9");
-			}
-		});
-	}
+                currentSltUrl = ""
+            } else {
+                $(this).attr("isSlt", "yes");
+                currentSltUrl = this.title;
+                $(this).css("border", "4px solid #8EB7E9");
+            }
+        });
+    }
 //	$(div).append(img);
-	$("#"+elementId).append(div);
-};
+    $("#" + elementId).append(div);
+}
 
-function addNewImgToList(url){
-	var count = create_img_count++;
-	var div = $("<div class='select_list_img_div' title='" + url + "' isSlt='' id='show_div_" + count + 
-			"' style='position:relative;border:3px solid #f2f2f2;margin-right:30px;margin-top:10px;margin-bottom:10px;float:left;overflow:hidden;height:100px;width:100px;" +
-			"background-image:url(\"" + url + "\");background-repeat:no-repeat;background-size: 100% auto;background-position:center center;'>");
-	$(div).click(function(){
-		if(isSingleMode){
-			$(".select_list_img_div").css("border","3px solid #f2f2f2").attr("isSlt","");
-		}
+function addNewImgToList(url) {
+    var count = create_img_count++;
+    var div = $("<div class='select_list_img_div' title='" + url + "' isSlt='' id='show_div_" + count +
+        "' style='position:relative;border:3px solid #f2f2f2;margin-right:30px;margin-top:10px;margin-bottom:10px;float:left;overflow:hidden;height:100px;width:100px;" +
+        "background-image:url(\"" + url + "\");background-repeat:no-repeat;background-size: 100% auto;background-position:center center;'>");
+    $(div).click(function () {
+        if (isSingleMode) {
+            $(".select_list_img_div").css("border", "3px solid #f2f2f2").attr("isSlt", "");
+        }
 		if($(this).attr("isSlt")){
 			$(this).attr("isSlt", "");
 			$(this).css("border","3px solid #f2f2f2");
@@ -302,30 +302,30 @@ function addInputAfterInput(name){
 function addInputToForm(){
 	var input = $("<input type='hidden' name=''>");
 	input = document.createElement("input");
-	input.type = "hidden";
-	input.name="images";
-	input.id = "img_"+count++;
-	input.value=url;
-	$("#product_form").append(input);
+    input.type = "hidden";
+    input.name = "images";
+    input.id = "img_" + count++;
+    input.value = url;
+    $("#product_form").append(input);
 }
 
-function delImgInput(numId){
-	$("#show_div_"+numId).remove();
-	$("#img_select_hidden_inp_"+numId).remove();
-};
+function delImgInput(numId) {
+    $("#show_div_" + numId).remove();
+    $("#img_select_hidden_inp_" + numId).remove();
+}
 
-function replaceFileUploadObj(fileObj){
-	var inputFile = document.createElement("input"); 
-	inputFile.type = 'file';
-	inputFile.name = 'imgFile';
-	inputFile.id = fileObj.id;
-	inputFile.accept = ".jpg,.jpeg,.png";
-	inputFile.onchange=function(){
-		upload_img(this);
-	}
-	fileObj.parentNode.appendChild(inputFile);
-	$(fileObj).remove();
-};
+function replaceFileUploadObj(fileObj) {
+    var inputFile = document.createElement("input");
+    inputFile.type = 'file';
+    inputFile.name = 'imgFile';
+    inputFile.id = fileObj.id;
+    inputFile.accept = ".jpg,.jpeg,.png";
+    inputFile.onchange = function () {
+        upload_img(this);
+    }
+    fileObj.parentNode.appendChild(inputFile);
+    $(fileObj).remove();
+}
 </script>
 
 <#-- 宏函数-start-->

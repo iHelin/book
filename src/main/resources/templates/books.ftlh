@@ -1,4 +1,4 @@
-<#import "frame.ftl" as main>
+<#import "frame.ftlh" as main>
 <@main.page title="全部图书">
 <style>
 	.book-img img {
@@ -7,28 +7,29 @@
       	max-height: 180px;
       	max-width: 100%;
     }
-    
-    .book-img {
+
+	.book-img {
 		display: block;
 		margin-left: auto;
 		margin-right: auto;
-    }
+	}
 </style>
-<br />
-<div class="am-container" style="">
-	
-	<div class="am-g am-g-fixed blog-g-fixed">
-		<#import "admin/pagination.ftl" as pager />
-	    <#assign urlParam>type=<#if type??>${type}</#if>&bookName=<#if bookName??>${bookName}</#if>&</#assign>
-		<div class="am-u-sm-12">
-			<form class="am-form" action="books" class="form-horizontal" role="form">
-	        	<div class="am-u-sm-12 am-u-md-3 am-fr">
-	          		<div class="am-input-group am-input-group-sm">
-	            		<input type="text" class="am-form-field" placeholder="书名" name="bookName" value="${bookName!}" />
-	          			<span class="am-input-group-btn">
+	<br/>
+	<div class="am-container" style="">
+
+		<div class="am-g am-g-fixed blog-g-fixed">
+			<#import "admin/pagination.ftlh" as pager />
+			<#assign urlParam>type=<#if type??>${type}</#if>&bookName=<#if bookName??>${bookName}</#if>&</#assign>
+			<div class="am-u-sm-12">
+				<form class="am-form" action="books" class="form-horizontal" role="form">
+					<div class="am-u-sm-12 am-u-md-3 am-fr">
+						<div class="am-input-group am-input-group-sm">
+							<input type="text" class="am-form-field" placeholder="书名" name="bookName"
+								   value="${bookName!}"/>
+							<span class="am-input-group-btn">
 	            			<button class="am-btn am-btn-default" type="submit">搜索</button>
 	          			</span>
-	          		</div>
+						</div>
 	        	</div>
 	        	<div class="am-u-sm-12 am-u-md-3 am-fr">
 	          		<div class="am-form-group">

@@ -1,4 +1,4 @@
-<#import "frame.ftl" as main>
+<#import "frame.ftlh" as main>
 <@main.page title="音乐">
   <style>
     @media only screen and (min-width: 1200px) {

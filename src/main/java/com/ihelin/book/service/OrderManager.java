@@ -1,4 +1,4 @@
-package com.ihelin.book.manager;
+package com.ihelin.book.service;
 
 import cn.hutool.json.JSONArray;
 import cn.hutool.json.JSONUtil;

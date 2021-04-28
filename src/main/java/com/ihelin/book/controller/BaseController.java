@@ -1,9 +1,9 @@
 package com.ihelin.book.controller;
 
 import com.ihelin.book.db.entity.Account;
-import com.ihelin.book.manager.AccountManager;
-import com.ihelin.book.manager.BookManager;
-import com.ihelin.book.manager.OrderManager;
+import com.ihelin.book.service.AccountManager;
+import com.ihelin.book.service.BookManager;
+import com.ihelin.book.service.OrderManager;
 import com.ihelin.book.utils.RequestUtil;
 import org.springframework.stereotype.Controller;
 

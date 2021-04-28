@@ -1,23 +1,21 @@
 package com.ihelin.book.controller.admin;
 
+import com.ihelin.book.controller.BaseController;
+import com.ihelin.book.db.entity.Book;
+import com.ihelin.book.service.BookManager;
+import com.ihelin.book.utils.ResponseUtil;
+import com.ihelin.book.view.Pagination;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+import javax.annotation.Resource;
+import javax.servlet.http.HttpServletResponse;
 import java.math.BigDecimal;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
-import javax.annotation.Resource;
-import javax.servlet.http.HttpServletResponse;
-
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestMapping;
-
-import com.ihelin.book.controller.BaseController;
-import com.ihelin.book.db.entity.Book;
-import com.ihelin.book.manager.BookManager;
-import com.ihelin.book.utils.ResponseUtil;
-import com.ihelin.book.view.Pagination;
 
 @Controller
 @RequestMapping(value = "/admin/*")
@@ -39,10 +37,9 @@ public class AdminBookController extends BaseController {
 		return "admin/books";
 	}
 
-	/**
-	 * 添加图书
-	 * 
-	 */
+    /**
+     * 添加图书
+     */
 	@RequestMapping("add_book_commit")
 	public void addBook(HttpServletResponse response, String bookName, String author, String press, Integer bookType,
 			Integer number, String isbn, BigDecimal price, BigDecimal promotionPrice, String promo, String detail,
@@ -51,51 +48,51 @@ public class AdminBookController extends BaseController {
 		newBook.setBookName(bookName);
 		newBook.setAuthor(author);
 		newBook.setPress(press);
-		newBook.setIsbn(isbn);
-		newBook.setImg(DEFAULT_BOOK_IMG);
-		newBook.setType(bookType);
-		newBook.setNumber(number);
-		newBook.setPrice(price);
-		newBook.setPromotionPrice(promotionPrice);
-		newBook.setCreateTime(new Date());
-		newBook.setCreaterId(1);// 替换
-		newBook.setPromo(promo);
-		newBook.setDetail(detail);
-		newBook.setIsFreePostage(postage == null ? false : true);
-		bookManager.insertBook(newBook);
-		ResponseUtil.writeSuccessJSON(response);
-	}
+        newBook.setIsbn(isbn);
+        newBook.setImg(DEFAULT_BOOK_IMG);
+        newBook.setType(bookType);
+        newBook.setNumber(number);
+        newBook.setPrice(price);
+        newBook.setPromotionPrice(promotionPrice);
+        newBook.setCreateTime(new Date());
+        newBook.setCreaterId(1);// 替换
+        newBook.setPromo(promo);
+        newBook.setDetail(detail);
+        newBook.setIsFreePostage(postage != null);
+        bookManager.insertBook(newBook);
+        ResponseUtil.writeSuccessJSON(response);
+    }
 
-	/**
-	 * 编辑图书
-	 * 
-	 */
+    /**
+     * 编辑图书
+     *
+     */
 	@RequestMapping("edit_book_commit")
 	public void editBook(HttpServletResponse response, Integer id, String bookName, String author, String press,
 			Integer bookType, Integer number, String isbn, BigDecimal price, BigDecimal promotionPrice, String promo,
 			String detail, Boolean postage) {
 		Book oldBook = bookManager.selectBookById(id);
-		oldBook.setBookName(bookName);
-		oldBook.setAuthor(author);
-		oldBook.setPress(press);
-		oldBook.setIsbn(isbn);
-		oldBook.setType(bookType);
-		oldBook.setNumber(number);
-		// oldBook.setPrice(price);
-		oldBook.setPromotionPrice(promotionPrice);
-		oldBook.setPromo(promo);
-		oldBook.setDetail(detail);
-		oldBook.setIsFreePostage(postage == null ? false : true);
-		bookManager.updateBook(oldBook);
-		ResponseUtil.writeSuccessJSON(response);
-	}
+        oldBook.setBookName(bookName);
+        oldBook.setAuthor(author);
+        oldBook.setPress(press);
+        oldBook.setIsbn(isbn);
+        oldBook.setType(bookType);
+        oldBook.setNumber(number);
+        // oldBook.setPrice(price);
+        oldBook.setPromotionPrice(promotionPrice);
+        oldBook.setPromo(promo);
+        oldBook.setDetail(detail);
+        oldBook.setIsFreePostage(postage != null);
+        bookManager.updateBook(oldBook);
+        ResponseUtil.writeSuccessJSON(response);
+    }
 
-	/**
-	 * 删除图书
-	 * 
-	 * @param id
-	 * @param response
-	 */
+    /**
+     * 删除图书
+     *
+     * @param id
+     * @param response
+     */
 	@RequestMapping("delete_book")
 	public void deleteBook(Integer id, HttpServletResponse response) {
 		if (id != null) {
@@ -106,12 +103,12 @@ public class AdminBookController extends BaseController {
 		}
 	}
 
-	/**
-	 * 通过id查询图书
-	 * 
-	 * @param id
-	 * @param response
-	 */
+    /**
+     * 通过id查询图书
+     *
+     * @param id
+     * @param response
+     */
 	@RequestMapping("selete_book")
 	public void selectBookByid(Integer id, HttpServletResponse response) {
 		Map<String, Object> bookMap = new HashMap<String, Object>();

@@ -1,21 +1,19 @@
 package com.ihelin.book.controller;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
-import javax.annotation.Resource;
-import javax.servlet.http.HttpServletResponse;
-
+import com.ihelin.book.db.entity.Book;
+import com.ihelin.book.service.BookManager;
+import com.ihelin.book.utils.ResponseUtil;
+import com.ihelin.book.view.Pagination;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.ihelin.book.db.entity.Book;
-import com.ihelin.book.manager.BookManager;
-import com.ihelin.book.utils.ResponseUtil;
-import com.ihelin.book.view.Pagination;
+import javax.annotation.Resource;
+import javax.servlet.http.HttpServletResponse;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 @Controller
 public class BookController {

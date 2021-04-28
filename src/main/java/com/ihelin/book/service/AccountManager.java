@@ -1,4 +1,4 @@
-package com.ihelin.book.manager;
+package com.ihelin.book.service;
 
 import cn.hutool.core.util.StrUtil;
 import com.ihelin.book.db.entity.Account;

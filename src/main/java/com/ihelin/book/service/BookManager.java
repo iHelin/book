@@ -1,16 +1,14 @@
-package com.ihelin.book.manager;
-
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
-import javax.annotation.Resource;
-
-import org.apache.ibatis.session.RowBounds;
-import org.springframework.stereotype.Service;
+package com.ihelin.book.service;
 
 import com.ihelin.book.db.entity.Book;
 import com.ihelin.book.db.mapper.BookMapper;
+import org.apache.ibatis.session.RowBounds;
+import org.springframework.stereotype.Service;
+
+import javax.annotation.Resource;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 @Service
 public class BookManager {
@@ -29,8 +27,8 @@ public class BookManager {
 			param.put("bookName", "%"+bookName+"%");
 		return bookMapper.bookList(param, new RowBounds(offset, size));
 	}
-	
-	public int listBookCount(Integer type,String bookName) {
+
+    public int listBookCount(Integer type,String bookName) {
 		Map<String, Object> param = new HashMap<String, Object>();
 		if (type != null)
 			param.put("type", type);

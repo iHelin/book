@@ -1,6 +1,7 @@
 package com.ihelin.book.utils;
 
 import cn.hutool.core.map.MapUtil;
+import cn.hutool.json.JSONUtil;
 
 import javax.servlet.http.HttpServletResponse;
 import java.util.Map;
@@ -30,7 +31,7 @@ public class ResponseUtil {
         res.put("status", "success");
         response.setContentType("text/json; charset=utf-8");
         try {
-            response.getWriter().write(JSON.toJson(res));
+            response.getWriter().write(JSONUtil.toJsonStr(res));
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -49,7 +50,7 @@ public class ResponseUtil {
         res.put("error", error);
         response.setContentType("text/json; charset=utf-8");
         try {
-            response.getWriter().write(JSON.toJson(res));
+            response.getWriter().write(JSONUtil.toJsonStr(res));
         } catch (Exception e) {
             e.printStackTrace();
         }

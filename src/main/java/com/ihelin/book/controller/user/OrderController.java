@@ -1,5 +1,7 @@
 package com.ihelin.book.controller.user;
 
+import cn.hutool.json.JSONArray;
+import cn.hutool.json.JSONUtil;
 import com.ihelin.book.controller.BaseController;
 import com.ihelin.book.db.entity.Book;
 import com.ihelin.book.db.entity.OrderItem;
@@ -7,7 +9,6 @@ import com.ihelin.book.db.entity.OrderPayGroup;
 import com.ihelin.book.filed.OrderStatus;
 import com.ihelin.book.manager.BookManager;
 import com.ihelin.book.manager.OrderManager;
-import com.ihelin.book.utils.JSON;
 import com.ihelin.book.utils.ResponseUtil;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.TransactionStatus;
@@ -98,9 +99,9 @@ public class OrderController extends BaseController {
         OrderPayGroup opg = orderManager.seleteOrderPayGroupById(oid);
         if (opg != null) {
             String oids = opg.getOrderIds();
-            List<Integer> oidList = JSON.parseArray(oids, Integer.class);
-            for (Integer orderItemId : oidList) {
-                OrderItem orderItem = orderManager.selectOrderItemById(orderItemId);
+            JSONArray oidList = JSONUtil.parseArray(oids);
+            for (int i = 0; i < oidList.size(); i++) {
+                OrderItem orderItem = orderManager.selectOrderItemById(oidList.getInt(i));
                 Book book = bookManager.selectBookById(orderItem.getBookId());
                 book.setNumber(book.getNumber() - orderItem.getNumber());
                 bookManager.updateBook(book);
@@ -140,7 +141,7 @@ public class OrderController extends BaseController {
         List<String> oidList = new ArrayList<String>();
         oidList.add(orderItem.getId() + "");
         String[] oids = oidList.toArray(new String[oidList.size()]);
-        opg.setOrderIds(JSON.toJson(oids));
+        opg.setOrderIds(JSONUtil.toJsonStr(oids));
         opg.setTotalMoney(orderItem.getTotalMoney());
         opg.setStatus(OrderStatus.NOT_PAY.getValue());
         orderManager.insertOrderPayGroup(opg);

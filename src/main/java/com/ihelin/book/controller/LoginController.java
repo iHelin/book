@@ -1,9 +1,9 @@
 package com.ihelin.book.controller;
 
 import cn.hutool.core.util.StrUtil;
+import cn.hutool.crypto.SecureUtil;
 import com.ihelin.book.db.entity.Account;
 import com.ihelin.book.filed.AccountType;
-import com.ihelin.book.utils.CryptUtil;
 import com.ihelin.book.utils.ResponseUtil;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -32,7 +32,7 @@ public class LoginController extends BaseController {
             ResponseUtil.writeFailedJSON(response, "empty");
             return;
         }
-        if (!CryptUtil.sha1(password).equals(account.getPassword())) {
+        if (!SecureUtil.sha1(password).equals(account.getPassword())) {
             ResponseUtil.writeFailedJSON(response, "failed");
             return;
         }
@@ -59,7 +59,7 @@ public class LoginController extends BaseController {
         Account ac = new Account();
         ac.setEmail(email);
         ac.setImg(DEFAULT_ACCOUNT_IMG);
-        ac.setPassword(CryptUtil.sha1(password));
+        ac.setPassword(SecureUtil.sha1(password));
         ac.setAccountType(AccountType.GENERAL.getValue());
         ac.setRegisterDate(new Date());
         accountManager.insertAccount(ac);

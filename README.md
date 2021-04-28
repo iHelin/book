@@ -33,8 +33,9 @@
 
 ## 参考文献
 * [Spring官网](https://spring.io/)
-* Spring MVC
-* [Mybatis](http://www.mybatis.org/mybatis-3/)
+* Spring Boot
+* [Mybatis Plus](https://baomidou.com)
+* [Hutool](https://www.hutool.cn)
 * [Bootstrap](http://www.bootcss.com/)
 * [AmazeUI](http://amazeui.org/)
 * [FontAwesome](http://fontawesome.io/)

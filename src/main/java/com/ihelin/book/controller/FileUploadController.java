@@ -1,15 +1,8 @@
 package com.ihelin.book.controller;
 
-import java.io.File;
-import java.io.FileOutputStream;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.Random;
-
-import javax.servlet.ServletContext;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
+import cn.hutool.core.io.IoUtil;
+import com.ihelin.book.db.entity.Account;
+import com.ihelin.book.db.entity.Book;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,9 +10,14 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.google.common.io.ByteStreams;
-import com.ihelin.book.db.entity.Account;
-import com.ihelin.book.db.entity.Book;
+import javax.servlet.ServletContext;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Random;
 
 @Controller
 public class FileUploadController extends BaseController {
@@ -41,7 +39,7 @@ public class FileUploadController extends BaseController {
                 String newFileName = df.format(new Date()) + "_" + new Random().nextInt(1000) + "." + fileExt;
                 try {
                     File uploadedFile = new File(saveRealFilePath, newFileName);
-                    ByteStreams.copy(file.getInputStream(), new FileOutputStream(uploadedFile));
+                    IoUtil.copy(file.getInputStream(), new FileOutputStream(uploadedFile));
                 } catch (Exception e) {
                     e.printStackTrace();
                 } finally {
@@ -77,7 +75,7 @@ public class FileUploadController extends BaseController {
                 String newFileName = df.format(new Date()) + "_" + new Random().nextInt(1000) + "." + fileExt;
                 try {
                     File uploadedFile = new File(saveRealFilePath, newFileName);
-                    ByteStreams.copy(file.getInputStream(), new FileOutputStream(uploadedFile));
+                    IoUtil.copy(file.getInputStream(), new FileOutputStream(uploadedFile));
                 } catch (Exception e) {
                     e.printStackTrace();
                 } finally {

@@ -1,4 +1,4 @@
-<#import "../frame.ftl" as main>
+<#import "../frame.ftlh" as main>
 <@main.page title="我的订单">
 <div class="am-container">
 	<div class="am-g am-g-fixed blog-g-fixed">

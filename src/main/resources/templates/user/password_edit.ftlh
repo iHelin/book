@@ -1,4 +1,4 @@
-<#import "../frame.ftl" as main>
+<#import "../frame.ftlh" as main>
 <@main.page title="密码修改">
 <div class="am-g am-g-fixed blog-g-fixed">
 	<div class="am-u-md-12">

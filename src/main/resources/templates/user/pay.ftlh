@@ -1,4 +1,4 @@
-<#import "../frame.ftl" as main>
+<#import "../frame.ftlh" as main>
 <@main.page title="支付">
 <div class="am-g am-g-fixed book-g-fixed">
 	<div class="am-u-md-12">
